@@ -40,8 +40,6 @@
     <Folder Include="Controllers\Home\" />
     <Folder Include="Controllers\Login\" />
     <Folder Include="Image\" />
-    <Folder Include="Views\Dashboard\" />
-    <Folder Include="Views\Footer\" />
     <Folder Include="wwwroot\css\dictionary\" />
     <Folder Include="wwwroot\css\common\" />
     <Folder Include="wwwroot\css\control\" />
@@ -49,14 +47,6 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
-    <None Include="wwwroot\images\Phone\Apple\3.webp" />
-    <None Include="wwwroot\images\Phone\Apple\4.webp" />
-    <None Include="wwwroot\images\Phone\Apple\btl_java %282%29.sql" />
-    <None Include="wwwroot\images\Phone\SamSung\2.webp" />
-    <None Include="wwwroot\images\Phone\SamSung\3.webp" />
-    <None Include="wwwroot\images\Phone\SamSung\Samsung Galaxy Note 20 Ultra 5G.webp" />
-    <None Include="wwwroot\images\Phone\Xiaomi\backgr.webp" />
-    <None Include="wwwroot\images\Phone\Xiaomi\GiamGia.svg" />
     <None Include="wwwroot\lib\fontawesome-free-5.15.4-web\attribution.js" />
     <None Include="wwwroot\lib\fontawesome-free-5.15.4-web\js\all.js" />
     <None Include="wwwroot\lib\fontawesome-free-5.15.4-web\js\all.min.js" />
