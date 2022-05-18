@@ -15,31 +15,17 @@ namespace QLApp.Core.UI.Controllers.Dictionary
         }
         public IActionResult Home()
         {
-            return View("Home");
+            return View("_Home");
         }
-        public IActionResult TrangChu()
-        {
-            return View("TrangChu");
-        }
+       
 
         public IActionResult khachhang()
         {
             return View("khachhang");
         }
-        public IActionResult donhang()
-        {
-            return View("donhang");
-        }
-        public IActionResult TrangChuInfo()
-        {
-            return View("TrangChuInfo");
-        }
+       
 
 
-        public IActionResult RR()
-        {
-            return View("khachhang");
-        }
-
+      
     }
 }

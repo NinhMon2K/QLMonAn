@@ -1,4 +1,17 @@
-﻿.login-partial {
+﻿body {
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.main-layout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.login-partial {
     position: relative;
     flex: 1;
     display: flex;
@@ -7,7 +20,7 @@
     padding: 0;
     height: 100%;
     align-items: center;
-    background: url("/images/Login.png") no-repeat fixed center;
+    background: url("/images/background-login.jpg") no-repeat fixed center;
     background-size: cover;
 
     .login-page {
@@ -44,7 +57,7 @@
                         width: 140px;
                         height: 128px;
                         border-radius: 50%;
-                        background-image: url("/images/phone.jpg");
+                        background-image: url("/images/logo.jpg");
                         background-position: center;
                         background-size: cover;
                     }
@@ -86,13 +99,14 @@
 
                         .child-password {
                             position: absolute;
-                            right: 85px;
+                            right: 80px;
                             margin: 12px 0 0 0;
                             color: #ccc;
+                            margin-top: 13px;
 
                             &:hover {
                                 color: #1492e6;
-                                cursor:pointer;
+                                cursor: pointer;
                             }
                         }
                     }
@@ -136,6 +150,15 @@
                             border: none;
                             color: #fff;
                             background-image: linear-gradient(185.95deg, #39bff4 0%, #6068ee 100%);
+
+                            a {
+                                color: #fff;
+                                text-decoration: none;
+                            }
+
+                            &:hover, &:focus, &:active {
+                                background-image: linear-gradient( .95deg,#396ff4 0%,#6068ee 100%);
+                            }
                         }
                     }
 
@@ -153,9 +176,23 @@
                         }
 
                         .login-lefts {
+                            a {
+                                border: none !important;
+
+                                &:hover {
+                                    background-color: #fff !important;
+                                }
+                            }
                         }
 
                         login-rights {
+                            a {
+                                border: none !important;
+
+                                &:hover {
+                                    background-color: #fff !important;
+                                }
+                            }
                         }
                     }
                 }
@@ -163,7 +200,39 @@
         }
     }
 }
+
 .text-box > input:focus {
     border: 3px solid #1492e6 !important;
-    outline-style:none;
+    outline-style: none;
+}
+
+#dialog-form {
+    width: 500px;
+    height: 500px;
+}
+
+.box_gt {
+    display: flex;
+    border: none !important;
+
+    .gt {
+        display: flex;
+        align-items: center;
+
+        &:first-child {
+            margin-right: 10px;
+        }
+
+        input {
+            width: auto !important;
+        }
+    }
+}
+
+.box_right {
+    width: 40px;
+
+    #ngaysinh {
+        width: 40px;
+    }
 }

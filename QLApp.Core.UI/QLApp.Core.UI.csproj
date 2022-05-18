@@ -43,6 +43,7 @@
     <Folder Include="wwwroot\css\dictionary\" />
     <Folder Include="wwwroot\css\common\" />
     <Folder Include="wwwroot\css\control\" />
+    <Folder Include="wwwroot\scss\Login\" />
   </ItemGroup>
 
   <ItemGroup>
