@@ -1,0 +1,54 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/view/dictionary/Home.css",
+    "inputFile": "wwwroot/scss/view/dictionary/Home.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/HeaderLayout.css",
+    "inputFile": "wwwroot/scss/view/dictionary/HeaderLayout.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/_Layout.css",
+    "inputFile": "wwwroot/scss/view/dictionary/_Layout.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/TrangChu.css",
+    "inputFile": "wwwroot/scss/view/dictionary/TrangChu.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/admin.css",
+    "inputFile": "wwwroot/scss/view/dictionary/admin.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/table.css",
+    "inputFile": "wwwroot/scss/view/dictionary/table.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/khachhang.css",
+    "inputFile": "wwwroot/scss/view/dictionary/khachhang.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/donhang.css",
+    "inputFile": "wwwroot/scss/view/dictionary/donhang.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/dilog.css",
+    "inputFile": "wwwroot/scss/view/dictionary/dilog.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/login/_LoginPartial.css",
+    "inputFile": "wwwroot/scss/view/login/_LoginPartial.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/control/toastr.css",
+    "inputFile": "wwwroot/scss/control/toastr.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/TrangChuInfo.css",
+    "inputFile": "wwwroot/scss/view/dictionary/TrangChuInfo.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/FooterLayout.css",
+    "inputFile": "wwwroot/scss/view/dictionary/FooterLayout.scss"
+  }
+]

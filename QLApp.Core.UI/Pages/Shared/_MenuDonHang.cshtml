@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Quản lý điện thoại</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/css/view/dictionary/Home.css" rel="stylesheet" />
+    <link href="~/css/view/dictionary/HeaderLayout.css" rel="stylesheet" />
+
+
+    <link href="~/lib/themify-icons/themify-icons.css" rel="stylesheet" />
+
+    <link href="~/lib/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet" />
+</head>
+<body>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+    <script src="~/js/util.js"></script>
+    <script src="~/js/ajax.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <link href="~/css/view/dictionary/donhang.css" rel="stylesheet" />
+    <div class="menu-group">
+
+
+    </div>
+
+
+    <div class="content-dh">
+        @RenderBody()
+
+    </div>
+
+
+    <script src="~/js/view/admin/dictionary/donhang.js"></script>
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

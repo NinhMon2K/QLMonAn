@@ -1,0 +1,29 @@
+﻿.order-desk {
+    table {
+        thead {
+            border-bottom: 2px solid #e0e0e0;
+
+            th {
+                background-color: #fff;
+                border: none !important;
+            }
+        }
+
+        td {
+            border: none;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .red-row {
+            color: #1492e6;
+
+            &:hover {
+                color: #2ea4f1;
+            }
+        }
+    }
+
+    .bootstrap-table .fixed-table-container table thead th.text-left-item {
+        text-align: left !important
+    }
+}

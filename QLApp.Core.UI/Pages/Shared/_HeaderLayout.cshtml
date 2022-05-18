@@ -1,0 +1,179 @@
+﻿<div class="app-container">
+    <div class="layout-header">
+        <div class="container-header">
+            <div class="left-header">
+                @*menu header*@
+                <div class="menu-header">
+                    <i class="ti-menu"></i>
+
+                   
+                        @await Html.PartialAsync("_MenuLayout")
+                   
+
+                </div>
+                @*logo header*@
+                <div class="logo-header">
+                    <a href="/Dictionary/TrangChu">
+                        <img src="~/images/logoPhoness.jpg" />
+                    </a>
+                </div>
+
+
+            </div>
+            @*search header*@
+            <div class="Searchs-header">
+                <div class="header-icon-search">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="header-input-search">
+                    <input type="text" placeholder="Bạn cần tìm gì?" name="name" value="" />
+                </div>
+
+
+            </div>
+            @*lists item header*@
+            <div class="right-header">
+
+                <ul class="header-navbar-list">
+                    @*item1*@
+                    <li class="header-navbar-item">
+                        <div class="navbar-item-wrapper">
+                            <a class="navbar-item-link" href="#">
+                                <i class="item-link-icon fas fa-phone-alt"></i>
+                                <div class="item-link-name">
+                                    <p>Gọi mua hàng</p>
+                                    <p>1800.2097</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    @*item2*@
+                    <li class="header-navbar-item">
+                        <div class="navbar-item-wrapper">
+                            <a class="navbar-item-link" href="#">
+                                <i class="item-link-icon ti-location-pin"></i>
+                                <div class="item-link-name">
+                                    <p>Cửa hàng</p>
+                                    <p>gần bạn</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    @*item3*@
+                    <li class="header-navbar-item">
+                        <div class="navbar-item-wrapper">
+                            <a class="navbar-item-link" href="#">
+                                <i class="item-link-icon fas fa-shipping-fast"></i>
+                                <div class="item-link-name">
+                                    <p>Tra cứu</p>
+                                    <p>đơn hàng</p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    @*item4*@
+                    <li class="header-navbar-item navbar-item-carts">
+                        <div class="navbar-item-wrapper item-cart">
+                            <a class="navbar-item-link" href="#">
+                                <i class="item-link-icon ti-bag"></i>
+                                <div class="item-link-name">
+                                    <p>Giỏ</p>
+                                    <p>hàng</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="container-cart-info">
+                            <div class="cart-info-content">
+                                <div class="top-cart-info">
+                                    <label>Sản phẩm mới thêm</label>
+                                </div>
+
+                                <div class="content-cart-info">
+                                    <ul class="container-cart-info-list">
+
+                                        <li class="container-item-cart">
+                                            <div class="left-cart_item-img">
+                                                <img src="/images/Phone/Apple/iphone11.jpg" />
+                                            </div>
+                                            <div class="center-cart_item-info"><p>Iphone 11 proMax ngon bo rẻ</p></div>
+                                            <div class="right-cart_item-price"><p>29.000.000đ</p></div>
+                                        </li>
+
+                                        <li class="container-item-cart">
+                                            <div class="left-cart_item-img">
+                                                <img src="/images/Phone/Apple/1.jpg" />
+                                            </div>
+                                            <div class="center-cart_item-info"><p>Iphone 11 proMax ngon bo rẻ</p></div>
+                                            <div class="right-cart_item-price"><p>29.000.000đ</p></div>
+                                        </li>
+
+                                        <li class="container-item-cart">
+                                            <div class="left-cart_item-img">
+                                                <img src="/images/Phone/Apple/2.jpg" />
+                                            </div>
+                                            <div class="center-cart_item-info"><p>Iphone 11 proMax ngon bo rẻ</p></div>
+                                            <div class="right-cart_item-price"><p>29.000.000đ</p></div>
+                                        </li>
+
+                                        <li class="container-item-cart">
+                                            <div class="left-cart_item-img">
+                                                <img src="/images/Phone/Apple/3.webp" />
+                                            </div>
+                                            <div class="center-cart_item-info"><p>Iphone 11 proMax ngon bo rẻ</p></div>
+                                            <div class="right-cart_item-price"><p>29.000.000đ</p></div>
+                                        </li>
+
+                                        <li class="container-item-cart">
+                                            <div class="left-cart_item-img">
+                                                <img src="/images/Phone/Apple/4.webp" />
+                                            </div>
+                                            <div class="center-cart_item-info"><p>Iphone 11 proMax ngon bo rẻ</p></div>
+                                            <div class="right-cart_item-price"><p>29.000.000đ</p></div>
+                                        </li>
+                                        
+
+                                    </ul>
+                                </div>
+                                <div class="bottom-cart-info">
+                                    <div class="bottom-left-cart">
+                                        <p>0</p>
+                                        <label>Thêm Hàng Vào Giỏ</label>
+                                    </div>
+                                    <div class="bottom-right-cart">
+                                        <button class="btn-cart-info">Xem giỏ hàng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    @*item5*@
+                    <li class="header-navbar-item navbar-item-users">
+                        <div class="navbar-item-wrapper item-user">
+                            <a class="navbar-item-link" href="#">
+                                <i class="item-link-icon far fa-user-circle"></i>
+                                <div class="item-link-name">
+                                    Tài khoản
+                                </div>
+                            </a>
+                        </div>
+                        <div class="container-user-info">
+                            <div class="user-info-content">
+                                <div class="c2 my-account">
+                                    <a href="#"><p>Tài khoản của tôi</p></a>
+                                </div>
+                                <div class="c2 log-out">
+                                    <a href="#"><p>Đăng xuất</p></a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+</div>

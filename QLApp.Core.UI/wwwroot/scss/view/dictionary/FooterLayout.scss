@@ -1,0 +1,50 @@
+﻿.app {
+    .container-footer {
+        width:100%;
+        align-items:center;
+        .footer-content {
+            width:1200px;
+            .footer_content-left {
+                .information-payments {
+                    .payments-top {
+                        display: flex;
+
+                        li {
+                            margin: 5px;
+
+                            a {
+
+                                img {
+                                    width: 80px;
+                                    height: 56px;
+                                    border: solid 1px #ccc;
+                                    padding: 10px;
+                                    border-radius: 5px;
+                                }
+                            }
+                        }
+                    }
+
+                    .payments-bottom {
+                        display: flex;
+
+                        li {
+                            margin: 5px;
+
+                            a {
+
+                                img {
+                                    border: solid 1px #ccc;
+                                    width: 80px;
+                                    height: 56px;
+                                    padding: 10px;
+                                    border-radius: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
