@@ -482,3 +482,19 @@ input {
         }
     }
 }
+.top-item {
+    outline: none;
+
+    &:hover {
+        button {
+            i {
+                color: #1492e6;
+                transform:scale(1.3);
+            }
+        }
+    }
+
+    button {
+        outline: none;
+    }
+}
