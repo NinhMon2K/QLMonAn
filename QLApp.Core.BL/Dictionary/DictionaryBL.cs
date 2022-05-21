@@ -28,6 +28,14 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<people>("Proc_Get_ND", new object[] { });
         }
+        public async Task<IList<monan>> LoadMonAn()
+        {
+            return await _service.DataService.GetDataAsync<monan>("Proc_GetALL_Food", new object[] { });
+        }
+        public async Task<IList<loaimonan>> LoadLoaiMonAn()
+        {
+            return await _service.DataService.GetDataAsync<loaimonan>("Proc_GetALL_TypeFood", new object[] { });
+        }
 
         public async Task<bool> SaveNguoiDung(SaveParam saveParam)
         {
@@ -55,6 +63,23 @@ namespace QLApp.Core.BL.Dictionary
             return rs;
 
         }
+        public async Task<bool> InsertDanhDau(danhdau d)
+        {
+                return await _service.DataService.ExcuteSaveAsync("Proc_Insert_ND", d);
+        }
+
+        //public async Task<bool> InsertDanhDau(Dictionary<string, object> pr)
+        //{
+
+        //    return await _service.DataService.ExcuteSaveAsync("Proc_Insert_ND", pr);
+        //}
+        //public async Task<bool> InsertDanhDau(danhdau d)
+        //{
+
+        //    return await _service.DataService.ExcuteSaveAsync("Proc_Insert_ND", d);
+        //}
+
+
 
     }
 }

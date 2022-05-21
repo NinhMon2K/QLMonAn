@@ -47,7 +47,39 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-        
+        [HttpGet("LoadMonAn")]
+        public async Task<ServiceResult> LoadMonAn()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpGet("LoadLoaiMonAn")]
+        public async Task<ServiceResult> LoadLoaiMonAn()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
 
         [HttpGet("LoadUser")]
         public async Task<ServiceResult> LoadUser()
