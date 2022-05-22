@@ -10,6 +10,7 @@ namespace QLApp.Core.Entities.Dictionary
         public string matkhau { get; set; }
         public int idnguoidung { get; set; }
         public int quyen { get; set; }
+        public byte[] File { get; set; }
        
       
     }

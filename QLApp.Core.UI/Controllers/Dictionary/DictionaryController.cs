@@ -23,9 +23,13 @@ namespace QLApp.Core.UI.Controllers.Dictionary
         {
             return View("khachhang");
         }
-       
+        public IActionResult monan()
+        {
+            return View("monan");
+        }
 
 
-      
+
+
     }
 }

@@ -14,5 +14,6 @@ namespace QLApp.Core.Entities.Dictionary.Data
         public string mota { get; set; }
         public string cachlam { get; set; }
         public string noiban { get; set; }
+
     }
 }

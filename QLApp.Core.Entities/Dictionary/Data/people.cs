@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QLApp.Core.Entities.Dictionary.Data
 {
-   public class people
+   public class people : User
     {
         public int id { get; set; }
         public string tendaydu { get; set; }

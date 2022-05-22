@@ -5,6 +5,7 @@ class login {
         this.init();
     }
     init() {
+        this.setImage();
         this.ChildPassword();
         this.loadUser();
         this.addForm();
@@ -12,6 +13,15 @@ class login {
     }
     callApi(nameAPI) {
         return AppUtil.getURLApi('Login', nameAPI);
+    }
+
+    setImage() {
+        let me = this;
+
+        $('#hinhanh').on('change', function (e) {
+            me.file = this.files && this.files[0];           
+        });
+
     }
 
     ChildPassword() {
@@ -100,26 +110,56 @@ class login {
                 Email: Email,
             }
 
+            me.callAjaxUploadFile().then(() => {
+                AppAjax.Ajax(me.callApi('Register'), { type: 'POST' }, JSON.stringify(us), function (data) {
 
-            AppAjax.Ajax(me.callApi('Register'), { type: 'POST' }, JSON.stringify(us), function (data) {
+                    if (data) {
 
-                if (data) {
+                        toastr.success('Đăng ký thành công')
+                        me.hide();
 
-                    toastr.success('Đăng ký thành công')
-                    me.hide();
+                    } else {
+                        toastr.error('Đăng ký thất bại');
 
-                } else {
-                    toastr.error('Đăng ký thất bại');
-
-                }
+                    }
+                })
             })
+
+            
 
         });
 
 
     }
 
+    callAjaxUploadFile() {
+        return new Promise((i, r) => {
 
+            let me = this;
+            let formdata = new FormData();
+            let config = {
+                type: 'POST',
+                data: formdata,
+                contentType: false,
+                cache: false,
+                enctype: "multipart/form-data",
+                processData: false,
+            }
+            formdata.append('file', me.file);
+
+            AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
+
+                if (data) {
+
+                    i();
+
+                } else {
+                    toastr.error('Đăng ký thất bại');
+
+                }
+            })
+        });
+    }
 
 }
 var ologin = new login(); 0

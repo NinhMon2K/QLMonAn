@@ -3,12 +3,10 @@
     "outputFile": "wwwroot/css/view/dictionary/Home.css",
     "inputFile": "wwwroot/scss/view/dictionary/Home.scss"
   },
-  
   {
     "outputFile": "wwwroot/css/view/dictionary/_Layout.css",
     "inputFile": "wwwroot/scss/view/dictionary/_Layout.scss"
   },
-  
   {
     "outputFile": "wwwroot/css/view/dictionary/admin.css",
     "inputFile": "wwwroot/scss/view/dictionary/admin.scss"
@@ -32,6 +30,9 @@
   {
     "outputFile": "wwwroot/css/control/toastr.css",
     "inputFile": "wwwroot/scss/control/toastr.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/monan.css",
+    "inputFile": "wwwroot/scss/view/dictionary/monan.scss"
   }
-  
 ]

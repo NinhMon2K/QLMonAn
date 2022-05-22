@@ -28,8 +28,8 @@ namespace QLApp.Core.API.Controllers.Dictionary
         {
 
         }
-        
-       
+
+
 
         [HttpGet("LoadNguoiDung")]
         public async Task<ServiceResult> LoadNguoiDung()
@@ -63,6 +63,24 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        [HttpGet("LoadALLMonAn")]
+        public async Task<ServiceResult> LoadALLMonAn()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadALLMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         [HttpGet("LoadLoaiMonAn")]
         public async Task<ServiceResult> LoadLoaiMonAn()
         {
@@ -71,6 +89,32 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpPost("LoadCheckedDanhDau")]
+        public async Task<ServiceResult> LoadCheckedDanhDau([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadCheckedDanhDau(a);
+
+
+
             }
             catch (Exception e)
             {
@@ -114,8 +158,65 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-        [HttpGet("DeleteND")]
-        public async Task<ServiceResult> DeleteND(string id)
+        [HttpPost("InsertDanhDau")]
+        public async Task<ServiceResult> InsertDanhDau([FromForm] danhdau d)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertDanhDau(d);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpPost("InserFood")]
+        public async Task<ServiceResult> InserFood([FromBody] monan m)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InserFood(m);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpPost("SaveImage")]
+        public async Task<ServiceResult> SaveImageDish(IFormFile file)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var formData = HttpContext.Request.Form;
+
+                if (file != null)
+                {
+                    var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(originalFileName);
+                    await _service.StorageService.SaveFileAsync(file.OpenReadStream(), fileName);
+                    res.Data = "/saveimage/" + fileName;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpPost("DeleteND")]
+        public async Task<ServiceResult> DeleteND(int id)
         {
             var res = new ServiceResult();
 
@@ -130,7 +231,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+        [HttpPost("DeleteDanhDau")]
+        public async Task<ServiceResult> DeleteDanhDau(int idmonan, string tentaikhoan)
+        {
+            var res = new ServiceResult();
 
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(idmonan, tentaikhoan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
 
 

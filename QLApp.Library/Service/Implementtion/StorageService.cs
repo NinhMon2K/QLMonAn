@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
 
 namespace QLApp.Library.Service.Implementtion
 {
@@ -19,7 +20,14 @@ namespace QLApp.Library.Service.Implementtion
 
         #endregion
 
-        
+        public StorageService()
+        {
+            _userContentFolder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var index = _userContentFolder.IndexOf("API");
+            var str = _userContentFolder.Substring(0, index);
+            _userContentFolder = str + "UI\\wwwroot\\" + USER_CONTENT_FOLDER_NAME;
+        }
+
         public string GetFileUrl(string fileName)
         {
             return $"/{USER_CONTENT_FOLDER_NAME}/{fileName}";

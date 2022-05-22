@@ -11,7 +11,8 @@
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%; }
+  width: 100%;
+  border-bottom: solid 1px #ccc; }
 
 th {
   border-bottom: 1px solid #ccc;
@@ -29,16 +30,31 @@ td {
   word-break: break-word;
   padding: 8px;
   font-size: 14px; }
+  td:hover i {
+    cursor: pointer;
+    font-size: 22px;
+    color: #2ea4f1; }
+  td img {
+    width: 120px;
+    height: 76px; }
   td i {
     font-size: 16px; }
 
+.item-video {
+  text-align: center !important; }
+  .item-video:hover i {
+    cursor: pointer;
+    font-size: 22px;
+    color: #2ea4f1; }
+
 .cfs {
   width: 60px;
-  text-align: center; }
-  .cfs:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    color: #2ea4f1; }
+  text-align: center;
+  /*&:hover {
+        cursor: pointer;
+        transform:scale(1.3);
+        color: #2ea4f1;
+    }*/ }
 
 .ck_All {
   width: 40px;
@@ -265,6 +281,19 @@ input {
           display: flex;
           flex: 1;
           border: 1px solid rgba(0, 0, 0, 0.1); }
+          .ui-dialog #dialog-form .page-content .page_row .box .box_right #lt_type_dish_filter {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 14px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-left: none;
+            padding-left: 5px;
+            /* color: rgba(0,0,0,0.6);*/ }
+            .ui-dialog #dialog-form .page-content .page_row .box .box_right #lt_type_dish_filter:focus-within {
+              border: 1px solid #1492e6 !important; }
+            .ui-dialog #dialog-form .page-content .page_row .box .box_right #lt_type_dish_filter:active {
+              border: 1px solid #1492e6 !important; }
           .ui-dialog #dialog-form .page-content .page_row .box .box_right input {
             width: 100%;
             height: 100%;
@@ -277,6 +306,21 @@ input {
             .ui-dialog #dialog-form .page-content .page_row .box .box_right input:focus-within {
               border: 1px solid #1492e6 !important; }
             .ui-dialog #dialog-form .page-content .page_row .box .box_right input:active {
+              border: 1px solid #1492e6 !important; }
+          .ui-dialog #dialog-form .page-content .page_row .box .box_right input[type=file] {
+            padding: 2px; }
+          .ui-dialog #dialog-form .page-content .page_row .box .box_right textarea {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 14px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-left: none;
+            padding-left: 5px;
+            /* color: rgba(0,0,0,0.6);*/ }
+            .ui-dialog #dialog-form .page-content .page_row .box .box_right textarea:focus-within {
+              border: 1px solid #1492e6 !important; }
+            .ui-dialog #dialog-form .page-content .page_row .box .box_right textarea:active {
               border: 1px solid #1492e6 !important; }
     .ui-dialog #dialog-form .page-footer {
       display: flex;
