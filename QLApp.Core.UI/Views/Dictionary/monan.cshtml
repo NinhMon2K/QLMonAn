@@ -63,8 +63,15 @@
         </tbody>
     </table>
 </div>
+<div class="container-phantrang">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" id="pagination">
+        </ul>
+    </nav>
+
+</div>
 <div id="dialog-form" title="Đăng kí">
-    <form id="">
+    <form class="form" id="form-1" action="" method="POST">
 
         <div class="page-content">
             <div class="page_row page_row-1">
@@ -72,8 +79,9 @@
                     <div class="box_left">
                         <label for="name">Tên món ăn</label>
                     </div>
-                    <div class="box_right">
-                        <input type="text" name="name_ma" id="name_ma" class="text ui-widget-content ui-corner-all">
+                    <div class="box_right form-group">
+                        <input type="text" name="name_ma" id="name_ma" class="text ui-widget-content ui-corner-all form-control">
+                        <span class="form-message"></span>
                     </div>
                 </div>
                 <div class="box box_hinhanh_ma">
@@ -82,8 +90,9 @@
                         <label for="name">Hình ảnh:</label>
 
                     </div>
-                    <div class="box_right">
-                        <input type="file" name="" id="hinhanh_ma" class="text ui-widget-content ui-corner-all">
+                    <div class="box_right form-group">
+                        <input type="file" name="" id="hinhanh_ma" class="form-control text ui-widget-content ui-corner-all ">
+                        <span class="form-message"></span>
                     </div>
                 </div>
 
@@ -92,8 +101,9 @@
                         <label for="email">Cách làm:</label>
 
                     </div>
-                    <div class="box_right">
-                        <textarea type="text" name="cachlam_ma" id="cachlam_ma" class="text ui-widget-content ui-corner-all"> </textarea>
+                    <div class="box_right form-group">
+                        <textarea type="text" name="cachlam_ma" id="cachlam_ma" class="text ui-widget-content ui-corner-all "> </textarea>
+                        <span class="form-message"></span>
                     </div>
                 </div>
                 <div class="box box_video_ma">
@@ -101,8 +111,9 @@
                         <label for="email">Video:</label>
 
                     </div>
-                    <div class="box_right">
-                        <input type="text" name="video_ma" id="video_ma" class="text ui-widget-content ui-corner-all">
+                    <div class="box_right form-group">
+                        <input type="text" name="video_ma" id="video_ma" class="form-control text ui-widget-content ui-corner-all ">
+                        <span class="form-message"></span>
                     </div>
                 </div>
                 <div class="box box_noiban_ma">
@@ -110,8 +121,9 @@
                         <label for="password">Nơi bán:</label>
 
                     </div>
-                    <div class="box_right">
-                        <input type="text" name="noiban_ma" id="noiban_ma" class="text ui-widget-content ui-corner-all">
+                    <div class="box_right form-group">
+                        <input type="text" name="noiban_ma" id="noiban_ma" class="text ui-widget-content ui-corner-all form-control">
+                        <span class="form-message"></span>
                     </div>
                 </div>
                 <div class="box box_loai_ma">
@@ -120,7 +132,7 @@
                         <label for="name">Loại món:</label>
 
                     </div>
-                    <div class="box_right">
+                    <div class="box_right form-group">
                         <select id="lt_type_dish_filter" placeholder="Select size..." style="width: 100%;">
                                
                             </select>
@@ -133,8 +145,9 @@
                         <label for="name">Mô tả:</label>
 
                     </div>
-                    <div class="box_right">
+                    <div class="box_right form-group">
                         <textarea type="text" name="mota_ma" id="mota_ma" class="mota_ma text ui-widget-content ui-corner-all"> </textarea>
+                        <span class="form-message"></span>
                     </div>
                 </div>
 

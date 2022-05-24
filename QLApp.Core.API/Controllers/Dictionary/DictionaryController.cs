@@ -47,6 +47,23 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        [HttpGet("CountMonAn")]
+        public async Task<ServiceResult> CountMonAn()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).CountMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
         [HttpGet("LoadMonAn")]
         public async Task<ServiceResult> LoadMonAn()
         {
@@ -72,6 +89,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadALLMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpGet("LoadMonAnID")]
+        public async Task<ServiceResult> LoadMonAnID(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadMonAnID(id);
             }
             catch (Exception e)
             {
@@ -174,14 +207,14 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-        [HttpPost("InserFood")]
-        public async Task<ServiceResult> InserFood([FromBody] monan m)
+        [HttpPost("SaveFood")]
+        public async Task<ServiceResult> SaveFood([FromBody] SaveParam saveParam)
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InserFood(m);
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveFood(saveParam);
             }
             catch (Exception e)
             {
@@ -239,6 +272,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(idmonan, tentaikhoan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        [HttpGet("DeleteMonAn")]
+        public async Task<ServiceResult> DeleteMonAn(int idMonan)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteMonAn(idMonan);
             }
             catch (Exception e)
             {

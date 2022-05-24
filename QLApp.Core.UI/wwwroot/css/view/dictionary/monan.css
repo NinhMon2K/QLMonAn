@@ -19,4 +19,6 @@ table tr .video-ma {
 .page_row .box_mota {
   height: 300px !important; }
   .page_row .box_mota .box_right .mota_ma {
-    height: 500px; }
+    height: 500px !important; }
+  .page_row .box_mota .box_right input {
+    height: 50px; }
