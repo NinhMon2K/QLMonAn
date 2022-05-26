@@ -1,5 +1,6 @@
 ﻿
 
+
 class monan {
     constructor() {
         this.init();
@@ -17,28 +18,39 @@ class monan {
     addPage() {
 
         let me = this;
-        $('#table_id').DataTable(
+        var tb = $('#table_id').DataTable(
             {
-                "pageLength": 8
+                "pageLength": 8,
             }
         );
-
+        me.tb = tb;
         $('#table_id_filter').html('');
         let leg = $('#table_id_length');
         leg.html('');
-      /*  $('.dataTables_info').html('');*/
+        /*  $('.dataTables_info').html('');*/
 
     }
     checkedDelete() {
+        let dsId = [];
+        let me = this;
+        $('.container-content').on('change', 'table .check-box-index input', e => {
 
-        //$('.container-table').on('change', 'table .check-box-index input', e => {
+            let input = $(e.currentTarget);
+            let countCheck = input.closest('table').find('.check-box-index input:checked').length;
 
-        //    let input = $(e.currentTarget);
-        //    let countCheck = input.closest('table').find('.check-box-index input:checked').length;
-        //    $('#btnXoa').prop('disabled', !countCheck);
+            let a = input.data('id');
+
+            //console.log(e.currentTarget);
+            //console.log($('.check-box-index input:checked'));
+            //dsId.push(a)
+
+            //console.log(countCheck);
+            let bt = $('.btn_delete');
+
+            bt.prop('disabled', !countCheck);
 
 
-        //})
+        })
     }
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
@@ -63,16 +75,14 @@ class monan {
                     text: item.tenloai,
                     class: 'cboLoai_ma'
                 }).appendTo(sel);
-
-
             });
         })
 
 
 
     }
-    
-    
+
+
     addForm() {
         let me = this;
         var dialog = $("#dialog-form").dialog({
@@ -99,7 +109,7 @@ class monan {
                         $('#video_ma').val(item.video);
                         $('#noiban_ma').val(item.noiban);
                         $('#mota_ma').val(item.mota);
-                       
+
                     });
 
 
@@ -119,7 +129,7 @@ class monan {
             $('#dialog-form').dialog('close');
         });
 
-       
+
     }
     SaveFood() {
         var me = this;
@@ -130,7 +140,7 @@ class monan {
             rules: [
                 Validator.isRequired('#name_ma', 'Vui lòng nhập tên món ăn!'),
                 Validator.isRequired('#hinhanh_ma', 'Vui lòng chọn ảnh!'),
-                Validator.isRequired('#video_ma', 'Vui lòng nhập tên đầy đủ của bạn'),
+
                 Validator.isRequired('#noiban_ma', 'Vui lòng nhập nơi bán món ăn!'),
                 Validator.isRequired('#mota_ma'),
 
@@ -148,16 +158,16 @@ class monan {
                 anh = me.anh;
 
                 let tenmonan = $('#name_ma').val();
-                let video = $('#video_ma').val();
+
                 let mota = $('#mota_ma').val();
                 let loaimon = $('#lt_type_dish_filter').val();
                 let cachlam = $('#cachlam_ma').val();
                 let noiban = $('#noiban_ma').val();
                 let us = {
-                    id:me.id,
+                    id: me.id,
                     tenmonan: tenmonan,
                     anh: anh,
-                    video: video,
+                    video: '',
                     mota: mota,
                     idLoai: parseInt(loaimon),
                     cachlam: cachlam,
@@ -174,11 +184,11 @@ class monan {
                         AppAjax.Ajax(me.callApi('SaveFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                             if (data) {
-
+                                me.tb.draw();
                                 toastr.success('Thêm mới thành công');
                                 $('#name_ma').val('');
                                 $('#cachlam_ma').val('');
-                                $('#video_ma').val('');
+
                                 $('#noiban_ma').val('');
                                 $('#mota_ma').val('');
 
@@ -219,7 +229,7 @@ class monan {
                                         if (data) {
                                             $('#name_ma').val('');
                                             $('#cachlam_ma').val('');
-                                            $('#video_ma').val('');
+
                                             $('#noiban_ma').val('');
                                             $('#mota_ma').val('');
                                             toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
@@ -260,7 +270,7 @@ class monan {
         $('.btn_left').on('click', '#btn_close', (e) => {
             $('#name_ma').val('');
             $('#cachlam_ma').val('');
-            $('#video_ma').val('');
+
             $('#noiban_ma').val('');
             $('#mota_ma').val('');
             $('#dialog-form').dialog('close');
@@ -276,13 +286,13 @@ class monan {
         AppAjax.Ajax(me.callApi('LoadALLMonAn'), {}, {}, function (data) {
             me.formdata = data;
 
-            
+
             data.forEach((item, i) => {
                 ++i;
                 let ID = item.Id_KH;
                 var tableRow = document.createElement('tr');
                 tableRow.innerHTML = `
-         <td class='check-box-index'><input type='checkbox' class='check_item'> </td>
+         <td class='check-box-index'><input type='checkbox' class='check_item' data-id=${item.id}> </td>
                          <td class='stt'>${i}</td>
                         <td> <img src='${item.anh}'></img></td>
                          <td>${item.tenmonan}</td>
@@ -321,7 +331,7 @@ class monan {
                             if (data) {
 
                                 toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
-
+                                me.tb.draw();
                                 let a = setTimeout(() => {
                                     $('#dialog-form').dialog('close');
                                     let a = setTimeout(() => {
@@ -352,23 +362,95 @@ class monan {
                 }
                 ]
             })
+
+
+
         })
 
         $('.ck_All').on('change', 'input', e => {
 
             let inputs = $(e.currentTarget);
             let countCheckAll = inputs.closest('table').find('.check-box-index input:checked').length;
-            console.log(countCheckAll);
 
-            let countCheckAlls = inputs.closest('table').find('.check-box-index input').length;
-            $('.check-box-index input').prop('checked', countCheckAlls);
-            me.formdata.forEach(x => x.checked = !!countCheckAlls);
-            $('#btn_delete').prop('enabled', !countCheckAlls);
+
+            let bt = $('.btn_delete');
+            if (countCheckAll == 0) {
+                $('.check-box-index input').prop('checked', !countCheckAll);
+                bt.prop('disabled', countCheckAll);
+            }
+
+            else {
+                $('.check-box-index input').prop('checked', !countCheckAll);
+                bt.prop('disabled', true);
+            }
+
 
 
 
 
         })
+
+        $('.btn-left').on('click', '.btn_delete', e => {
+            //let count = $('table').find('.check-box-index input:checked').length;
+
+            console.log(me.tb);
+            //console.log(count);
+            let u = $('.check-box-index input:checked');
+            $('<div>', {
+                text: 'Bạn thực sự muốn xóa !'
+            }).dialog({
+                title: 'Cảnh báo!',
+                modal: true,
+
+                buttons: [{
+                    text: 'Xóa',
+                    class: 'btn_kt',
+                    id: 'btnCheckXoa',
+                    click: function () {
+                        $('.check-box-index input:checked').each((index, item) => {
+
+                            let idMonan = item.getAttribute('data-id');
+                            AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
+
+                                if (data) {
+
+                                    toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
+                                    me.tb.draw();
+                                    let a = setTimeout(() => {
+                                        $('#dialog-form').dialog('close');
+                                        let a = setTimeout(() => {
+                                            $('#dialog-form').dialog('close');
+                                            me.loadDanhSachMonAn();
+
+                                        }, 200);
+
+                                    }, 200);
+
+
+                                } else {
+                                    toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
+
+                                }
+                            })
+                         
+                        });
+                       
+                    }
+                    
+                },
+                {
+                    text: 'Không',
+                    class: 'btn_kt',
+                    id: 'btnCheckKhong',
+                    click: function (e) {
+                        $(this).dialog('close');
+
+                    }
+                }
+                ]
+            })
+
+        });
 
     }
     callAjaxUploadFile() {

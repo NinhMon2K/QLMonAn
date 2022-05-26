@@ -29,6 +29,12 @@ table.dataTable.display > tbody > tr.odd > .sorting_1, table.dataTable.order-col
 tr:hover td {
   background: #E3F2FF !important; }
 
+.home-content {
+  margin: -25px 0 0 0; }
+
+.container-content {
+  height: 50%; }
+
 td {
   position: relative;
   overflow: hidden;
@@ -158,9 +164,6 @@ input[type=checkbox]:checked tr:active {
     .container-button .btn:hover {
       background-color: #2ea4f1;
       border-color: #2ea4f1; }
-  .container-button .btn_delete:enabled {
-    background-color: #ccc;
-    border: solid 1px #ccc; }
 
 table {
   font-family: arial, sans-serif;
