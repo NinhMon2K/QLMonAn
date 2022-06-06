@@ -211,7 +211,9 @@ class monan {
         $('.btn_left').on('click', '#btn_close', (e) => {
             $('#name_ma').val('');
             $('#cachlam_ma').val('');
-
+           
+            const file = document.querySelector('#hinhanh_ma');
+            file.value = '';
             $('#noiban_ma').val('');
             $('#mota_ma').val('');
             $('#dialog-form').dialog('close');
@@ -331,7 +333,7 @@ class monan {
                                 $('#video_ma').val(item.video);
                                 $('#noiban_ma').val(item.noiban);
                                 $('#mota_ma').val(item.mota);
-
+                              
                             });
 
 
