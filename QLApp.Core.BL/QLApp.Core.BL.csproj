@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QLApp.Core.Entities\QLApp.Core.Entities.csproj" />
     <ProjectReference Include="..\QLApp.Library\QLApp.Library.csproj" />
   </ItemGroup>
 

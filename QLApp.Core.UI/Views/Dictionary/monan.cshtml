@@ -1,4 +1,8 @@
-﻿@{
+﻿@using QLApp.Core.Entities
+@using QLApp.Core.Entities.Constant
+@using QLApp.UILibrary.Helper
+
+@{
     Layout = "_Layout";
 
 }
@@ -41,28 +45,45 @@
     </div>
 </div>
 <div class="container-table">
-    <table id="table_id" class="display">
+    <table id="table_id"
+           class="display"
+           data-url="@Url.AppAction(MicroService.Core,"LoadALLMonAn","Dictionary")"
+           data-pagination="true"
+
+           data-page-size="2"
+            data-load-dictionary="true"
+           data-side-pagination="server">
         <thead>
-            <tr>
-                <th class="text-center ck_All">
-                    <input type="checkbox" name="name" class="check_item" />
+            <tr data-field="id" data-id="id">
+                <th class="text-center ck_All"
+                    data-checkbox="true"
+                    data-field="">
                 </th>
-                <th class="stt">STT </th>
-                <th class="img-ma">Hình ảnh</th>
-                <th class="name-ma">Tên món ăn</th>
-                <th class="loai-ma">Loại món</th>
-                <th class="mota-ma">Mô tả</th>
-                <th class="cachlam-ma">Cách làm</th>
-                <th class="noiban-ma">Nơi bán</th>
-                <th class="video-ma">Video</th>
-                <th class="btn_sua"></th>
-                <th class="btn_xoa"></th>
+                <th class="stt"
+                    data-field="stt">STT </th>
+                <th class="img-ma"
+                    data-field="anh"
+                    data-formatter="monanr.onFormatIng">Hình ảnh</th>
+                <th class="name-ma"
+                    data-field="tenmonan">Tên móns ăn</th>
+                <th class="loai-ma"
+                    data-field="tenloai" data-align="center">Loại món</th>
+                <th class="mota-ma"
+                    data-field="mota">Mô tả</th>
+                <th class="cachlam-ma"
+                    data-field="cachlam">Cách làm</th>
+                <th class="noiban-ma"
+                    data-field="noiban">Nơi bán</th>
+                <th class="video-ma"
+                    data-formatter="monanr.onFormatVideo">Video</th>
+                <th class="btn_sua" data-formatter="monanr.onFormatUpdate" data-align="center"> </th>
+                <th class="btn_xoa" data-formatter="monanr.onFormatDelete">  </th>
             </tr>
         </thead>
-        <tbody class="customer-monan">
-        </tbody>
+
     </table>
 </div>
+
 <div class="container-phantrang">
     <nav aria-label="Page navigation example">
         <ul class="pagination" id="pagination">
@@ -106,7 +127,7 @@
                         <span class="form-message"></span>
                     </div>
                 </div>
-               
+
                 <div class="box box_noiban_ma">
                     <div class="box_left">
                         <label for="password">Nơi bán:</label>
@@ -125,9 +146,8 @@
                     </div>
                     <div class="box_right form-group">
                         <select id="lt_type_dish_filter" placeholder="Select size..." style="width: 100%;">
-                               
-                            </select>
-                       
+                        </select>
+
                     </div>
                 </div>
                 <div class="box box_mota">

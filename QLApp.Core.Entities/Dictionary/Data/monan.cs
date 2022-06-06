@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QLApp.Core.Entities.Dictionary.Data
 {
-   public class monan : loaimonan
+   public class monan : loaimonan 
     {
         public int id { get; set; }
 
@@ -14,6 +14,6 @@ namespace QLApp.Core.Entities.Dictionary.Data
         public string mota { get; set; }
         public string cachlam { get; set; }
         public string noiban { get; set; }
-
+        public Paginator Paginator { get; set; }
     }
 }

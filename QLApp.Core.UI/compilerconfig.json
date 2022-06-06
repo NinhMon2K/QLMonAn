@@ -34,5 +34,9 @@
   {
     "outputFile": "wwwroot/css/view/dictionary/monan.css",
     "inputFile": "wwwroot/scss/view/dictionary/monan.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/taikhoan.css",
+    "inputFile": "wwwroot/scss/view/dictionary/taikhoan.scss"
   }
 ]

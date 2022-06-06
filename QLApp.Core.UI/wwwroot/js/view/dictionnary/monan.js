@@ -1,6 +1,5 @@
 ﻿
 
-
 class monan {
     constructor() {
         this.init();
@@ -12,46 +11,11 @@ class monan {
         this.setImage();
         this.SaveFood();
         this.addCombobox();
-        this.checkedDelete();
-        this.addPage();
-    }
-    addPage() {
 
-        let me = this;
-        var tb = $('#table_id').DataTable(
-            {
-                "pageLength": 8,
-            }
-        );
-        me.tb = tb;
-        $('#table_id_filter').html('');
-        let leg = $('#table_id_length');
-        leg.html('');
-        /*  $('.dataTables_info').html('');*/
 
     }
-    checkedDelete() {
-        let dsId = [];
-        let me = this;
-        $('.container-content').on('change', 'table .check-box-index input', e => {
-
-            let input = $(e.currentTarget);
-            let countCheck = input.closest('table').find('.check-box-index input:checked').length;
-
-            let a = input.data('id');
-
-            //console.log(e.currentTarget);
-            //console.log($('.check-box-index input:checked'));
-            //dsId.push(a)
-
-            //console.log(countCheck);
-            let bt = $('.btn_delete');
-
-            bt.prop('disabled', !countCheck);
 
 
-        })
-    }
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
     }
@@ -78,14 +42,17 @@ class monan {
             });
         })
 
+        $('.ti-trash').on('click', (e) => {
+            debugger
 
+        });
 
     }
 
 
     addForm() {
         let me = this;
-        var dialog = $("#dialog-form").dialog({
+        let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,
             width: 1030,
@@ -97,33 +64,7 @@ class monan {
             me.Mode = 1;
             me.Id = null;
         });
-        $('.container-table').on('click', '.btnUpdate', (e) => {
-            let btn = $(e.currentTarget).data('id');
-            let id = btn;
-            AppAjax.Ajax(me.callApi('LoadMonAnID'), {}, { id }, function (data) {
-                console.log(data);
-                if (data) {
-                    data.forEach((item, i) => {
-                        $('#name_ma').val(item.tenmonan);
-                        $('#cachlam_ma').val(item.cachlam);
-                        $('#video_ma').val(item.video);
-                        $('#noiban_ma').val(item.noiban);
-                        $('#mota_ma').val(item.mota);
 
-                    });
-
-
-
-                } else {
-                    toastr.error('Không có dữ liêu.Thất bại!', { positionClass: 'toast-top-center' });
-
-                }
-
-            })
-            me.Mode = 3;
-            me.id = btn;
-            dialog.dialog("open");
-        })
         $('.btn_left').on('click', '#btn_close', (e) => {
 
             $('#dialog-form').dialog('close');
@@ -184,7 +125,7 @@ class monan {
                         AppAjax.Ajax(me.callApi('SaveFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                             if (data) {
-                                me.tb.draw();
+
                                 toastr.success('Thêm mới thành công');
                                 $('#name_ma').val('');
                                 $('#cachlam_ma').val('');
@@ -194,7 +135,7 @@ class monan {
 
                                 let a = setTimeout(() => {
                                     $('#dialog-form').dialog('close');
-                                    me.loadDanhSachMonAn();
+                                    $('#table_id').bootstrapTable('refresh');
                                 }, 200);
 
                             } else {
@@ -233,10 +174,10 @@ class monan {
                                             $('#noiban_ma').val('');
                                             $('#mota_ma').val('');
                                             toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
+                                            $('#dialog-form').dialog('close');
 
                                             let a = setTimeout(() => {
-                                                $('#dialog-form').dialog('close');
-                                                me.loadDanhSachMonAn();
+                                                $('#table_id').bootstrapTable('refresh');
                                             }, 200);
 
                                         } else {
@@ -279,125 +220,155 @@ class monan {
     }
     loadDanhSachMonAn() {
         let me = this;
-
-        var contentTables = $('.customer-monan');
-        contentTables.html('');
-
-        AppAjax.Ajax(me.callApi('LoadALLMonAn'), {}, {}, function (data) {
-            me.formdata = data;
-
-
-            data.forEach((item, i) => {
-                ++i;
-                let ID = item.Id_KH;
-                var tableRow = document.createElement('tr');
-                tableRow.innerHTML = `
-         <td class='check-box-index'><input type='checkbox' class='check_item' data-id=${item.id}> </td>
-                         <td class='stt'>${i}</td>
-                        <td> <img src='${item.anh}'></img></td>
-                         <td>${item.tenmonan}</td>
-                         <td>${item.tenloai}</td>
-             <td>${item.mota}</td>
-             <td class='text-right'>${item.cachlam}</td>
-                        <td class='text-right'>${item.noiban}</td>
-                        <td class='text-right size-td item-video'><i class='ti-video-camera'></i></td>
-                        <td class='cfs btnDelete'  data-id=${item.id}><i class='ti-trash'></i></td>
-                        <td class='cfs btnUpdate'  data-id=${item.id}><i class='ti-write'></i></td>
-                         `;
-
-                contentTables.append(tableRow);
-
-            });
+        let dialog = $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 740,
+            width: 1030,
+            modal: true,
 
         });
 
-        $('.customer-monan tr').on('click', '.btnDelete', (e) => {
-            let btn = $(e.currentTarget).data('id');
-            console.log(btn);
-            let idMonan = parseInt(btn);
-            $('<div>', {
-                text: 'Bạn thực sự muốn xóa !'
-            }).dialog({
-                title: 'Cảnh báo!',
-                modal: true,
-
-                buttons: [{
-                    text: 'Xóa',
-                    class: 'btn_kt',
-                    id: 'btnCheckXoa',
-                    click: function () {
-                        AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
-
-                            if (data) {
-
-                                toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
-                                me.tb.draw();
-                                let a = setTimeout(() => {
-                                    $('#dialog-form').dialog('close');
-                                    let a = setTimeout(() => {
-                                        $('#dialog-form').dialog('close');
-                                        me.loadDanhSachMonAn();
-
-                                    }, 200);
-
-                                }, 200);
+        let option = {
+            responseHandler: function (res) {
+                let data = res.Data || [];
+                data.forEach((x, i) => { x.stt = i + 1 });
+                return data;
+            },
 
 
-                            } else {
-                                toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
+            totalField: "RecordsTotal",
+            pageList: [5, 7, 8, 10],
+            pageSize: 8,
+            sidePagination: "client",
+            undefinedText: "",
+            silent: true,
+            onCheck: function () {
+                $('.btn_delete').prop('disabled', false);
+            },
+
+            onUncheck: function () {
+                $('.btn_delete').prop('disabled', true);
+            },
+            onCheckAll() {
+
+                $('.btn_delete').prop('disabled', false);
+
+            },
+
+            onUncheckAll() {
+                $('.btn_delete').prop('disabled', true);
+            },
+           
+            onPostBody(data, bs) {
+
+                bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
+                    let index = $(e.currentTarget).closest('tr').data('index');
+                    let item = data[index];
+                    let idMonan = parseInt(item.id);
+                    $('<div>', {
+                        text: 'Bạn thực sự muốn xóa !'
+                    }).dialog({
+                        title: 'Cảnh báo!',
+                        modal: true,
+
+                        buttons: [{
+                            text: 'Xóa',
+                            class: 'btn_kt',
+                            id: 'btnCheckXoa',
+                            click: function () {
+                                AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
+
+                                    if (data) {
+
+                                        toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
+
+                                        let a = setTimeout(() => {
+                                            $('#dialog-form').dialog('close');
+                                            let a = setTimeout(() => {
+                                                $('#dialog-form').dialog('close');
+                                                $('#table_id').bootstrapTable('refresh');
+
+                                            }, 200);
+
+                                        }, 200);
+
+
+                                    } else {
+                                        toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
+
+                                    }
+                                    $(this).dialog('close');
+                                })
 
                             }
-                        })
-                        $(this).dialog('close');
-                    }
-                },
-                {
-                    text: 'Không',
-                    class: 'btn_kt',
-                    id: 'btnCheckKhong',
-                    click: function (e) {
-                        $(this).dialog('close');
+                        },
+                        {
+                            text: 'Không',
+                            class: 'btn_kt',
+                            id: 'btnCheckKhong',
+                            click: function (e) {
+                                $(this).dialog('close');
 
-                    }
-                }
-                ]
-            })
+                            }
+                        }
+                        ]
+                    })
 
 
+                });
 
-        })
+                bs.$body.off('click', '.btnUpdate').on('click', '.btnUpdate', (e) => {
 
-        $('.ck_All').on('change', 'input', e => {
+                    let index = $(e.currentTarget).closest('tr').data('index');
+                    let item = data[index];
+                    let id = parseInt(item.id);
+                    AppAjax.Ajax(me.callApi('LoadMonAnID'), {}, { id }, function (data) {
+                        console.log(data);
+                        if (data) {
+                            data.forEach((item, i) => {
+                                $('#name_ma').val(item.tenmonan);
+                                $('#cachlam_ma').val(item.cachlam);
+                                $('#video_ma').val(item.video);
+                                $('#noiban_ma').val(item.noiban);
+                                $('#mota_ma').val(item.mota);
 
-            let inputs = $(e.currentTarget);
-            let countCheckAll = inputs.closest('table').find('.check-box-index input:checked').length;
+                            });
 
 
-            let bt = $('.btn_delete');
-            if (countCheckAll == 0) {
-                $('.check-box-index input').prop('checked', !countCheckAll);
-                bt.prop('disabled', countCheckAll);
+
+                        } else {
+                            toastr.error('Không có dữ liêu.Thất bại!', { positionClass: 'toast-top-center' });
+
+                        }
+
+                    })
+                    me.Mode = 3;
+                    me.id = id;
+                    dialog.dialog("open");
+                });
+                $('.container-table').on('click', '.btnUpdate', (e) => {
+
+                })
+
             }
 
-            else {
-                $('.check-box-index input').prop('checked', !countCheckAll);
-                bt.prop('disabled', true);
-            }
+        };
 
-
-
-
-
-        })
+        $('#table_id').bootstrapTable(option);
 
         $('.btn-left').on('click', '.btn_delete', e => {
-            //let count = $('table').find('.check-box-index input:checked').length;
+            let ID = [];
 
-            console.log(me.tb);
-            //console.log(count);
+            ID = $.map($('#table_id').bootstrapTable('getSelections'), function (row) {
+
+                return row.id
+            });
+
             let u = $('.check-box-index input:checked');
             $('<div>', {
                 text: 'Bạn thực sự muốn xóa !'
+
+
             }).dialog({
                 title: 'Cảnh báo!',
                 modal: true,
@@ -407,20 +378,15 @@ class monan {
                     class: 'btn_kt',
                     id: 'btnCheckXoa',
                     click: function () {
-                        $('.check-box-index input:checked').each((index, item) => {
-
-                            let idMonan = item.getAttribute('data-id');
+                        ID.forEach((idMonan) => {
                             AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
 
                                 if (data) {
-
-                                    toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
-                                    me.tb.draw();
                                     let a = setTimeout(() => {
                                         $('#dialog-form').dialog('close');
                                         let a = setTimeout(() => {
                                             $('#dialog-form').dialog('close');
-                                            me.loadDanhSachMonAn();
+                                            $('#table_id').bootstrapTable('refresh');
 
                                         }, 200);
 
@@ -432,11 +398,13 @@ class monan {
 
                                 }
                             })
-                         
+                            $(this).dialog('close');
+
                         });
-                       
+
+                        toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
                     }
-                    
+
                 },
                 {
                     text: 'Không',
@@ -475,7 +443,6 @@ class monan {
                 me.anh = data;
                 if (data) {
 
-
                     i();
 
                 } else {
@@ -484,6 +451,29 @@ class monan {
                 }
             })
         });
+    }
+
+    onFormatIng(val) {
+        return `<img src='${val}'></img>`;
+    }
+    onFormatChecked(val) {
+        return `<input type='checkbox' data-checkbox ='true' true, class='check_item' data-id=${val}>`;
+    }
+    onFormatVideo() {
+        return `<i class='ti-video-camera'></i>`;
+    }
+
+    onFormatUpdate() {
+        return `<div class='btnUpdate'><i class='ti-file'></i></div>`;
+    }
+    onFormatDelete() {
+        return `<div class='btnDelete'> <i class='ti-trash'></i> </div>`;
+    }
+    getIdSelections() {
+        return $('#table_id').map($('#table_id').bootstrapTable('getSelections'), function (row) {
+            console.log(row.id);
+            return `<i data-ID= '${row.id}' class='ti-trash'></i>`
+        })
     }
 }
 var monanr = new monan();

@@ -82,7 +82,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
         [HttpGet("LoadALLMonAn")]
-        public async Task<ServiceResult> LoadALLMonAn()
+        public async Task<ServiceResult> LoadALLMonAn( )
         {
             var res = new ServiceResult();
 

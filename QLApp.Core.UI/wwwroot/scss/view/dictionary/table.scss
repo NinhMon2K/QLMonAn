@@ -4,6 +4,9 @@
 
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 .container-table {
@@ -12,9 +15,23 @@
     position: relative;
 }
 
+.btn_sua {
+    width: 60px;
+   text-align:center;
+}
+
+.btn_xoa {
+    width: 60px;
+    text-align: center;
+}
+
+.video-ma {
+    width: 60px;
+    text-align: center;
+}
 table {
     font-family: arial, sans-serif;
-    border-collapse: collapse;
+    border-collapse: collapse !important;
     width: 100%;
     border-bottom: solid 1px #ccc;
 }
@@ -45,6 +62,61 @@ tr:hover td {
 
     height:50%;
 }
+.pagination {
+    margin: 10px 24px 0 0px;
+}
+.btn {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    font-family: Roboto-Regular;
+    font-size: 13px !important;
+    white-space: nowrap;
+    outline: none !important;
+    background-color: #1492e6;
+    border-color: #1492e6;
+    margin-right: 10px;
+    color: #fff !important;
+}
+.container-table {
+    .bootstrap-table {
+        .fixed-table-pagination {
+            .pagination-detail {
+                margin-left: 14px;
+
+                .pagination-info {
+                    font-family: Roboto-Regular;
+                    font-size: 14px !important;
+                    white-space: nowrap;
+                    outline: none !important;
+                }
+
+                .page-list {
+                    font-family: Roboto-Regular;
+                    font-size: 14px !important;
+                    white-space: nowrap;
+                    outline: none !important;
+
+                    .btn-group {
+                        .btn {
+                            border-width: 1px;
+                            border-style: solid;
+                            border-radius: 4px;
+                            font-family: Roboto-Regular;
+                            font-size: 13px !important;
+                            white-space: nowrap;
+                            outline: none !important;
+                            background-color: #1492e6;
+                            border-color: #1492e6;
+                            margin-right: 10px;
+                            color: #fff !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 td {
     position: relative;
     overflow: hidden;
@@ -53,18 +125,19 @@ td {
     word-break: break-word;
     padding: 8px;
     font-size: 14px;
+    border: none !important;
 
     &:hover {
         i {
             cursor: pointer;
-            font-size: 22px;
+            /* font-size: 22px;*/
             color: #2ea4f1 !important;
         }
     }
 
     img {
         width: 120px;
-        height: 76px;
+        height: 70px;
     }
 
     i {
@@ -176,14 +249,9 @@ table.dataTable.display > tbody > tr.even > .sorting_1, table.dataTable.order-co
     width: 40px;
     text-align: center;
 }
-
-.tb {
-}
-
 .stt {
     width: 20px !important;
     text-align: center;
-  
 }
 
 .check_item {
@@ -593,9 +661,9 @@ input {
 
                 .btn_left {
                     .btn {
-                        border-color: #1492e6;
-                        background-color: #fff;
-                        color: #000;
+                        border-color: #1492e6!important;
+                        background-color: #fff!important;
+                        color: #000!important;
 
                         &:hover {
                             border-color: #2ea4f1;

@@ -41,7 +41,6 @@
     <Folder Include="Controllers\Login\" />
     <Folder Include="Image\" />
     <Folder Include="wwwroot\css\dictionary\" />
-    <Folder Include="wwwroot\css\common\" />
     <Folder Include="wwwroot\css\control\" />
     <Folder Include="wwwroot\scss\Login\" />
   </ItemGroup>
@@ -2080,6 +2079,12 @@
     <None Include="wwwroot\lib\themify-icons\SVG\zip.svg" />
     <None Include="wwwroot\lib\themify-icons\SVG\zoom-in.svg" />
     <None Include="wwwroot\lib\themify-icons\SVG\zoom-out.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QLApp.Core.Entities\QLApp.Core.Entities.csproj" />
+    <ProjectReference Include="..\QLApp.Library\QLApp.Library.csproj" />
+    <ProjectReference Include="..\QLApp.UILibrary\QLApp.UILibrary.csproj" />
   </ItemGroup>
 
 </Project>
