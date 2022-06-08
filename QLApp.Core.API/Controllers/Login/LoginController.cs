@@ -51,6 +51,36 @@ namespace QLApp.Core.API.Controllers.Login
 
             return res;
         }
+
+        [HttpGet("CheckUser")]
+        public async Task<ServiceResult> GetTaiKhoan(string UserName)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var user = await BLFactory.CreateAs<LoginBL>(_service).GetTaiKhoan(UserName);
+
+                if (user != null)
+                {
+                    _service.AuthService.SetUser(user);
+                    //var a = _httpA
+                    res.Data = true;
+                }
+                else
+                {
+                    res.Data = false;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         [HttpPost("Register")]
         public async Task<ServiceResult> RegisterUser([FromBody] User user)
         {
@@ -58,7 +88,7 @@ namespace QLApp.Core.API.Controllers.Login
 
             try
             {
-                
+
                 res.Data = await BLFactory.CreateAs<LoginBL>(_service).RegisterUser(user);
 
             }
