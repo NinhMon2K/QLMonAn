@@ -248,6 +248,33 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        [HttpPost("SaveImageND")]
+        public async Task<ServiceResult> SaveImageNDDish(IFormFile file)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var formData = HttpContext.Request.Form;
+
+                if (file != null)
+                {
+                    var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(originalFileName);
+                    await _service.StorageService.SaveFileAsync(file.OpenReadStream(), fileName);
+                    res.Data = "/saveimage/imgpeople/" + fileName;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         [HttpPost("DeleteND")]
         public async Task<ServiceResult> DeleteND(int id)
         {

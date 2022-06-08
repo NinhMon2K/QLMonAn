@@ -1,0 +1,25 @@
+﻿.box_gt {
+    display: flex;
+    border: none !important;
+
+    .gt {
+        display: flex;
+        align-items: center;
+
+        &:first-child {
+            margin-right: 10px;
+        }
+
+        input {
+            width: auto !important;
+        }
+    }
+}
+
+.box_right {
+    width: 40px;
+
+    #ngaysinh {
+        width: 40px;
+    }
+}

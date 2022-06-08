@@ -4,10 +4,8 @@
 
 @{
     Layout = "_Layout";
-
 }
-<link href="~/css/view/dictionary/monan.css" rel="stylesheet" />
-
+<link href="~/css/view/dictionary/nguoidung.css" rel="stylesheet" />
 <div class="top-content">
     <div class="header__search__bar bl">
         <div class="header__search__bar__icon">
@@ -44,14 +42,15 @@
         </div>
     </div>
 </div>
+
+
 <div class="container-table">
     <table id="table_id"
            class="display"
-           data-url="@Url.AppAction(MicroService.Core,"LoadALLMonAn","Dictionary")"
+           data-url="@Url.AppAction(MicroService.Core,"LoadNguoiDung","Dictionary")"
            data-pagination="true"
-           data-scrollTo = "true"
-           data-page-size="2"
-            data-load-dictionary="true"
+           data-scrollTo="true"
+           data-load-dictionary="true"
            data-side-pagination="server">
         <thead>
             <tr data-field="id" data-id="id">
@@ -61,23 +60,21 @@
                 </th>
                 <th class="stt"
                     data-field="stt">STT </th>
-                <th class="img-ma"
-                    data-field="anh"
-                    data-formatter="monanr.onFormatIng">Hình ảnh</th>
-                <th class="name-ma"
-                    data-field="tenmonan">Tên món ăn</th>
-                <th class="loai-ma"
-                    data-field="tenloai" data-align="center">Loại món</th>
-                <th class="mota-ma"
-                    data-field="mota">Mô tả</th>
-                <th class="cachlam-ma"
-                    data-field="cachlam">Cách làm</th>
-                <th class="noiban-ma"
-                    data-field="noiban">Nơi bán</th>
-                <th class="video-ma"
-                    data-formatter="monanr.onFormatVideo">Video</th>
-                <th class="btn_sua" data-formatter="monanr.onFormatUpdate" data-align="center"> </th>
-                <th class="btn_xoa" data-formatter="monanr.onFormatDelete">  </th>
+                <th class="img-nd"
+                    data-field="anhdaidien"
+                    data-formatter="nd.onFormatIng">Hình ảnh</th>
+                <th class="fullname-nd"
+                    data-field="tendaydu">Họ và tên</th>
+                <th class="ngaysinh-nd"
+                    data-field="ngaysinh" data-align="center">Ngày sinh</th>
+                <th class="email-nd"
+                    data-field="email">Email</th>
+                <th class="gioitinh-nd"
+                    data-field="gioitinh">Giới tính</th>
+                <th class="sdt-nd"
+                    data-field="sdt">Số điện thoại</th>
+                <th class="btn_sua" data-formatter="nd.onFormatUpdate" data-align="center"> </th>
+                <th class="btn_xoa" data-formatter="nd.onFormatDelete">  </th>
             </tr>
         </thead>
 
@@ -91,73 +88,74 @@
     </nav>
 
 </div>
-<div id="dialog-form" title="Món ăn">
+<div id="dialog-form" title="Người dùng">
     <form class="form" id="form-1" action="" method="POST">
 
         <div class="page-content">
             <div class="page_row page_row-1">
                 <div class="box box_name">
                     <div class="box_left">
-                        <label for="name">Tên món ăn</label>
+                        <label for="name">Họ và tên:</label>
                     </div>
                     <div class="box_right form-group">
-                        <input type="text" name="name_ma" id="name_ma" class="text ui-widget-content ui-corner-all form-control">
+                        <input type="text" name="fullname_nd" id="fullname_nd" class="text ui-widget-content ui-corner-all form-control">
                         <span class="form-message"></span>
                     </div>
                 </div>
-                <div class="box box_hinhanh_ma">
+                <div class="box box_hinhanh_nd">
                     <div class="box_left">
 
                         <label for="name">Hình ảnh:</label>
 
                     </div>
                     <div class="box_right form-group">
-                        <input type="file" name="" id="hinhanh_ma" class="form-control text ui-widget-content ui-corner-all ">
+                        <input type="file" name="" id="hinhanh_nd" class="form-control text ui-widget-content ui-corner-all ">
                         <span class="form-message"></span>
                     </div>
                 </div>
 
-                <div class="box box_cachlam_ma">
+                <div class="box box_ht">
                     <div class="box_left">
-                        <label for="email">Cách làm:</label>
+                        <label>Ngày sinh:</label>
+                    </div>
+                    <div class="box_right">
+                        <input type="date" id="ngaysinh" name="date">
+                    </div>
+                </div>
+
+                <div class="box box_email">
+                    <div class="box_left">
+                        <label for="password">Email:</label>
 
                     </div>
                     <div class="box_right form-group">
-                        <textarea type="text" name="cachlam_ma" id="cachlam_ma" class="text ui-widget-content ui-corner-all "> </textarea>
+                        <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all form-control">
                         <span class="form-message"></span>
                     </div>
                 </div>
-
-                <div class="box box_noiban_ma">
+                <div class="box box_ht">
                     <div class="box_left">
-                        <label for="password">Nơi bán:</label>
+                        <label for="password">Giới tính:</label>
 
                     </div>
-                    <div class="box_right form-group">
-                        <input type="text" name="noiban_ma" id="noiban_ma" class="text ui-widget-content ui-corner-all form-control">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
-                <div class="box box_loai_ma">
-                    <div class="box_left">
-
-                        <label for="name">Loại món:</label>
-
-                    </div>
-                    <div class="box_right form-group">
-                        <select id="lt_type_dish_filter" placeholder="Select size..." style="width: 100%;">
-                        </select>
+                    <div class="box_right box_gt">
+                        <div class="gt gt_nam">
+                            <input type="radio" id="rdonam" name="nam" value="nam">
+                            <label>Nam</label>
+                        </div>
+                        <div class="gt gt_nu">
+                            <input type="radio" id="rdonu" name="nam" value="nam">
+                            <label>Nữ</label>
+                        </div>
 
                     </div>
                 </div>
-                <div class="box box_mota">
+                <div class="box box_sdt">
                     <div class="box_left">
-
-                        <label for="name">Mô tả:</label>
-
+                        <label for="name">Số điện thoại:</label>
                     </div>
                     <div class="box_right form-group">
-                        <textarea type="text" name="mota_ma" id="mota_ma" class="mota_ma text ui-widget-content ui-corner-all"> </textarea>
+                        <input type="text" name="sdt" id="sdt" class="text ui-widget-content ui-corner-all form-control">
                         <span class="form-message"></span>
                     </div>
                 </div>
@@ -177,5 +175,4 @@
         </div>
     </form>
 </div>
-
-<script src="~/js/view/dictionnary/monan.js"></script>
+<script src="~/js/view/dictionnary/nguoidung.js"></script>

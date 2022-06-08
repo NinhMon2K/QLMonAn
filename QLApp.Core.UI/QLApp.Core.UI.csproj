@@ -42,6 +42,7 @@
     <Folder Include="Image\" />
     <Folder Include="wwwroot\css\dictionary\" />
     <Folder Include="wwwroot\css\control\" />
+    <Folder Include="wwwroot\saveimage\imgpeople\" />
     <Folder Include="wwwroot\scss\Login\" />
   </ItemGroup>
 
