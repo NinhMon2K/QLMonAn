@@ -33,6 +33,21 @@ namespace QLApp.Core.BL.Login
             }
 
         }
+        public async Task<User> GetTaiKhoan(string UserName)
+        {
+            var ids = await _service.DataService.GetDataAsync<string>("Proc_Checks_TaiKhoan", new object[] { UserName });
+
+            if (ids != null && ids.Count > 0)
+            {
+                var userID = ids[0];
+                return new User();
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
 
     }

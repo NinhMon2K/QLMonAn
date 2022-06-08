@@ -82,7 +82,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
         [HttpGet("LoadALLMonAn")]
-        public async Task<ServiceResult> LoadALLMonAn( )
+        public async Task<ServiceResult> LoadALLMonAn()
         {
             var res = new ServiceResult();
 
@@ -158,6 +158,8 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
 
+
+
         [HttpGet("LoadUser")]
         public async Task<ServiceResult> LoadUser()
         {
@@ -166,6 +168,40 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadUser();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpGet("GetTaiKhoanID")]
+        public async Task<ServiceResult> GetTaiKhoanID(string tentaikhoan)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetTaiKhoanID(tentaikhoan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpGet("LoadALLTaiKhoan")]
+        public async Task<ServiceResult> LoadALLTaiKhoan()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadALLTaiKhoan();
             }
             catch (Exception e)
             {
@@ -191,6 +227,25 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        [HttpPost("SaveTaiKhoan")]
+        public async Task<ServiceResult> SaveTaiKhoan([FromBody] SaveParam saveParam)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveTaiKhoan(saveParam);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+
         [HttpPost("InsertDanhDau")]
         public async Task<ServiceResult> InsertDanhDau([FromForm] danhdau d)
         {
@@ -280,6 +335,24 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        [HttpGet("DeleteTaiKhoan")]
+        public async Task<ServiceResult> DeleteTaiKhoan(string tentaikhoan)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteTaiKhoan(tentaikhoan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         [HttpGet("DeleteMonAn")]
         public async Task<ServiceResult> DeleteMonAn(int idMonan)
         {
