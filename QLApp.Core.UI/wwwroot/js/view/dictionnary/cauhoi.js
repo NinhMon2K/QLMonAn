@@ -1,15 +1,14 @@
 ﻿
 
-class nguoidung {
+class cauhoi {
     constructor() {
         this.init();
 
     }
     init() {
-        this.loadNguoiDung();
+        this.loadCauHoi();
         this.addForm();
-        this.setImage();
-        this.SaveNguoiDung();
+    //    this.SaveFood();
     //    this.addCombobox();
 
 
@@ -19,21 +18,13 @@ class nguoidung {
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
     }
-    setImage() {
-        let me = this;
-
-        $('#hinhanh_nd').on('change', function (e) {
-            me.file = this.files && this.files[0];
-        });
-
-    }
    
     addForm() {
         let me = this;
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,
-            width: 1030,
+            width: 700,
             modal: true,
 
         });
@@ -50,18 +41,18 @@ class nguoidung {
 
 
     }
-    SaveNguoiDung() {
+    SaveFood() {
         var me = this;
         Validator({
             form: '#form-1',
             formGroupSelector: '.box_right',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequired('#fullname_nd', 'Vui lòng nhập tên!'),
-                Validator.isRequired('#hinhanh_nd', 'Vui lòng chọn ảnh!'),
-                Validator.isRequired('#ngaysinh', 'Vui lòng nhập ngày sinh!'),
-                Validator.isEmail('#email', 'Vui lòng nhập email!'),
-                Validator.isRequired('#sdt', 'Vui lòng nhập số điện thoại!'),
+                Validator.isRequired('#name_ma', 'Vui lòng nhập tên món ăn!'),
+                Validator.isRequired('#hinhanh_ma', 'Vui lòng chọn ảnh!'),
+
+                Validator.isRequired('#noiban_ma', 'Vui lòng nhập nơi bán món ăn!'),
+                Validator.isRequired('#mota_ma'),
 
             ],
             onSubmit: function (data) {
@@ -76,27 +67,60 @@ class nguoidung {
                 let anh = '';
                 anh = me.anh;
 
-                let tendaydu = $('#fullname_nd').val();
-                //let mota = $('#hinhanh_nd').val();
-                let ngaysinh = $('#ngaysinh').val();
-                let email = $('#email').val();
-                let sdt = $('#sdt').val();
-                let gioitinh = $('input[type="radio"][name="sex"]:checked').val();
-                let nguoidung = {
+                let tenmonan = $('#name_ma').val();
+
+                let mota = $('#mota_ma').val();
+                let loaimon = $('#lt_type_dish_filter').val();
+                let cachlam = $('#cachlam_ma').val();
+                let noiban = $('#noiban_ma').val();
+                let us = {
                     id: me.id,
-                    tendaydu: tendaydu,
-                    anhdaidien: anh,
-                    ngaysinh: ngaysinh,
-                    email: email,
-                    gioitinh: parseInt(gioitinh),
-                    sdt: sdt,
+                    tenmonan: tenmonan,
+                    anh: anh,
+                    video: '',
+                    mota: mota,
+                    idLoai: parseInt(loaimon),
+                    cachlam: cachlam,
+                    noiban: noiban,
                 }
 
                 switch (me.Mode) {
+                    case 1: {
+                        let data = {
+                            Mode: 1,
+                            Formdata: JSON.stringify(us)
+                        }
+
+                        AppAjax.Ajax(me.callApi('SaveFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
+
+                            if (data) {
+
+                                toastr.success('Thêm mới thành công');
+                                $('#name_ma').val('');
+                                $('#cachlam_ma').val('');
+
+                                $('#noiban_ma').val('');
+                                $('#mota_ma').val('');
+
+                                let a = setTimeout(() => {
+                                    $('#dialog-form').dialog('close');
+                                    $('#table_id').bootstrapTable('refresh');
+                                }, 200);
+
+                            } else {
+                                toastr.error('Thêm mới thất bại');
+
+                            }
+                        })
+
+                        break;
+                    }
                     case 3: {
+
+
                         let data = {
                             Mode: 3,
-                            Formdata: JSON.stringify(nguoidung)
+                            Formdata: JSON.stringify(us)
                         }
 
                         $('<div>', {
@@ -110,10 +134,14 @@ class nguoidung {
                                 class: 'btn_kt',
                                 id: 'btnCheckSua',
                                 click: function () {
-                                    AppAjax.Ajax(me.callApi('SaveNguoiDung'), { type: 'POST' }, JSON.stringify(data), function (data) {
+                                    AppAjax.Ajax(me.callApi('SaveFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                                         if (data) {
-                                        
+                                            $('#name_ma').val('');
+                                            $('#cachlam_ma').val('');
+
+                                            $('#noiban_ma').val('');
+                                            $('#mota_ma').val('');
                                             toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
                                             $('#dialog-form').dialog('close');
 
@@ -161,12 +189,12 @@ class nguoidung {
         });
 
     }
-    loadNguoiDung() {
+    loadCauHoi() {
         let me = this;
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,
-            width: 600,
+            width: 1030,
             modal: true,
 
         });
@@ -207,7 +235,7 @@ class nguoidung {
                 bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
-                    let id = parseInt(item.id);
+                    let idMonan = parseInt(item.id);
                     $('<div>', {
                         text: 'Bạn thực sự muốn xóa !'
                     }).dialog({
@@ -219,7 +247,7 @@ class nguoidung {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
-                                AppAjax.Ajax(me.callApi('DeleteND'), {}, { id }, function (data) {
+                                AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
 
                                     if (data) {
 
@@ -265,22 +293,16 @@ class nguoidung {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
                     let id = parseInt(item.id);
-                    dialog.dialog("open");
-                    AppAjax.Ajax(me.callApi('LoadNguoiDungID'), {}, { id }, function (data) {
-
+                    AppAjax.Ajax(me.callApi('LoadMonAnID'), {}, { id }, function (data) {
+                        console.log(data);
                         if (data) {
                             data.forEach((item, i) => {
-                                $('#fullname_nd').val(item.tendaydu);
-                            //    $('#hinhanh_nd').val(item.anhdaidien);
-                                $('#ngaysinh').val(item.ngaysinh);
-                                $('#email').val(item.email);
-                                $('#sdt').val(item.sdt);
-                                if (item.gioitinh == '1') {
-                                    $("#rdonam").prop("checked", true);
-                                }
-                                else {
-                                    $("#rdonu").prop("checked", true);
-                                }
+                                $('#name_ma').val(item.tenmonan);
+                                $('#cachlam_ma').val(item.cachlam);
+                                $('#video_ma').val(item.video);
+                                $('#noiban_ma').val(item.noiban);
+                                $('#mota_ma').val(item.mota);
+
                             });
 
 
@@ -293,7 +315,7 @@ class nguoidung {
                     })
                     me.Mode = 3;
                     me.id = id;
-                    
+                    dialog.dialog("open");
                 });
                 $('.container-table').on('click', '.btnUpdate', (e) => {
 
@@ -327,8 +349,8 @@ class nguoidung {
                     class: 'btn_kt',
                     id: 'btnCheckXoa',
                     click: function () {
-                        ID.forEach((id) => {
-                            AppAjax.Ajax(me.callApi('DeleteND'), {}, { id }, function (data) {
+                        ID.forEach((idMonan) => {
+                            AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
 
                                 if (data) {
                                     let a = setTimeout(() => {
@@ -387,7 +409,7 @@ class nguoidung {
             }
             formdata.append('file', me.file);
 
-            AppAjax.Ajax(me.callApi('SaveImageND'), config, {}, function (data) {
+            AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
 
                 me.anh = data;
                 if (data) {
@@ -402,13 +424,6 @@ class nguoidung {
         });
     }
 
-    onFormatIng(val) {
-        return `<img src='${val}'></img>`;
-    }
-    onFormatChecked(val) {
-        return `<input type='checkbox' data-checkbox ='true' true, class='check_item' data-id=${val}>`;
-    }
-
     onFormatUpdate() {
         return `<div class='btnUpdate'><i class='ti-file'></i></div>`;
     }
@@ -421,11 +436,5 @@ class nguoidung {
             return `<i data-ID= '${row.id}' class='ti-trash'></i>`
         })
     }
-    onFormatDate(val) {
-    return
-        `${val.split(' ')[0].split('-').reverse().join('-')}`;
-    }
-    
 }
-
-var nd = new nguoidung();
+var ch = new cauhoi();

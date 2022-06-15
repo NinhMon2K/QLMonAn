@@ -1,0 +1,74 @@
+﻿@using QLApp.Core.Entities
+@using QLApp.Core.Entities.Constant
+@using QLApp.UILibrary.Helper
+@{
+    Layout = "_Layout";
+}
+<link href="~/css/view/dictionary/baoloi.css" rel="stylesheet" />
+<div class="top-content">
+    <div class="header__search__bar bl">
+        <div class="header__search__bar__icon">
+            <i class="ti-filter"></i>
+        </div>
+        <div class="header__search__bar__input">
+            <input type="text" placeholder="Điều kiện lọc">
+        </div>
+
+        <div class="header__search__bar__modal">
+
+        </div>
+
+    </div>
+    <div class="header__search__bar search">
+        <div class="header__search__bar__icon">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="header__search__bar__input">
+            <input type="text" placeholder="Tìm kiếm">
+        </div>
+
+        <div class="header__search__bar__modal">
+
+        </div>
+
+    </div>
+    <div class="container-button">
+        <div class="btn-left">
+            <button class="btn btn_delete" disabled>Delete</button>
+        </div>
+        <div class="btn-right">
+            <button class="btn btn_check" id="btn_check">Duyệt</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-table">
+    <table id="table_id"
+           class="display"
+           data-url="@Url.AppAction(MicroService.Core,"LoadLoi","Dictionary")"
+           data-pagination="true"
+           data-scrollTo="true"
+           data-load-dictionary="true"
+           data-side-pagination="server">
+        <thead>
+            <tr data-field="id" data-id="id">
+                <th class="text-center ck_All"
+                    data-checkbox="true"
+                    data-field="">
+                </th>
+                <th class="stt"
+                    data-field="stt">STT </th>
+                <th class="cauhoi" 
+                    data-field="tenloi">Tên lỗi</th>
+                <th class="traloi" data-width="200" data-align="center"
+                    data-field="trangthai" data-formatter="bl.onFormatStatus">Trạng thái</th>
+                <th class="btn_xoa" data-formatter="bl.onFormatDelete">  </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+<script src="~/js/view/dictionnary/baoloi.js"></script>

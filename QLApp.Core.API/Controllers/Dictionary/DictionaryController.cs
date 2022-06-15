@@ -48,6 +48,40 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        [HttpGet("LoadCauHoi")]
+        public async Task<ServiceResult> LoadCauHoi()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadCauHoi();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpGet("loadLoi")]
+        public async Task<ServiceResult> loadLoi()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).loadLoi();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         [HttpGet("CountMonAn")]
         public async Task<ServiceResult> CountMonAn()
         {
@@ -114,14 +148,14 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpGet("LoadLoaiMonAn")]
-        public async Task<ServiceResult> LoadLoaiMonAn()
+        [HttpGet("LoadNguoiDungID")]
+        public async Task<ServiceResult> LoadNguoiDungID(int id)
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadNguoiDungID(id);
             }
             catch (Exception e)
             {
@@ -330,7 +364,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpPost("DeleteND")]
+        [HttpGet("DeleteND")]
         public async Task<ServiceResult> DeleteND(int id)
         {
             var res = new ServiceResult();
