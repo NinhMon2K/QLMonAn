@@ -38,5 +38,17 @@
   {
     "outputFile": "wwwroot/css/view/dictionary/taikhoan.css",
     "inputFile": "wwwroot/scss/view/dictionary/taikhoan.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/nguoidung.css",
+    "inputFile": "wwwroot/scss/view/dictionary/nguoidung.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/cauhoi.css",
+    "inputFile": "wwwroot/scss/view/dictionary/cauhoi.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/baoloi.css",
+    "inputFile": "wwwroot/scss/view/dictionary/baoloi.scss"
   }
 ]

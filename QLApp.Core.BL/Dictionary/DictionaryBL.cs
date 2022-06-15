@@ -37,6 +37,14 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<people>("Proc_Get_ND", new object[] { });
         }
+        public async Task<IList<cauHoi>> LoadCauHoi()
+        {
+            return await _service.DataService.GetDataAsync<cauHoi>("Proc_Get_Cauhoi", new object[] { });
+        }
+        public async Task<IList<baoloi>> loadLoi()
+        {
+            return await _service.DataService.GetDataAsync<baoloi>("Pro_Get_Baoloi", new object[] { });
+        }
         public async Task<IList<Pagezing>> CountMonAn()
         {
             return await _service.DataService.GetDataAsync<Pagezing>("Proc_Count_Monan", new object[] { });
@@ -54,6 +62,11 @@ namespace QLApp.Core.BL.Dictionary
         {
 
             return await _service.DataService.GetDataAsync<monan>("Proc_Get_MonAn_ID", new object[] { id });
+        }
+        public async Task<IList<people>> LoadNguoiDungID(int id)
+        {
+
+            return await _service.DataService.GetDataAsync<people>("Proc_Get_NguoiDung_ID", new object[] { id });
         }
         public async Task<IList<loaimonan>> LoadLoaiMonAn()
         {
