@@ -317,7 +317,7 @@
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,
-            width: 540,
+            width: 760,
             modal: true,
 
         });
@@ -346,8 +346,21 @@
             me.resetForm();
             me.loadForm(2);
         });
+        me.changeFileToImage('hinhanh_tk','#blah');
+
+    }
+    changeFileToImage(idFile, idImage) {
+        document.getElementById(idFile).onchange = function () {
 
 
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idImage).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        };
     }
     loadTaiKhoan() {
         let me = this;
@@ -465,6 +478,7 @@
                                 $('#taikhoan').prop('disabled', true);
                                 $('#taikhoan').val(item.tentaikhoan);
                                 $('#password_tk').val(item.matkhau);
+                                $('#blah').attr('src', item.anhdaidien);
                                 let pq = '';
                                 if (item.quyen == '1') {
                                     pq = 'Người dùng'

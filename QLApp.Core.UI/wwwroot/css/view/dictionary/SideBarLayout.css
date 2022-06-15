@@ -13,7 +13,7 @@
     width: 260px;
     background: #011239;
     z-index: 100;
-   /* transition: all 0.5s ease;*/
+    transition: all 0.5s ease;
 }
 
     .sidebar.close {
@@ -333,6 +333,10 @@
             font-size: 42px;
             margin: 0 11px 0 0px;
         }
+            .user-info .top-user-info .left-info .img_userinfo {
+                width:40px;
+                height:auto;
+            }
 
 .user-info .title-user {
     margin: 10px 0;
@@ -390,8 +394,10 @@
     display: flex;
 }
 
-.top-item .user-icon i {
-    font-size: 34px;
+.top-item .user-icon img {
+    width:40px;
+    width:40px;
+    height:auto;
 }
 
 

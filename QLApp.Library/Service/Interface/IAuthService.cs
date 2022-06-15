@@ -10,7 +10,7 @@ namespace QLApp.Library.Service.Interface
 
 
         void SetUser(User user);
-
+        User GetCurrentUser();
 
     }
 }

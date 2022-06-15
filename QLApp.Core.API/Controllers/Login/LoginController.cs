@@ -34,9 +34,8 @@ namespace QLApp.Core.API.Controllers.Login
 
                 if (user != null)
                 {
-                    _service.AuthService.SetUser(user);
                     //var a = _httpA
-                    res.Data = true;
+                    res.Data = user;
                 }
                 else
                 {

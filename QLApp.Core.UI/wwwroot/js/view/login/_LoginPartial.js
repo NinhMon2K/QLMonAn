@@ -77,9 +77,10 @@ class login {
                 Password: password
             }, function (data) {
                 if (data) {
-
+                    localStorage.setItem('taikhoan', JSON.stringify(data));
                     let url = '/Dictionary/Home';
                     window.location.href = url;
+
 
                 } else {
                     toastr.warning('Tài khoản hoặc mật khẩu không đúng', { positionClass: 'toast-top-center' });

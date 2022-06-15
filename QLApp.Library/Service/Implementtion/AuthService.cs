@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using QLApp.Core.Entities.Dictionary;
 using QLApp.Core.Entities.Enum;
+using QLApp.Library.Model;
 using QLApp.Library.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,7 @@ namespace QLApp.Library.Service.Implementtion
 {
     public class AuthService : IAuthService
     {
-        private User _userInfo;
         public static IList<Dictionary<string, User>> users;
-        public static User current;
 
         public AuthService()
         {
@@ -23,25 +22,19 @@ namespace QLApp.Library.Service.Implementtion
         {
             get
             {
-                if (_userInfo == null)
-                {
-                    _userInfo = GetCurrentUser();
-                }
-                return _userInfo;
+                return Login.user;
             }
         }
 
         public User GetCurrentUser()
         {
-            return current;
+            return Login.user;
         }
 
         public void SetUser(User user)
         {
-            _userInfo = user;
-            current = user;
+            Login.user = user;
         }
-
 
     }
 }

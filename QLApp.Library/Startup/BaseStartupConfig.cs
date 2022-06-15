@@ -9,7 +9,7 @@ using QLApp.Library.Service.Implementtion;
 
 namespace QLApp.Library.Startup
 {
-    public class BaseStartupConfig
+    public static class BaseStartupConfig
     {
         public static void ConfigureService(ref IServiceCollection services, IConfiguration configuration, bool isApi)
         {

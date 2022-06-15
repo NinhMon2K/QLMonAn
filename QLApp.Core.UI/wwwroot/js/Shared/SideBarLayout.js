@@ -8,6 +8,13 @@
         this.initMenu();
         this.initUser();
         this.initToolTip();
+        this.setUserInfo();
+    }
+    setUserInfo() {
+        let taikhoan = JSON.parse(localStorage.getItem('taikhoan')) ;
+        $('.user-name').text(taikhoan.tentaikhoan);
+        $('.img_userinfo').attr("src", taikhoan.anhdaidien);
+
     }
     initMenu() {
         var arrow = $(".arrow");
@@ -18,7 +25,7 @@
             });
         }
         let sidebar = document.querySelector(".sidebar");
-   
+        sidebar.classList.toggle("close");
         let sidebarBtn = document.querySelector(".bx-menu");
         sidebarBtn.addEventListener("click", () => {
             sidebar.classList.toggle("close");

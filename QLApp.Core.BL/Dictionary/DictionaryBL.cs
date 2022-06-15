@@ -24,10 +24,14 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<User>("Proc_Get_User", new object[] { });
         }
-
-        public async Task<IList<people>> LoadALLTaiKhoan()
+        public async Task<IList<thongke>> LoadThongKe()
         {
-            return await _service.DataService.GetDataAsync<people>("Proc_GetALL_TK", new object[] { });
+            return await _service.DataService.GetDataAsync<thongke>("Proc_Count_ThongKe", new object[] { });
+        }
+
+        public async Task<IList<User>> LoadALLTaiKhoan()
+        {
+            return await _service.DataService.GetDataAsync<User>("Proc_GetALL_TK", new object[] { });
         }
         public async Task<IList<people>> LoadNguoiDung()
         {
@@ -80,7 +84,7 @@ namespace QLApp.Core.BL.Dictionary
 
         public async Task<bool> SaveTaiKhoan(SaveParam saveParam)
         {
-            var obj = JsonSerializer.Deserialize<people>(saveParam.FormData.ToString());
+            var obj = JsonSerializer.Deserialize<User>(saveParam.FormData.ToString());
             if (saveParam.Mode == Mode.Add)
             {
                 return await _service.DataService.ExcuteSaveAsync("Proc_Save_TK", obj);
@@ -123,9 +127,9 @@ namespace QLApp.Core.BL.Dictionary
 
         }
 
-        public async Task<IList<people>> GetTaiKhoanID(string tentaikhoan)
+        public async Task<IList<User>> GetTaiKhoanID(string tentaikhoan)
         {
-            return await _service.DataService.GetDataAsync<people>("Proc_Get_TK_ID", new object[] { tentaikhoan });
+            return await _service.DataService.GetDataAsync<User>("Proc_Get_TK_ID", new object[] { tentaikhoan });
         }
 
 

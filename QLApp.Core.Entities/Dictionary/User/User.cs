@@ -1,10 +1,11 @@
-﻿using System;
+﻿using QLApp.Core.Entities.Dictionary.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace QLApp.Core.Entities.Dictionary
 {
-    public class User
+    public class User : people
     {
         public string tentaikhoan { get; set; } 
         public string matkhau { get; set; }

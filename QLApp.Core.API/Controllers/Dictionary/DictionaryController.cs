@@ -176,6 +176,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+        [HttpGet("LoadThongKe")]
+        public async Task<ServiceResult> LoadThongKe()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadThongKe();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
         [HttpGet("GetTaiKhoanID")]
         public async Task<ServiceResult> GetTaiKhoanID(string tentaikhoan)

@@ -6,9 +6,10 @@
     Layout = "_Layout";
 
 }
+
 <link href="~/css/view/dictionary/monan.css" rel="stylesheet" />
 
-<div class="top-content">
+<div class="top-content" id="tbMoman">
     <div class="header__search__bar bl">
         <div class="header__search__bar__icon">
             <i class="ti-filter"></i>
@@ -26,8 +27,8 @@
         <div class="header__search__bar__icon">
             <i class="fas fa-search"></i>
         </div>
-        <div class="header__search__bar__input">
-            <input type="text" placeholder="Tìm kiếm">
+        <div class="header__search__bar__input search">
+            <input id="txt_search" type="text" placeholder="Tìm kiếm">
         </div>
 
         <div class="header__search__bar__modal">
@@ -48,27 +49,33 @@
     <table id="table_id"
            class="display"
            data-url="@Url.AppAction(MicroService.Core,"LoadALLMonAn","Dictionary")"
+           data-toolbar="#tbMoman"
+           data-search-selector="#txt_search"
            data-pagination="true"
-           data-scrollTo = "true"
+           data-scrollTo="true"
            data-page-size="2"
-            data-load-dictionary="true"
+           data-load-dictionary="true"
            data-side-pagination="server">
         <thead>
             <tr data-field="id" data-id="id">
                 <th class="text-center ck_All"
                     data-checkbox="true"
+                    data-searchable="false"
                     data-field="">
                 </th>
                 <th class="stt"
+                    data-searchable="false"
                     data-field="stt">STT </th>
                 <th class="img-ma"
                     data-field="anh"
+                    data-searchable="false"
                     data-formatter="monanr.onFormatIng">Hình ảnh</th>
                 <th class="name-ma"
                     data-field="tenmonan">Tên móns ăn</th>
                 <th class="loai-ma"
                     data-field="tenloai" data-align="center">Loại món</th>
                 <th class="mota-ma"
+                    data-searchable="false"
                     data-field="mota">Mô tả</th>
                 <th class="cachlam-ma"
                     data-field="cachlam">Cách làm</th>
@@ -96,37 +103,75 @@
 
         <div class="page-content">
             <div class="page_row page_row-1">
-                <div class="box box_name">
-                    <div class="box_left">
-                        <label for="name">Tên món ăn</label>
+                <div class="cpn_centent">
+
+                    <div class="cpn_centent_text">
+                        <div class="box box_name">
+                            <div class="box_left">
+                                <label for="name">Tên món ăn</label>
+                            </div>
+                            <div class="box_right form-group">
+                                <input type="text" name="name_ma" id="name_ma" class="text ui-widget-content ui-corner-all form-control">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+                        <div class="box box_cachlam_ma">
+                            <div class="box_left">
+                                <label for="email">Cách làm:</label>
+
+                            </div>
+                            <div class="box_right form-group">
+                                <textarea type="text" name="cachlam_ma" id="cachlam_ma" class="text ui-widget-content ui-corner-all "> </textarea>
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="box_right form-group">
-                        <input type="text" name="name_ma" id="name_ma" class="text ui-widget-content ui-corner-all form-control">
-                        <span class="form-message"></span>
+
+                    <div class="right-content">
+                        <div class="import-content">
+                            <label for="hinhanh_ma">
+
+                                <div for="hinhanh_ma" class="drag-container">
+
+
+                                    <div class="ic-plus">
+
+                                        <i for="hinhanh_ma" class="ti-plus"></i>
+                                    </div>
+
+                                    <div class="display-text">
+                                        Chọn ảnh
+                                    </div>
+
+                                    <input class="drag-box"
+                                           id="hinhanh_ma"
+                                           type="file"
+                                           title="Chọn ảnh" style="display: none; visibility: none;" />
+                                    <img id="blah" class="img-back" />
+
+                                </div>
+
+                            </label>
+                            <div class="result-upload"></div>
+
+                        </div>
+
                     </div>
                 </div>
-                <div class="box box_hinhanh_ma">
-                    <div class="box_left">
 
-                        <label for="name">Hình ảnh:</label>
+                @*<div class="box box_hinhanh_ma">
+                        <div class="box_left">
 
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="file" name="" id="hinhanh_ma" class="form-control text ui-widget-content ui-corner-all ">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
+                            <label for="name">Hình ảnh:</label>
 
-                <div class="box box_cachlam_ma">
-                    <div class="box_left">
-                        <label for="email">Cách làm:</label>
+                        </div>
+                        <div class="box_right form-group">
+                            <input type="file" name="" id="hinhanh_ma" class="form-control text ui-widget-content ui-corner-all ">
+                            <span class="form-message"></span>
+                        </div>
+                    </div>*@
 
-                    </div>
-                    <div class="box_right form-group">
-                        <textarea type="text" name="cachlam_ma" id="cachlam_ma" class="text ui-widget-content ui-corner-all "> </textarea>
-                        <span class="form-message"></span>
-                    </div>
-                </div>
+
 
                 <div class="box box_noiban_ma">
                     <div class="box_left">
@@ -163,6 +208,8 @@
                 </div>
 
             </div>
+
+
 
         </div>
         <div class="page-footer">

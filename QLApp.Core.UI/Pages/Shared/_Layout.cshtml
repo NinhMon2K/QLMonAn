@@ -1,6 +1,12 @@
 ﻿@using QLApp.Core.Entities
 @using QLApp.Core.Entities.Constant
 @using QLApp.UILibrary.Helper
+
+
+@{
+    var a = AuthService.GetCurrentUser()?.tentaikhoan;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +49,12 @@
     <link href="~/css/common/bootstrap-table.min.css" rel="stylesheet" />
     <script src="~/js/common/bootstrap-table.js"></script>
     <script src="~/js/common/bootstrap-table-vi-VN.js"></script>
+    <script src="~/js/common/Chart.bundle.js"></script>
+    <script src="~/js/common/Chart.bundle.min.js"></script>
+    <link href="~/js/common/Chart.css" rel="stylesheet" />
+    <script src="~/js/common/Chart.js"></script>
+    <link href="~/js/common/Chart.min.css" rel="stylesheet" />
+    <script src="~/js/common/Chart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
     <script src="~/js/common/bs-override.js"></script>
 
@@ -66,12 +78,12 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="/Dictionary/TrangChu">
+                <a href="@Url.AppAction(MicroService.UI, "Home","Dictionary")">
                     <i class='ti-home'></i>
-                    <span class="link_name">Trang chủ</span>
+                    <span class="link_name">Tổng quan</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/Dictionary/TrangChu">Trang chủ</a></li>
+                    <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "Home","Dictionary")">Tổng quan</a></li>
                 </ul>
             </li>
 
@@ -155,6 +167,16 @@
             </li>-->
         </ul>
     </div>
+
+
+    <script>
+
+        var a = {
+            a: "@AuthService.GetCurrentUser()?.tentaikhoan"
+        }
+
+    </script>
+
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu' title="Menu"></i>
@@ -172,13 +194,13 @@
                 <div class="top-item header-user">
 
                     <div class="user user-name">Nguyễn Nghĩa Ninh</div>
-                    <div class="user user-icon"><i class="far fa-user-circle"></i></div>
+                    <div class="user user-icon"><img class="img_userinfo"/></div>
                     <div class="user user-icon-dropdow"><i class="ti-arrow-circle-down"></i></div>
                     <div class="user-info">
                         <div class="top-user-info">
-                            <div class="left-info"><i class="far fa-user-circle"></i></div>
+                            <div class="left-info"><img class="img_userinfo" /></i></div>
                             <div class="right-info">
-                                <div class="name-info">Nguyễn Nghĩa Ninh</div>
+                                <div class="name-info">@AuthService.GetCurrentUser()?.tentaikhoan</div>
                                 <div class="information-user"><a href="#">Thông tin tin khoản</a></div>
                             </div>
                         </div>

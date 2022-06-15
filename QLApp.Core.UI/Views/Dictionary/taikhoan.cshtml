@@ -9,7 +9,7 @@
 }
 <link href="~/css/view/dictionary/taikhoan.css" rel="stylesheet" />
 
-<div class="top-content">
+<div class="top-content" id="tbTaiKhoan">
     <div class="header__search__bar bl">
         <div class="header__search__bar__icon">
             <i class="ti-filter"></i>
@@ -27,8 +27,8 @@
         <div class="header__search__bar__icon">
             <i class="fas fa-search"></i>
         </div>
-        <div class="header__search__bar__input">
-            <input type="text" placeholder="Tìm kiếm">
+        <div class="header__search__bar__input search">
+            <input type="text" id="txt_search" placeholder="Tìm kiếm">
         </div>
 
         <div class="header__search__bar__modal">
@@ -48,8 +48,10 @@
 <div class="container-table">
     <table id="table_id"
            class="display"
+            data-toolbar="#tbTaiKhoan"
            data-url="@Url.AppAction(MicroService.Core,"LoadALLTaiKhoan","Dictionary")"
            data-pagination="true"
+            data-search-selector="#txt_search"
            data-scrollTo="true"
            data-page-size="2"
            data-load-dictionary="true"
@@ -57,26 +59,33 @@
         <thead>
             <tr data-field="id" data-id="id">
                 <th class="text-center ck_All"
+                    data-searchable="false"
                     data-checkbox="true"
                     data-field="">
                 </th>
                 <th class="stt"
+                    data-searchable="false"
                     data-field="stt">STT </th>
 
                 <th class="name_tk"
                     data-align="center"
+                   
                     data-field="tentaikhoan">Tài khoản</th>
                 <th class="mat_khau"
                     data-field="matkhau"
+                    data-searchable="false"
                     data-formatter="taikhoano.onFormatPassword"
                     data-align="center">Mật khẩu</th>
                 <th class="email_tk"
+                   
                     data-field="email">Email</th>
                 <th class="cachlam-ma"
                     data-field="sdt"
+                    
                     data-align="right"
                     data-width="100">Số điện thoại</th>
                 <th class="noiban-ma"
+                   
                     data-field="quyen"
                     data-formatter="taikhoano.onFormatDecentralization"
                     data-align="center">Quyền</th>
@@ -137,75 +146,106 @@
 
 
             <div class="page_row page_row-2" data-step="2" style="display:none;">
-                <div class="box box_ht">
-                    <div class="box_left">
-                        <label for="password">Họ tên:</label>
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="text" name="fullname" id="fullname" class="text ui-widget-content ui-corner-all">
-                    </div>
-                </div>
+                <div class="cpn_centent">
 
-                <div class="box box_hinhanh_tk">
-                    <div class="box_left">
-
-                        <label for="name">Hình ảnh:</label>
-
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="file" name="" id="hinhanh_tk" class="form-control text ui-widget-content ui-corner-all ">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
-                <div class="box box_ht">
-                    <div class="box_left">
-                        <label for="password">Giới tính:</label>
-
-                    </div>
-                    <div class="box_right box_gt ">
-                        <div class="gt gt_nam">
-                            <input type="radio" id="rdonam" name="sex" value="1">
-                            <label>Nam</label>
-                        </div>
-                        <div class="gt gt_nu">
-                            <input type="radio" id="rdonu" name="sex" value="0">
-                            <label>Nữ</label>
+                    <div class="cpn_centent_text">
+                        <div class="box box_ht">
+                            <div class="box_left">
+                                <label for="password">Họ tên:</label>
+                            </div>
+                            <div class="box_right form-group">
+                                <input type="text" name="fullname" id="fullname" class="text ui-widget-content ui-corner-all">
+                            </div>
                         </div>
 
+                        <div class="box box_ht">
+                            <div class="box_left">
+                                <label for="password">Giới tính:</label>
+
+                            </div>
+                            <div class="box_right box_gt ">
+                                <div class="gt gt_nam">
+                                    <input type="radio" id="rdonam" name="sex" value="1">
+                                    <label>Nam</label>
+                                </div>
+                                <div class="gt gt_nu">
+                                    <input type="radio" id="rdonu" name="sex" value="0">
+                                    <label>Nữ</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="box box_sdt">
+                            <div class="box_left">
+
+                                <label for="name">Số điện thoại:</label>
+
+                            </div>
+                            <div class="box_right form-group">
+                                <input type="text" name="" id="sdt" class="text ui-widget-content ui-corner-all">
+                            </div>
+                        </div>
+
+                        <div class="box box_ht ">
+                            <div class="box_left">
+                                <label>Ngày sinh:</label>
+                            </div>
+                            <div class="box_right form-group">
+                                <input type="date" id="ngaysinh" name="date">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+                        <div class="box box_email">
+                            <div class="box_left">
+
+                                <label for="name">Email:</label>
+
+                            </div>
+                            <div class="box_right  form-group">
+                                <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+
                     </div>
+                    <div class="right-content">
+                        <div class="import-content">
+                            <label for="hinhanh_tk">
+
+                                <div for="hinhanh_tk" class="drag-container">
+
+
+                                    <div class="ic-plus">
+
+                                        <i for="hinhanh_tk" class="ti-plus"></i>
+                                    </div>
+
+                                    <div class="display-text">
+                                        Chọn ảnh
+                                    </div>
+
+                                    <input class="drag-box"
+                                           id="hinhanh_tk"
+                                           type="file"
+                                           title="Chọn ảnh" style="display: none; visibility: none;" />
+                                    <img id="blah" class="img-back" />
+
+                                </div>
+
+                            </label>
+                            <div class="result-upload"></div>
+
+                        </div>
+
+                    </div>
+
+
+
                 </div>
+               
 
-                <div class="box box_sdt">
-                    <div class="box_left">
 
-                        <label for="name">Số điện thoại:</label>
-
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="text" name="" id="sdt" class="text ui-widget-content ui-corner-all">
-                    </div>
-                </div>
-
-                <div class="box box_ht ">
-                    <div class="box_left">
-                        <label>Ngày sinh:</label>
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="date" id="ngaysinh" name="date">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
-                <div class="box box_email">
-                    <div class="box_left">
-
-                        <label for="name">Email:</label>
-
-                    </div>
-                    <div class="box_right  form-group">
-                        <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
 
 
 

@@ -1,5 +1,4 @@
 ﻿
-
 class monan {
     constructor() {
         this.init();
@@ -15,7 +14,12 @@ class monan {
 
     }
 
-
+    execImport(n) {
+        let t = this
+            , i = Object.values(n).map(n => t.handleUploadFile(n));
+        return Promise.all(i)
+    }
+   
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
     }
@@ -69,7 +73,8 @@ class monan {
 
             $('#dialog-form').dialog('close');
         });
-
+      
+        me.changeFileToImage('hinhanh_ma','#blah');
 
     }
     SaveFood() {
@@ -80,7 +85,7 @@ class monan {
             errorSelector: '.form-message',
             rules: [
                 Validator.isRequired('#name_ma', 'Vui lòng nhập tên món ăn!'),
-                Validator.isRequired('#hinhanh_ma', 'Vui lòng chọn ảnh!'),
+                
 
                 Validator.isRequired('#noiban_ma', 'Vui lòng nhập nơi bán món ăn!'),
                 Validator.isRequired('#mota_ma'),
@@ -211,7 +216,7 @@ class monan {
         $('.btn_left').on('click', '#btn_close', (e) => {
             $('#name_ma').val('');
             $('#cachlam_ma').val('');
-           
+
             const file = document.querySelector('#hinhanh_ma');
             file.value = '';
             $('#noiban_ma').val('');
@@ -239,7 +244,7 @@ class monan {
 
 
             totalField: "RecordsTotal",
-            pageList: [5, 7, 8, 10],
+            pageList: [5, 7, 8, 9, 10],
             pageSize: 8,
             sidePagination: "client",
             undefinedText: "",
@@ -260,7 +265,9 @@ class monan {
             onUncheckAll() {
                 $('.btn_delete').prop('disabled', true);
             },
-           
+
+            filterColumn: ['tenmonan'],
+
             onPostBody(data, bs) {
 
                 bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
@@ -333,7 +340,8 @@ class monan {
                                 $('#video_ma').val(item.video);
                                 $('#noiban_ma').val(item.noiban);
                                 $('#mota_ma').val(item.mota);
-                              
+                                $('#blah').attr('src', item.anh);
+
                             });
 
 
@@ -423,6 +431,22 @@ class monan {
         });
 
     }
+
+  
+    changeFileToImage(idFile, idImage) {
+        document.getElementById(idFile).onchange = function () {
+
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idImage).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        };
+    }
+
     callAjaxUploadFile() {
 
         return new Promise((i, r) => {
@@ -477,5 +501,7 @@ class monan {
             return `<i data-ID= '${row.id}' class='ti-trash'></i>`
         })
     }
+  
+    
 }
 var monanr = new monan();

@@ -20,18 +20,14 @@ namespace QLApp.Core.BL.Login
         }
         public async Task<User> GetUser(string UserName, string Password)
         {
-            var ids = await _service.DataService.GetDataAsync<string>("Proc_Get_User", new object[] { UserName, Password });
+            var us = await _service.DataService.GetObjectAsync<User>("Proc_Get_User", new object[] { UserName, Password });
 
-            if (ids != null && ids.Count > 0)
+            if (us != null)
             {
-                var userID = ids[0];
-                return new User();
-            }
-            else
-            {
-                return null;
+                _service.AuthService.SetUser(us);
             }
 
+            return us;
         }
         public async Task<User> GetTaiKhoan(string UserName)
         {
