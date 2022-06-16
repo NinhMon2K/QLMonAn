@@ -29,6 +29,7 @@ class monan {
         $('#hinhanh_ma').on('change', function (e) {
             me.file = this.files && this.files[0];
         });
+       
 
     }
     addCombobox() {
@@ -46,10 +47,7 @@ class monan {
             });
         })
 
-        $('.ti-trash').on('click', (e) => {
-            debugger
-
-        });
+       
 
     }
 
@@ -101,7 +99,8 @@ class monan {
 
             me.callAjaxUploadFile().then(() => {
                 let anh = '';
-                anh = me.anh;
+            anh = me.anh;
+           
 
                 let tenmonan = $('#name_ma').val();
 
@@ -134,7 +133,7 @@ class monan {
                                 toastr.success('Thêm mới thành công');
                                 $('#name_ma').val('');
                                 $('#cachlam_ma').val('');
-
+                                $('#hinhanh_ma').val('')
                                 $('#noiban_ma').val('');
                                 $('#mota_ma').val('');
 
@@ -175,7 +174,7 @@ class monan {
                                         if (data) {
                                             $('#name_ma').val('');
                                             $('#cachlam_ma').val('');
-
+                                            $('#hinhanh_ma').val('');
                                             $('#noiban_ma').val('');
                                             $('#mota_ma').val('');
                                             toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
@@ -340,7 +339,7 @@ class monan {
                                 $('#video_ma').val(item.video);
                                 $('#noiban_ma').val(item.noiban);
                                 $('#mota_ma').val(item.mota);
-                                $('#blah').attr('src', item.anh);
+                                $('#blah').attr('src', '/saveimage/ReviewFoods/service/thang/'+ item.anh);
 
                             });
 
@@ -480,7 +479,7 @@ class monan {
     }
 
     onFormatIng(val) {
-        return `<img src='${val}'></img>`;
+        return `<img src='${'/saveimage/ReviewFoods/service/thang/'+val}'></img>`;
     }
     onFormatChecked(val) {
         return `<input type='checkbox' data-checkbox ='true' true, class='check_item' data-id=${val}>`;

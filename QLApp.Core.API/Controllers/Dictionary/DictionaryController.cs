@@ -226,6 +226,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+        [HttpGet("LoadItemMenu")]
+        public async Task<ServiceResult> LoadItemMenu()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadItemMenu();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
         [HttpGet("GetTaiKhoanID")]
         public async Task<ServiceResult> GetTaiKhoanID(string tentaikhoan)
@@ -294,7 +310,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+        [HttpGet("LoadLoaiMonAn")]
+        public async Task<ServiceResult> LoadLoaiMonAn()
+        {
+            var res = new ServiceResult();
 
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
         [HttpPost("InsertDanhDau")]
         public async Task<ServiceResult> InsertDanhDau([FromForm] danhdau d)
@@ -342,7 +373,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
                     var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(originalFileName);
                     await _service.StorageService.SaveFileAsync(file.OpenReadStream(), fileName);
-                    res.Data = "/saveimage/" + fileName;
+                    res.Data = "uploads/" + fileName;
                 }
 
             }

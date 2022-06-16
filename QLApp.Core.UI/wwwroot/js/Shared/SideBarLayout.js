@@ -9,11 +9,20 @@
         this.initUser();
         this.initToolTip();
         this.setUserInfo();
+        this.LogoutUser();
     }
+    
     setUserInfo() {
         let taikhoan = JSON.parse(localStorage.getItem('taikhoan')) ;
         $('.user-name').text(taikhoan.tentaikhoan);
-        $('.img_userinfo').attr("src", taikhoan.anhdaidien);
+        $('.img_userinfo').attr("src", '/saveimage/ReviewFoods/service/thang/'+ taikhoan.anhdaidien);
+
+    }
+    LogoutUser() {
+        $('#btnLogout').on('click', () => {
+            localStorage.removeItem('taikhoan');
+
+        });
 
     }
     initMenu() {

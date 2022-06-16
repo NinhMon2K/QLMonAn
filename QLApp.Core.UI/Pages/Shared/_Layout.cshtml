@@ -100,10 +100,10 @@
 
                 <a href="@Url.AppAction(MicroService.UI, "nguoidung","Dictionary")">
                     <i class='far fa-user-circle'></i>
-                    <span class="link_name">People</span>
+                    <span class="link_name">Thông tin nguời dùng</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "nguoidung","Dictionary")">People</a></li>
+                    <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "nguoidung","Dictionary")">Thông tin nguời dùng</a></li>
                 </ul>
             </li>
             <li>
@@ -142,7 +142,7 @@
                     <li><a class="link_name" href="#">Trợ giúp</a></li>
                 </ul>
             </li>
-            <li>
+            @*<li>
                 <a href="#">
                     <i class='bx bx-cog'></i>
                     <span class="link_name">Setting</span>
@@ -150,7 +150,7 @@
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="#">Setting</a></li>
                 </ul>
-            </li>
+            </li>*@
             <!--<li>
             <div class="profile-details">
                 <div class="profile-content">-->
@@ -210,7 +210,7 @@
                             <div class="name-information">Admin</div>
                         </div>
                         <div class="logout-content">
-                            <button>Đăng xuất</button>
+                            <button id="btnLogout"><a href="/">Đăng xuất</a></button>
                         </div>
                     </div>
                 </div>

@@ -481,9 +481,9 @@
                                 $('#blah').attr('src', item.anhdaidien);
                                 let pq = '';
                                 if (item.quyen == '1') {
-                                    pq = 'Người dùng'
-                                } else {
                                     pq = 'Admin';
+                                } else {
+                                    pq = 'Người dùng'
                                 }
                                 $('#lt_type_dish_filter').value = pq;
                                 $('#fullname').val(item.tendaydu);
@@ -563,10 +563,10 @@
     onFormatDecentralization(val) {
         let pq = '';
         if (val == '2') {
-            pq = 'Admin'
+            pq = 'Người dùng'
         }
         else {
-            pq = 'Người dùng'
+            pq = 'Admin'
         }
         return pq;
     }

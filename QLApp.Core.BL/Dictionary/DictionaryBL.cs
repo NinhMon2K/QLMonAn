@@ -28,6 +28,10 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<thongke>("Proc_Count_ThongKe", new object[] { });
         }
+        public async Task<IList<item>> LoadItemMenu()
+        {
+            return await _service.DataService.GetDataAsync<item>("Proc_Get_DemItemMenu", new object[] { });
+        }
 
         public async Task<IList<User>> LoadALLTaiKhoan()
         {

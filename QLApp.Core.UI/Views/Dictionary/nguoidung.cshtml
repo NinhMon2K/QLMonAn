@@ -6,7 +6,7 @@
     Layout = "_Layout";
 }
 <link href="~/css/view/dictionary/nguoidung.css" rel="stylesheet" />
-<div class="top-content">
+<div class="top-content" id="tbNguoiDung">
     <div class="header__search__bar bl">
         <div class="header__search__bar__icon">
             <i class="ti-filter"></i>
@@ -24,8 +24,8 @@
         <div class="header__search__bar__icon">
             <i class="fas fa-search"></i>
         </div>
-        <div class="header__search__bar__input">
-            <input type="text" placeholder="Tìm kiếm">
+        <div class="header__search__bar__input search">
+            <input type="text"  id="txt_search" placeholder="Tìm kiếm">
         </div>
 
         <div class="header__search__bar__modal">
@@ -45,7 +45,9 @@
     <table id="table_id"
            class="display"
            data-url="@Url.AppAction(MicroService.Core,"LoadNguoiDung","Dictionary")"
+           data-toolbar="#tbNguoiDung"
            data-pagination="true"
+            data-search-selector="#txt_search"
            data-scrollTo="true"
            data-load-dictionary="true"
            data-side-pagination="server">
@@ -53,12 +55,15 @@
             <tr data-field="id" data-id="id">
                 <th class="text-center ck_All"
                     data-checkbox="true"
+                    data-searchable="false"
                     data-field="">
                 </th>
                 <th class="stt"
+                    data-searchable="false"
                     data-field="stt">STT </th>
                 <th class="img-nd"
                     data-field="anhdaidien"
+                    data-searchable="false"
                     data-formatter="nd.onFormatIng">Hình ảnh</th>
                 <th class="fullname-nd"
                     data-field="tendaydu">Họ và tên</th>
@@ -67,7 +72,9 @@
                 <th class="email-nd"
                     data-field="email">Email</th>
                 <th class="gioitinh-nd"
-                    data-field="gioitinh">Giới tính</th>
+                    data-field="gioitinh"
+                    data-formatter="nd.onFormatGT"
+                    >Giới tính</th>
                 <th class="sdt-nd"
                     data-field="sdt">Số điện thoại</th>
                 <th class="btn_sua" data-formatter="nd.onFormatUpdate" data-align="center"> </th>
@@ -78,13 +85,6 @@
     </table>
 </div>
 
-<div class="container-phantrang">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination" id="pagination">
-        </ul>
-    </nav>
-
-</div>
 <div id="dialog-form" title="Người dùng">
     <form class="form" id="form-1" action="" method="POST">
 

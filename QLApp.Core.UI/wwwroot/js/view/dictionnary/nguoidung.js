@@ -152,9 +152,6 @@ class nguoidung {
         $('.btn_left').on('click', '#btn_close', (e) => {
             $('#name_ma').val('');
             $('#cachlam_ma').val('');
-
-            const file = document.querySelector('#hinhanh_ma');
-            file.value = '';
             $('#noiban_ma').val('');
             $('#mota_ma').val('');
             $('#dialog-form').dialog('close');
@@ -403,7 +400,7 @@ class nguoidung {
     }
 
     onFormatIng(val) {
-        return `<img src='${val}'></img>`;
+        return `<img src='${'/saveimage/ReviewFoods/service/thang/'+val}'></img>`;
     }
     onFormatChecked(val) {
         return `<input type='checkbox' data-checkbox ='true' true, class='check_item' data-id=${val}>`;
@@ -424,6 +421,16 @@ class nguoidung {
     onFormatDate(val) {
     return
         `${val.split(' ')[0].split('-').reverse().join('-')}`;
+    }
+    onFormatGT(val) {
+        let pq = '';
+        if (val == '0') {
+            pq = 'Nữ'
+        }
+        else {
+            pq = 'Nam'
+        }
+        return pq;
     }
     
 }

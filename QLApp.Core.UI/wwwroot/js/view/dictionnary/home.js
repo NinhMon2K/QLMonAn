@@ -10,78 +10,88 @@ class home {
         this.listMenu();
     }
     listMenu() {
+        let me = this;
 
-        
-            let arr = [{
-                indexTotal: '0',
-                name: 'Home',
-                iconItem: 'ti-home',
-                link:'/Dictionary/monan'
-            },
+        let arr = [{
+            indexTotal: '0',
+            name: 'Món ăn',
+            iconItem: 'ti-home',
+            link: '/Dictionary/monan'
+        },
 
-            {
-                indexTotal: '0',
-                name: 'Tài khoản',
-                iconItem: 'ti-bookmark-alt',
-                link: 'Duyet.php'
-            },
-            {
-                indexTotal: '0',
-                name: 'Báo lỗi',
-                iconItem: 'ti-alert',
-                link: 'Daxacnhan.php'
-            },
-            {
-                indexTotal: '0',
-                name: 'Câu hỏi',
-                iconItem: 'ti-help-alt',
-                link: 'Chuanbi.php'
-            },
-
-
-            ];
-            let list = $('.menu-group').html('');
-            let i = 0;
-            arr.forEach((x, i) => {
-                let $item = $('<a>', {
-                    id: i,
-                    class: 'item-navbar',
-                    href: x.link,
-                    data: {
-                        index: i
-                    }
-
-                }).data('data', x).appendTo(list);
-
-                let $navbarLeft = $('<div>', {
-                    class: 'navbar-left'
-                }).appendTo($item);
-                let $navbarRight = $('<div>', {
-                    class: 'navbar-right'
-                }).appendTo($item);
-
-                let $total = $('<div>', {
-                    class: 'total',
-                    text: x.indexTotal
-                }).appendTo($navbarLeft);
-                let $nametotal = $('<div>', {
-                    class: 'name-total',
-                    text: x.name
-                }).appendTo($navbarLeft);
+        {
+            indexTotal: '0',
+            name: 'Tài khoản',
+            iconItem: 'ti-bookmark-alt',
+            link: '/Dictionary/taikhoan'
+        },
+        {
+            indexTotal: '0',
+            name: 'Báo lỗi',
+            iconItem: 'ti-alert',
+            link: '/Dictionary/baoloi'
+        },
+        {
+            indexTotal: '0',
+            name: 'Câu hỏi',
+            iconItem: 'ti-help-alt',
+            link: '/Dictionary/cauhoi'
+        },
 
 
-                let $icon = $('<div>', {
-                    class: 'icon-navbar'
-                }).appendTo($navbarRight);
-                let $ic = $('<i>', {
-                    class: x.iconItem
-                }).appendTo($icon);
-            }
+        ];
+        let list = $('.menu-group').html('');
+        let i = 0;
+        arr.forEach((x, i) => {
+            let $item = $('<a>', {
+                id: i,
+                class: 'item-navbar',
+                href: x.link,
+                data: {
+                    index: i
+                }
+
+            }).data('data', x).appendTo(list);
+
+            let $navbarLeft = $('<div>', {
+                class: 'navbar-left'
+            }).appendTo($item);
+            let $navbarRight = $('<div>', {
+                class: 'navbar-right'
+            }).appendTo($item);
+
+            let $total = $('<div>', {
+                class: 'total',
+                text: x.indexTotal
+            }).appendTo($navbarLeft);
+            let $nametotal = $('<div>', {
+                class: 'name-total',
+                text: x.name
+            }).appendTo($navbarLeft);
+
+
+            let $icon = $('<div>', {
+                class: 'icon-navbar'
+            }).appendTo($navbarRight);
+            let $ic = $('<i>', {
+                class: x.iconItem
+            }).appendTo($icon);
+        }
 
 
 
-            )
-       
+        )
+
+        AppAjax.Ajax(me.callApi('LoadItemMenu'), {}, {}, function (data) {
+            data.forEach((item, i) => {
+                $('#0 .total').text(item.MonAn)
+                $('#1 .total').text(item.TaiKhoan)
+                $('#2 .total').text(item.BaoLoi)
+                $('#3 .total').text(item.CauHoi)
+            });
+        })
+
+
     }
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
@@ -90,7 +100,7 @@ class home {
         let me = this;
         let Dem = [];
         let tenMon = [];
-        setInterval(() => { },2000 );
+        setInterval(() => { }, 2000);
         AppAjax.Ajax(me.callApi('LoadThongKe'), {}, {}, function (data) {
 
             Dem = data.map((x) => x.Dem);
@@ -119,13 +129,13 @@ class home {
             type: 'bar',
             data: {
                 labels: tenMon,
-             
+
 
                 datasets: [{
                     backgroundColor: '#007bff',
                     borderColor: '#007bff',
                     data: Dem,
-                   
+
                     fill: false
                 }
 
