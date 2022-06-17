@@ -54,7 +54,6 @@
             });
         }
         let sidebar = document.querySelector(".sidebar");
-        sidebar.classList.toggle("close");
         let sidebarBtn = document.querySelector(".bx-menu");
         sidebarBtn.addEventListener("click", () => {
             sidebar.classList.toggle("close");

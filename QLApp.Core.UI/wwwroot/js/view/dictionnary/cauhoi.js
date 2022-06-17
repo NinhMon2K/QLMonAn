@@ -8,7 +8,7 @@ class cauhoi {
     init() {
         this.loadCauHoi();
         this.addForm();
-    //    this.SaveFood();
+        this.SaveCauHoi();
     //    this.addCombobox();
 
 
@@ -41,19 +41,15 @@ class cauhoi {
 
 
     }
-    SaveFood() {
+    SaveCauHoi() {
         var me = this;
         Validator({
             form: '#form-1',
             formGroupSelector: '.box_right',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequired('#name_ma', 'Vui lòng nhập tên món ăn!'),
-                Validator.isRequired('#hinhanh_ma', 'Vui lòng chọn ảnh!'),
-
-                Validator.isRequired('#noiban_ma', 'Vui lòng nhập nơi bán món ăn!'),
-                Validator.isRequired('#mota_ma'),
-
+                Validator.isRequired('#cauhoi', 'Vui lòng nhập câu hỏi!'),
+                Validator.isRequired('#traloi', 'Vui lòng nhập câu trả lời!'),
             ],
             onSubmit: function (data) {
                 // Call API
@@ -61,27 +57,13 @@ class cauhoi {
             }
         });
         $('.right-footer').on('click', '#btn_luu', () => {
+                let cauhoi = $('#cauhoi').val();
 
-
-            me.callAjaxUploadFile().then(() => {
-                let anh = '';
-                anh = me.anh;
-
-                let tenmonan = $('#name_ma').val();
-
-                let mota = $('#mota_ma').val();
-                let loaimon = $('#lt_type_dish_filter').val();
-                let cachlam = $('#cachlam_ma').val();
-                let noiban = $('#noiban_ma').val();
+                let traloi = $('#traloi').val();
                 let us = {
                     id: me.id,
-                    tenmonan: tenmonan,
-                    anh: anh,
-                    video: '',
-                    mota: mota,
-                    idLoai: parseInt(loaimon),
-                    cachlam: cachlam,
-                    noiban: noiban,
+                    cauhoi: cauhoi,
+                    traloi: traloi,
                 }
 
                 switch (me.Mode) {
@@ -91,16 +73,13 @@ class cauhoi {
                             Formdata: JSON.stringify(us)
                         }
 
-                        AppAjax.Ajax(me.callApi('SaveFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
+                        AppAjax.Ajax(me.callApi('SaveCauHoi'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                             if (data) {
 
                                 toastr.success('Thêm mới thành công');
-                                $('#name_ma').val('');
-                                $('#cachlam_ma').val('');
-
-                                $('#noiban_ma').val('');
-                                $('#mota_ma').val('');
+                                $('#cauhoi').val('');
+                                $('#traloi').val('');
 
                                 let a = setTimeout(() => {
                                     $('#dialog-form').dialog('close');
@@ -134,14 +113,11 @@ class cauhoi {
                                 class: 'btn_kt',
                                 id: 'btnCheckSua',
                                 click: function () {
-                                    AppAjax.Ajax(me.callApi('SaveFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
+                                    AppAjax.Ajax(me.callApi('SaveCauHoi'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                                         if (data) {
-                                            $('#name_ma').val('');
-                                            $('#cachlam_ma').val('');
-
-                                            $('#noiban_ma').val('');
-                                            $('#mota_ma').val('');
+                                            $('#cauhoi').val('');
+                                            $('#traloi').val('');
                                             toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
                                             $('#dialog-form').dialog('close');
 
@@ -174,17 +150,12 @@ class cauhoi {
                         break;
                     }
                 }
-            });
+            
         });
 
         $('.btn_left').on('click', '#btn_close', (e) => {
-            $('#name_ma').val('');
-            $('#cachlam_ma').val('');
-
-            const file = document.querySelector('#hinhanh_ma');
-            file.value = '';
-            $('#noiban_ma').val('');
-            $('#mota_ma').val('');
+            $('#cauhoi').val('');
+            $('#traloi').val('');
             $('#dialog-form').dialog('close');
         });
 
@@ -235,7 +206,7 @@ class cauhoi {
                 bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
-                    let idMonan = parseInt(item.id);
+                    let id = parseInt(item.id);
                     $('<div>', {
                         text: 'Bạn thực sự muốn xóa !'
                     }).dialog({
@@ -247,7 +218,7 @@ class cauhoi {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
-                                AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
+                                AppAjax.Ajax(me.callApi('DeleteCauHoi'), {}, { id }, function (data) {
 
                                     if (data) {
 
@@ -293,15 +264,12 @@ class cauhoi {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
                     let id = parseInt(item.id);
-                    AppAjax.Ajax(me.callApi('LoadMonAnID'), {}, { id }, function (data) {
+                    AppAjax.Ajax(me.callApi('GetCauHoiID'), {}, { id }, function (data) {
                         console.log(data);
                         if (data) {
                             data.forEach((item, i) => {
-                                $('#name_ma').val(item.tenmonan);
-                                $('#cachlam_ma').val(item.cachlam);
-                                $('#video_ma').val(item.video);
-                                $('#noiban_ma').val(item.noiban);
-                                $('#mota_ma').val(item.mota);
+                                $('#cauhoi').val(item.cauhoi);
+                                $('#traloi').val(item.traloi);
 
                             });
 
@@ -391,37 +359,6 @@ class cauhoi {
 
         });
 
-    }
-    callAjaxUploadFile() {
-
-        return new Promise((i, r) => {
-
-            let me = this;
-
-            let formdata = new FormData();
-            let config = {
-                type: 'POST',
-                data: formdata,
-                contentType: false,
-                cache: false,
-                enctype: "multipart/form-data",
-                processData: false,
-            }
-            formdata.append('file', me.file);
-
-            AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
-
-                me.anh = data;
-                if (data) {
-
-                    i();
-
-                } else {
-                    toastr.error('Thêm mới thất bại');
-
-                }
-            })
-        });
     }
 
     onFormatUpdate() {

@@ -143,7 +143,70 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+        /// <summary>
+        /// thêm/sửa câu hỏi
+        /// </summary>
+        /// <param name="saveParam"></param>
+        /// <returns></returns>
+        [HttpPost("SaveCauHoi")]
+        public async Task<ServiceResult> SaveCauHoi([FromBody] SaveParam saveParam)
+        {
+            var res = new ServiceResult();
 
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveCauHoi(saveParam);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        /// <summary>
+        /// xóa câu hỏi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteCauHoi")]
+        public async Task<ServiceResult> DeleteCauHoi(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteCauHoi(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+         
+        /// <summary>
+        /// lấy dữ liệu theo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetCauHoiID")]
+        public async Task<ServiceResult> GetCauHoiID(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetCauHoiID(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
         //----------END CÂU HỎI----------
 
@@ -169,7 +232,39 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        [HttpGet("UpdateBaoLoi")]
+        public async Task<ServiceResult> UpdateBaoLoi(int id)
+        {
+            var res = new ServiceResult();
 
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).UpdateBaoLoi(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpGet("DeleteBaoLoi")]
+        public async Task<ServiceResult> DeleteBaoLoi(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteBaoLoi(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
         //----------END BÁO LỖI----------
 

@@ -8,6 +8,7 @@ class baoloi {
     init() {
         this.loadLoi();
         this.Done();
+        this.confirm();
     }
 
 
@@ -64,10 +65,12 @@ class baoloi {
 
             onPostBody(data, bs) {
 
+
+
                 bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
-                    let idMonan = parseInt(item.id);
+                    let id = parseInt(item.id);
                     $('<div>', {
                         text: 'Bạn thực sự muốn xóa !'
                     }).dialog({
@@ -79,7 +82,7 @@ class baoloi {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
-                                AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
+                                AppAjax.Ajax(me.callApi('DeleteBaoLoi'), {}, { id }, function (data) {
 
                                     if (data) {
 
@@ -125,6 +128,8 @@ class baoloi {
 
         $('#table_id').bootstrapTable(option);
 
+
+
         $('.btn-left').on('click', '.btn_delete', e => {
             let ID = [];
 
@@ -147,8 +152,8 @@ class baoloi {
                     class: 'btn_kt',
                     id: 'btnCheckXoa',
                     click: function () {
-                        ID.forEach((idMonan) => {
-                            AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
+                        ID.forEach((id) => {
+                            AppAjax.Ajax(me.callApi('DeleteBaoLoi'), {}, { id }, function (data) {
 
                                 if (data) {
                                     let a = setTimeout(() => {
@@ -190,40 +195,38 @@ class baoloi {
         });
 
     }
-    callAjaxUploadFile() {
 
-        return new Promise((i, r) => {
+    confirm() {
+        let me = this;
+        let ID = [];
 
-            let me = this;
+        $('.btn-right').on('click', '#btn_check', (e) => {
+            ID = $.map($('#table_id').bootstrapTable('getSelections'), function (row) {
 
-            let formdata = new FormData();
-            let config = {
-                type: 'POST',
-                data: formdata,
-                contentType: false,
-                cache: false,
-                enctype: "multipart/form-data",
-                processData: false,
-            }
-            formdata.append('file', me.file);
+                return row.id
+            });
+            ID.forEach((id) => {
+                AppAjax.Ajax(me.callApi('UpdateBaoLoi'), {}, { id }, function (data) {
 
-            AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
+                    if (data) {
+                        toastr.success('Xử lý sữ liệu thành công', { positionClass: 'toast-top-center' });
+                        let a = setTimeout(() => {
+                            let a = setTimeout(() => {
+                                $('#table_id').bootstrapTable('refresh');
 
-                me.anh = data;
-                if (data) {
+                            }, 200);
 
-                    i();
+                        }, 200);
 
-                } else {
-                    toastr.error('Thêm mới thất bại');
 
-                }
-            })
+                    } else {
+                        toastr.error('Xử lý sữ liệu thất bại', { positionClass: 'toast-top-center' });
+
+                    }
+                })
+
+            });
         });
-    }
-
-    onFormatUpdate() {
-        return `<div class='btnUpdate'><i class='ti-file'></i></div>`;
     }
     onFormatDelete() {
         return `<div class='btnDelete'> <i class='ti-trash'></i> </div>`;

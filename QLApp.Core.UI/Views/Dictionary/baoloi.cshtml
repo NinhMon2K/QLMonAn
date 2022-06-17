@@ -6,7 +6,7 @@
 }
 <link href="~/css/view/dictionary/baoloi.css" rel="stylesheet" />
 
-<div class="menu-group">
+<div class="menu-group" >
     <a id="0" class="item-navbar item-navbar_3" href="/Dictionary/monan">
         <div class="navbar-left">
             <div class="total">38</div>
@@ -33,7 +33,7 @@
     </a>
 
 </div>
-<div class="top-content">
+<div class="top-content" id="tbBaoLoi">
     <div class="header__search__bar bl">
         <div class="header__search__bar__icon">
             <i class="ti-filter"></i>
@@ -51,8 +51,8 @@
         <div class="header__search__bar__icon">
             <i class="fas fa-search"></i>
         </div>
-        <div class="header__search__bar__input">
-            <input type="text" placeholder="Tìm kiếm">
+        <div class="header__search__bar__input search">
+            <input type="text" placeholder="Tìm kiếm" id="txt_search">
         </div>
 
         <div class="header__search__bar__modal">
@@ -75,6 +75,8 @@
     <table id="table_id"
            class="display"
            data-url="@Url.AppAction(MicroService.Core,"LoadLoi","Dictionary")"
+           data-toolbar="#tbBaoLoi"
+           data-search-selector="#txt_search"
            data-pagination="true"
            data-scrollTo="true"
            data-load-dictionary="true"
@@ -83,10 +85,11 @@
             <tr data-field="id" data-id="id">
                 <th class="text-center ck_All"
                     data-checkbox="true"
+                    data-searchable="false"
                     data-field="">
                 </th>
                 <th class="stt"
-                    data-field="stt">STT </th>
+                    data-field="stt" data-searchable="false">STT </th>
                 <th class="cauhoi"
                     data-field="tenloi">Tên lỗi</th>
                 <th class="traloi" data-width="200" data-align="center"

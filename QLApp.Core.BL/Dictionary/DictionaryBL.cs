@@ -39,7 +39,17 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<baoloi>("Pro_Get_Baoloi", new object[] { });
         }
-        
+
+        public async Task<bool> UpdateBaoLoi(int id)
+        {
+            return await _service.DataService.ExcuteDeteteAsync("Proc_update_BaoLoi", new object[] { id });
+        }
+
+        public async Task<bool> DeleteBaoLoi(int id)
+        {
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_BaoLoi", new object[] { id });
+        }
+
         public async Task<IList<thongke>> LoadThongKe()
         {
             return await _service.DataService.GetDataAsync<thongke>("Proc_Count_ThongKe", new object[] { });
@@ -52,8 +62,6 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<thongke>("Proc_Count_BaoLoi", new object[] { });
         }
-
-      
      
         public async Task<IList<cauHoi>> LoadCauHoi()
         {
@@ -109,6 +117,31 @@ namespace QLApp.Core.BL.Dictionary
             }
 
         }
+
+        public async Task<bool> SaveCauHoi(SaveParam saveParam)
+        {
+            var obj = JsonSerializer.Deserialize<cauHoi>(saveParam.FormData.ToString());
+            if (saveParam.Mode == Mode.Add)
+            {
+                return await _service.DataService.ExcuteSaveAsync("Proc_Insert_CH", obj);
+            }
+            else
+            {
+                return await _service.DataService.ExcuteSaveAsync("Proc_Update_CH", obj);
+            }
+
+        }
+
+        public async Task<bool> DeleteCauHoi(int id)
+        {
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_CH", new object[] { id });
+        }
+
+        public async Task<IList<cauHoi>> GetCauHoiID(int id)
+        {
+            return await _service.DataService.GetDataAsync<cauHoi>("Proc_Get_CH_ID", new object[] { id });
+        }
+
 
         public async Task<bool> SaveTaiKhoan(SaveParam saveParam)
         {

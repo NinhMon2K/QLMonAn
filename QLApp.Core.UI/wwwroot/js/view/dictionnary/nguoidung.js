@@ -387,7 +387,7 @@ class nguoidung {
             }
             formdata.append('file', me.file);
 
-            AppAjax.Ajax(me.callApi('SaveImageND'), config, {}, function (data) {
+            AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
 
                 me.anh = data;
                 if (data) {
