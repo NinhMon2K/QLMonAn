@@ -35,7 +35,7 @@
     setUserInfo() {
         let taikhoan = JSON.parse(localStorage.getItem('taikhoan')) ;
         $('.user-name').text(taikhoan.tentaikhoan);
-        $('.img_userinfo').attr("src", '/saveimage/ReviewFoods/service/thang/'+ taikhoan.anhdaidien);
+        $('.img_userinfo').attr("src", taikhoan.anhdaidien);
 
     }
     LogoutUser() {

@@ -239,7 +239,7 @@ td {
 
     img {
         width: 110px;
-        height: 57px;
+        height: px;
     }
 
     i {
@@ -656,6 +656,7 @@ input {
 
                     .img-back {
                         /* width: 138px;*/
+                        max-width: 172px;
                         padding: 10px 10px 0 10px;
                         max-height: 106px;
                     }
@@ -901,7 +902,10 @@ input {
 .top-item {
     outline: none;
 
-    .btn_thongbao {
+    .user{
+
+
+    } .btn_thongbao {
     }
 
     .bell_item {

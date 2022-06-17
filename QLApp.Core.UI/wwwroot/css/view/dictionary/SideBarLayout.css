@@ -318,25 +318,49 @@
         box-shadow: 2px 2px #ccc;
         display: none;
         flex-direction: column;
-        background-color: aliceblue;
-        z-index: 1;
+        background-color:#fff;
+       /* background-color: aliceblue;*/
+        z-index: 100;
         padding: 24px;
         border-radius: 6px;
-        
+        box-shadow: rgba(123,120,248,0.5) 0px 10px 20px 0px;
     }
-        
 
-        .user-info .top-user-info .left-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 42px;
-            margin: 0 11px 0 0px;
+        .header-user .user-info:before, .user-info:after {
+            content: "";
+            position: absolute;
+            top: -9px;
+            right: 44px;
+            width: 20px;
+            height: 20px;
+            border: solid 1px #ccc;
+            transform: rotate(45deg);
+            border: solid 1px #ccc;
+            border-radius: 2px;
+            z-index: -1;
         }
-            .user-info .top-user-info .left-info .img_userinfo {
-                width:40px;
-                height:auto;
-            }
+
+        .header-user .user-info:after {
+            background-color: #fff;
+            top: -7px;
+            z-index: 1;
+            border: 0;
+            right: 44px;
+        }
+
+.user-info .top-user-info .left-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    margin: 0 11px 0 0px;
+}
+
+    .user-info .top-user-info .left-info .img_userinfo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
 
 .user-info .title-user {
     margin: 10px 0;
@@ -346,17 +370,18 @@
     display: flex;
     margin: 0 0 10px 0;
 }
+
     .user-info .information-title-user:hover {
         background-color: #E3F2FF;
         border-radius: 5px;
-        cursor:pointer;
+        cursor: pointer;
     }
 
     .user-info .information-title-user .icon-information {
         margin: 0 6px 0 0;
     }
-.header-user > .user {
 
+.header-user > .user {
     cursor: pointer;
 }
 
@@ -372,18 +397,23 @@
 
     .user-info .logout-content button {
         width: 100%;
-        height: 30px;
+        height: 27px;
         border: solid 1px #ccc;
         border-radius: 5px;
         text-align: center;
         background-color: #fff;
         color: #1492e6;
     }
-
-        .user-info .logout-content button:hover {
-            background-color: #1492e6;
+        .user-info .logout-content button a {
+           text-decoration:none;
+        }
+        .user-info .logout-content button:hover a {
             color: #fff;
         }
+            .user-info .logout-content button:hover {
+                background-color: #1492e6;
+                color: #fff;
+            }
 
 .user-info .top-user-info .right-info {
     display: flex;
@@ -395,9 +425,9 @@
 }
 
 .top-item .user-icon img {
-    width:40px;
-    width:40px;
-    height:auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 
@@ -412,28 +442,30 @@
 .top-item user-icon-dropdow i {
     font-size: 18px;
 }
+
 .home-section {
     background-color: #EDF0F3;
 }
-    .home-section .home-content{
-        background-color:#fff;
+
+    .home-section .home-content {
+        background-color: #fff;
     }
 
-    .home-section .home-content .bx-menu,
-    .home-section .home-content .text {
-        color: #11101d;
-        font-size: 35px;
-    }
+        .home-section .home-content .bx-menu,
+        .home-section .home-content .text {
+            color: #11101d;
+            font-size: 35px;
+        }
 
-.home-section .home-content .bx-menu {
-    margin: 0 15px;
-    cursor: pointer;
-}
+        .home-section .home-content .bx-menu {
+            margin: 0 15px;
+            cursor: pointer;
+        }
 
-.home-section .home-content .text {
-    font-size: 26px;
-    font-weight: 600;
-}
+        .home-section .home-content .text {
+            font-size: 26px;
+            font-weight: 600;
+        }
 
 .container-content {
     margin: 14px 18px 0 18px;

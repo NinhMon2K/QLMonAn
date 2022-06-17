@@ -415,7 +415,7 @@ class nguoidung {
         };
     }
     onFormatIng(val) {
-        return `<img src='${'/saveimage/ReviewFoods/service/thang/'+val}'></img>`;
+        return `<img src='${val}'></img>`;
     }
     onFormatChecked(val) {
         return `<input type='checkbox' data-checkbox ='true' true, class='check_item' data-id=${val}>`;

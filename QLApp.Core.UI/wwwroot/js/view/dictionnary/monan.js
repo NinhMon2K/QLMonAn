@@ -46,9 +46,6 @@ class monan {
                 }).appendTo(sel);
             });
         })
-
-       
-
     }
 
 
@@ -61,6 +58,7 @@ class monan {
             modal: true,
 
         });
+       
         $("#btn_add").button().on("click", function () {
             dialog.dialog("open");
             me.Mode = 1;
@@ -244,7 +242,7 @@ class monan {
 
             totalField: "RecordsTotal",
             pageList: [5, 7, 8, 9, 10],
-            pageSize: 8,
+            pageSize: 5,
             sidePagination: "client",
             undefinedText: "",
             silent: true,

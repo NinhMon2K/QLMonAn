@@ -159,7 +159,7 @@ td {
     color: #2ea4f1 !important; }
   td img {
     width: 110px;
-    height: 57px; }
+    height: px; }
   td i {
     font-size: 16px; }
 
@@ -459,6 +459,7 @@ input {
             font-size: 0.8rem; }
           .ui-dialog .right-content .import-content label .drag-container .img-back {
             /* width: 138px;*/
+            max-width: 172px;
             padding: 10px 10px 0 10px;
             max-height: 106px; }
   .ui-dialog #dialog-form {
