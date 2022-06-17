@@ -29,7 +29,12 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
         }
 
+        //START THÔNG TIN NGƯỜI DÙNG
 
+        /// <summary>
+        ///API Load thông tin người dùng
+        /// </summary>
+        /// <returns></returns>
 
         [HttpGet("LoadNguoiDung")]
         public async Task<ServiceResult> LoadNguoiDung()
@@ -48,6 +53,80 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Load thông tin người dùng theo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("LoadNguoiDungID")]
+        public async Task<ServiceResult> LoadNguoiDungID(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadNguoiDungID(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Thêm/Sửa thông tin người dùng
+        /// </summary>
+        /// <param name="saveParam"></param>
+        /// <returns></returns>
+        [HttpPost("SaveNguoiDung")]
+        public async Task<ServiceResult> SaveNguoiDung([FromBody] SaveParam saveParam)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveNguoiDung(saveParam);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Xóa thông tin người dùng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteND")]
+        public async Task<ServiceResult> DeleteND(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteND(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        //----------END THÔNG TIN NGƯỜI DÙNG----
+
+        //----------START CÂU HỎI--------------
+
+        /// <summary>
+        /// Lấy dữ liệu câu hỏi
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("LoadCauHoi")]
         public async Task<ServiceResult> LoadCauHoi()
         {
@@ -65,6 +144,14 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+
+        //----------END CÂU HỎI----------
+
+        //----------START BÁO LỖI--------------
+        /// <summary>
+        /// Lấy dữ liệu báo lỗi
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("loadLoi")]
         public async Task<ServiceResult> loadLoi()
         {
@@ -82,6 +169,16 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+
+
+        //----------END BÁO LỖI----------
+
+        //----------START MÓN ĂN--------------
+
+        /// <summary>
+        /// Đếm tổng số món ăn
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("CountMonAn")]
         public async Task<ServiceResult> CountMonAn()
         {
@@ -98,6 +195,11 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        /// <summary>
+        /// Lấy dữ liệu món ăn
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("LoadMonAn")]
         public async Task<ServiceResult> LoadMonAn()
         {
@@ -115,6 +217,10 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Lấy dữ liệu toàn bộ món ăn và chi tiết món ăn
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("LoadALLMonAn")]
         public async Task<ServiceResult> LoadALLMonAn()
         {
@@ -131,6 +237,12 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        /// <summary>
+        /// Lấy dữ liệu món ăn theo ID món ăn
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("LoadMonAnID")]
         public async Task<ServiceResult> LoadMonAnID(int id)
         {
@@ -148,14 +260,18 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpGet("LoadNguoiDungID")]
-        public async Task<ServiceResult> LoadNguoiDungID(int id)
+        /// <summary>
+        /// Lấy tên loại món ăn
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadLoaiMonAn")]
+        public async Task<ServiceResult> LoadLoaiMonAn()
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadNguoiDungID(id);
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
             }
             catch (Exception e)
             {
@@ -164,6 +280,166 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        /// <summary>
+        /// Thêm/Sửa thông tin món ăn
+        /// </summary>
+        /// <param name="saveParam"></param>
+        /// <returns></returns>
+        [HttpPost("SaveFood")]
+        public async Task<ServiceResult> SaveFood([FromBody] SaveParam saveParam)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveFood(saveParam);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Xóa món ăn theo ID
+        /// </summary>
+        /// <param name="idMonan"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteMonAn")]
+        public async Task<ServiceResult> DeleteMonAn(int idMonan)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteMonAn(idMonan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        //----------END MÓN ĂN----------
+
+
+        //----------START TÀI KHOẢN --------------
+        /// <summary>
+        /// Lấy dữ liệu tài khoản
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadUser")]
+        public async Task<ServiceResult> LoadUser()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadUser();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lấy tài khoản theo tên tài khoản
+        /// </summary>
+        /// <param name="tentaikhoan"></param>
+        /// <returns></returns>
+        [HttpGet("GetTaiKhoanID")]
+        public async Task<ServiceResult> GetTaiKhoanID(string tentaikhoan)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetTaiKhoanID(tentaikhoan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lấy dữ liệu toàn bộ của tài khoản
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadALLTaiKhoan")]
+        public async Task<ServiceResult> LoadALLTaiKhoan()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadALLTaiKhoan();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Thêm/Sửa thông tin tài khoản
+        /// </summary>
+        /// <param name="saveParam"></param>
+        /// <returns></returns>
+        [HttpPost("SaveTaiKhoan")]
+        public async Task<ServiceResult> SaveTaiKhoan([FromBody] SaveParam saveParam)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveTaiKhoan(saveParam);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        
+        /// <summary>
+        /// Xóa tài khoản theo tên tài khoản
+        /// </summary>
+        /// <param name="tentaikhoan"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteTaiKhoan")]
+        public async Task<ServiceResult> DeleteTaiKhoan(string tentaikhoan)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteTaiKhoan(tentaikhoan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        //----------END TÀI KHOẢN ----------
+
+
         [HttpPost("LoadCheckedDanhDau")]
         public async Task<ServiceResult> LoadCheckedDanhDau([FromBody] Dictionary<string, object> pr)
         {
@@ -193,23 +469,11 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
 
 
-
-        [HttpGet("LoadUser")]
-        public async Task<ServiceResult> LoadUser()
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadUser();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
+        //----------START THÔNG KÊ --------------
+        /// <summary>
+        /// Lấy dữ liệu thống kê : tên món ăn và tổng số tim của món ăn được nhiều người thả tim
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("LoadThongKe")]
         public async Task<ServiceResult> LoadThongKe()
         {
@@ -226,6 +490,14 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        //----------END THÔNG KÊ ----------
+
+
+        /// <summary>
+        /// Lấy dữ liệu cho item menu
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("LoadItemMenu")]
         public async Task<ServiceResult> LoadItemMenu()
         {
@@ -243,14 +515,18 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpGet("GetTaiKhoanID")]
-        public async Task<ServiceResult> GetTaiKhoanID(string tentaikhoan)
+        /// <summary>
+        /// Lấy tổng số báo lỗi khi chưa xử lý
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadThongBao")]
+        public async Task<ServiceResult> LoadThongBao()
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetTaiKhoanID(tentaikhoan);
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadThongBao();
             }
             catch (Exception e)
             {
@@ -260,14 +536,22 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpGet("LoadALLTaiKhoan")]
-        public async Task<ServiceResult> LoadALLTaiKhoan()
+        //----------START ĐÁNH DẤU/THẢ TIM --------------
+
+        /// <summary>
+        /// Xóa dữ liệu đánh dấu theo id món ăn và tên tài khoản
+        /// </summary>
+        /// <param name="idmonan"></param>
+        /// <param name="tentaikhoan"></param>
+        /// <returns></returns>
+        [HttpPost("DeleteDanhDau")]
+        public async Task<ServiceResult> DeleteDanhDau(int idmonan, string tentaikhoan)
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadALLTaiKhoan();
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(idmonan, tentaikhoan);
             }
             catch (Exception e)
             {
@@ -277,56 +561,11 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpPost("SaveNguoiDung")]
-        public async Task<ServiceResult> SaveNguoiDung([FromBody] SaveParam saveParam)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveNguoiDung(saveParam);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-
-        [HttpPost("SaveTaiKhoan")]
-        public async Task<ServiceResult> SaveTaiKhoan([FromBody] SaveParam saveParam)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveTaiKhoan(saveParam);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-        [HttpGet("LoadLoaiMonAn")]
-        public async Task<ServiceResult> LoadLoaiMonAn()
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-
+        /// <summary>
+        /// Thêm mới đánh dấu/thả tim
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
         [HttpPost("InsertDanhDau")]
         public async Task<ServiceResult> InsertDanhDau([FromForm] danhdau d)
         {
@@ -343,22 +582,20 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-        [HttpPost("SaveFood")]
-        public async Task<ServiceResult> SaveFood([FromBody] SaveParam saveParam)
-        {
-            var res = new ServiceResult();
 
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveFood(saveParam);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+        //----------END ĐÁNH DẤU/THẢ TIM ----------v
 
-            return res;
-        }
+
+
+
+
+
+
+        /// <summary>
+        /// Lưu ảnh lên server
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost("SaveImage")]
         public async Task<ServiceResult> SaveImageDish(IFormFile file)
         {
@@ -367,13 +604,19 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 var formData = HttpContext.Request.Form;
+                var oldFile = formData["oldFile"];
+                if (!string.IsNullOrEmpty(oldFile.ToString()))
+                {
+                    oldFile = oldFile.ToString().Split("/").LastOrDefault();
+                    await _service.StorageService.DeleteFileAsync(oldFile);
+                }
 
                 if (file != null)
                 {
                     var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(originalFileName);
                     await _service.StorageService.SaveFileAsync(file.OpenReadStream(), fileName);
-                    res.Data = "uploads/" + fileName;
+                    res.Data = "/saveimage/" + fileName;
                 }
 
             }
@@ -411,78 +654,6 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpGet("DeleteND")]
-        public async Task<ServiceResult> DeleteND(int id)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteND(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-        [HttpPost("DeleteDanhDau")]
-        public async Task<ServiceResult> DeleteDanhDau(int idmonan, string tentaikhoan)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(idmonan, tentaikhoan);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-
-        [HttpGet("DeleteTaiKhoan")]
-        public async Task<ServiceResult> DeleteTaiKhoan(string tentaikhoan)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteTaiKhoan(tentaikhoan);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-
-        [HttpGet("DeleteMonAn")]
-        public async Task<ServiceResult> DeleteMonAn(int idMonan)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteMonAn(idMonan);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-
-
-
-
-
-
-
+        
     }
 }

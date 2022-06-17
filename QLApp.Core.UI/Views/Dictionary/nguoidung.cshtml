@@ -25,7 +25,7 @@
             <i class="fas fa-search"></i>
         </div>
         <div class="header__search__bar__input search">
-            <input type="text"  id="txt_search" placeholder="Tìm kiếm">
+            <input type="text" id="txt_search" placeholder="Tìm kiếm">
         </div>
 
         <div class="header__search__bar__modal">
@@ -47,7 +47,7 @@
            data-url="@Url.AppAction(MicroService.Core,"LoadNguoiDung","Dictionary")"
            data-toolbar="#tbNguoiDung"
            data-pagination="true"
-            data-search-selector="#txt_search"
+           data-search-selector="#txt_search"
            data-scrollTo="true"
            data-load-dictionary="true"
            data-side-pagination="server">
@@ -68,13 +68,12 @@
                 <th class="fullname-nd"
                     data-field="tendaydu">Họ và tên</th>
                 <th class="ngaysinh-nd"
-                    data-field="ngaysinh" data-align="center">Ngày sinh</th>
+                    data-field="ngaysinh" data-formatter="nd.onFormatDate" data-align="center">Ngày sinh</th>
                 <th class="email-nd"
                     data-field="email">Email</th>
                 <th class="gioitinh-nd"
                     data-field="gioitinh"
-                    data-formatter="nd.onFormatGT"
-                    >Giới tính</th>
+                    data-formatter="nd.onFormatGT">Giới tính</th>
                 <th class="sdt-nd"
                     data-field="sdt">Số điện thoại</th>
                 <th class="btn_sua" data-formatter="nd.onFormatUpdate" data-align="center"> </th>
@@ -90,36 +89,94 @@
 
         <div class="page-content">
             <div class="page_row page_row-1">
-                <div class="box box_name">
-                    <div class="box_left">
-                        <label for="name">Họ và tên:</label>
+
+                <div class="cpn_centent">
+
+                    <div class="cpn_centent_text">
+                        <div class="box box_name">
+                            <div class="box_left">
+                                <label for="name">Họ và tên:</label>
+                            </div>
+                            <div class="box_right form-group">
+                                <input type="text" name="fullname_nd" id="fullname_nd" class="text ui-widget-content ui-corner-all form-control">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="box box_ht">
+                            <div class="box_left">
+                                <label>Ngày sinh:</label>
+                            </div>
+                            <div class="box_right">
+                                <input type="date" id="ngaysinh" name="date">
+                            </div>
+                        </div>
+                        <div class="box box_sdt">
+                            <div class="box_left">
+                                <label for="name">Số điện thoại:</label>
+                            </div>
+                            <div class="box_right form-group">
+                                <input type="text" name="sdt" id="sdt" class="text ui-widget-content ui-corner-all form-control">
+                                <span class="form-message"></span>
+                            </div>
+                        </div>
+                        <div class="box box_ht">
+                            <div class="box_left">
+                                <label for="password">Giới tính:</label>
+
+                            </div>
+                            <div class="box_right box_gt">
+                                <div class="gt gt_nam">
+                                    <input type="radio" id="rdonam" name="sex" value="1">
+                                    <label>Nam</label>
+                                </div>
+                                <div class="gt gt_nu">
+                                    <input type="radio" id="rdonu" name="sex" value="0">
+                                    <label>Nữ</label>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="box_right form-group">
-                        <input type="text" name="fullname_nd" id="fullname_nd" class="text ui-widget-content ui-corner-all form-control">
-                        <span class="form-message"></span>
+                    <div class="right-content">
+                        <div class="import-content">
+                            <label for="hinhanh_nd">
+
+                                <div for="hinhanh_nd" class="drag-container">
+
+
+                                    <div class="ic-plus">
+
+                                        <i for="hinhanh_nd" class="ti-plus"></i>
+                                    </div>
+
+                                    <div class="display-text">
+                                        Chọn ảnh
+                                    </div>
+
+                                    <input class="drag-box"
+                                           id="hinhanh_nd"
+                                           type="file"
+                                           title="Chọn ảnh" style="display: none; visibility: none;" />
+                                    <img id="blah" class="img-back" />
+
+                                </div>
+
+                            </label>
+                            <div class="result-upload"></div>
+
+                        </div>
+
                     </div>
                 </div>
-                <div class="box box_hinhanh_nd">
-                    <div class="box_left">
 
-                        <label for="name">Hình ảnh:</label>
 
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="file" name="" id="hinhanh_nd" class="form-control text ui-widget-content ui-corner-all ">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
 
-                <div class="box box_ht">
-                    <div class="box_left">
-                        <label>Ngày sinh:</label>
-                    </div>
-                    <div class="box_right">
-                        <input type="date" id="ngaysinh" name="date">
-                    </div>
-                </div>
 
+
+                
                 <div class="box box_email">
                     <div class="box_left">
                         <label for="password">Email:</label>
@@ -127,32 +184,6 @@
                     </div>
                     <div class="box_right form-group">
                         <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all form-control">
-                        <span class="form-message"></span>
-                    </div>
-                </div>
-                <div class="box box_ht">
-                    <div class="box_left">
-                        <label for="password">Giới tính:</label>
-
-                    </div>
-                    <div class="box_right box_gt">
-                        <div class="gt gt_nam">
-                            <input type="radio" id="rdonam" name="sex" value="1">
-                            <label>Nam</label>
-                        </div>
-                        <div class="gt gt_nu">
-                            <input type="radio" id="rdonu" name="sex" value="0">
-                            <label>Nữ</label>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="box box_sdt">
-                    <div class="box_left">
-                        <label for="name">Số điện thoại:</label>
-                    </div>
-                    <div class="box_right form-group">
-                        <input type="text" name="sdt" id="sdt" class="text ui-widget-content ui-corner-all form-control">
                         <span class="form-message"></span>
                     </div>
                 </div>

@@ -1,25 +1,11 @@
-﻿.box_gt {
-    display: flex;
-    border: none !important;
-
-    .gt {
-        display: flex;
-        align-items: center;
-
-        &:first-child {
-            margin-right: 10px;
+﻿.page-content {
+    .page_row {
+        .cpn_centent {
+            .cpn_centent_text {
+                .box_ht{
+                    margin-bottom:-10px!important;
+                }
+            }
         }
-
-        input {
-            width: auto !important;
-        }
-    }
-}
-
-.box_right {
-    width: 40px;
-
-    #ngaysinh {
-        width: 40px;
     }
 }

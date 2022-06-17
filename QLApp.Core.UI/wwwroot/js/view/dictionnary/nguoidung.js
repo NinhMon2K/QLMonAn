@@ -44,9 +44,10 @@ class nguoidung {
         });
 
         $('.btn_left').on('click', '#btn_close', (e) => {
-
+            $('.img-back').removeAttr('src');
             $('#dialog-form').dialog('close');
         });
+        me.changeFileToImage('hinhanh_nd', '#blah');
 
 
     }
@@ -269,9 +270,11 @@ class nguoidung {
                             data.forEach((item, i) => {
                                 $('#fullname_nd').val(item.tendaydu);
                             //    $('#hinhanh_nd').val(item.anhdaidien);
-                                $('#ngaysinh').val(item.ngaysinh);
+                                let dates = item.ngaysinh.substring(0, 10);
+                                $('#ngaysinh').val(dates);
                                 $('#email').val(item.email);
                                 $('#sdt').val(item.sdt);
+                                $('#blah').attr('src', item.anhdaidien);
                                 if (item.gioitinh == '1') {
                                     $("#rdonam").prop("checked", true);
                                 }
@@ -398,7 +401,19 @@ class nguoidung {
             })
         });
     }
+    changeFileToImage(idFile, idImage) {
+        document.getElementById(idFile).onchange = function () {
 
+
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idImage).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        };
+    }
     onFormatIng(val) {
         return `<img src='${'/saveimage/ReviewFoods/service/thang/'+val}'></img>`;
     }
@@ -419,8 +434,8 @@ class nguoidung {
         })
     }
     onFormatDate(val) {
-    return
-        `${val.split(' ')[0].split('-').reverse().join('-')}`;
+        let dates = val.substring(0,10);
+        return `${dates.split(' ')[0].split('-').reverse().join('-')}`;
     }
     onFormatGT(val) {
         let pq = '';

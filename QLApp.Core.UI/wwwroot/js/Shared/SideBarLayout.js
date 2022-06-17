@@ -10,6 +10,26 @@
         this.initToolTip();
         this.setUserInfo();
         this.LogoutUser();
+        this.loadThongBao();
+    }
+    callApi(nameAPI) {
+        return AppUtil.getURLApi('Dictionary', nameAPI);
+    }
+    loadThongBao() {
+        let me = this;
+        let p = $('.bell_item').find('p');
+        AppAjax.Ajax(me.callApi('LoadThongBao'), {}, {}, function (data) {
+
+           
+            data.forEach((item, i) => {
+                if (item.TongLoi == '0') {
+                    $('.bell_item').hide();
+                } else {
+
+                p.text(item.TongLoi);
+                }
+            });
+        })
     }
     
     setUserInfo() {

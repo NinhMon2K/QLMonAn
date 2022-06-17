@@ -133,7 +133,7 @@
                     <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "cauhoi","Dictionary")">Câu hỏi</a></li>
                 </ul>
             </li>
-            <li>
+            @*<li>
                 <a href="#">
                     <i class='ti-help-alt'></i>
                     <span class="link_name">Trợ giúp</span>
@@ -141,7 +141,7 @@
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="#">Trợ giúp</a></li>
                 </ul>
-            </li>
+            </li>*@
             @*<li>
                 <a href="#">
                     <i class='bx bx-cog'></i>
@@ -182,13 +182,16 @@
             <i class='bx bx-menu' title="Menu"></i>
             <div class="right-header">
                 <div class="top-item header-setting">
-                    <button><i class="ti-settings" title="Cài đặt"></i></button>
+                    <button class="btn_setting">   <a href="#"><i class="ti-settings" title="Cài đặt"></i></a> </button>
                 </div>
                 <div class="top-item header-help">
-                    <button><i class="ti-info-alt" title="Trợ giúp"></i></button>
+                    <button class="btn_trogiup"> <a href="#"><i class="ti-info-alt" title="Trợ giúp"></i></a> </button>
                 </div>
                 <div class="top-item header-notification">
-                    <button><i class="ti-bell" title="Thông báo"></i></button>
+                    <button class="btn_thongbao"> <a href="@Url.AppAction(MicroService.UI, "baoloi","Dictionary")"><i class="ti-bell" title="Thông báo"></i></a>  </button>
+                    <div class="bell_item">
+                        <p>24</p>
+                    </div>
                 </div>
                 <div class="sepetator"></div>
                 <div class="top-item header-user">
@@ -201,7 +204,7 @@
                             <div class="left-info"><img class="img_userinfo" /></i></div>
                             <div class="right-info">
                                 <div class="name-info">@AuthService.GetCurrentUser()?.tentaikhoan</div>
-                                <div class="information-user"><a href="#">Thông tin tin khoản</a></div>
+                                <div class="information-user"><a href="#">Thông tin tài khoản</a></div>
                             </div>
                         </div>
                         <div class="title-user">Chức vụ</div>

@@ -19,20 +19,14 @@ namespace QLApp.Core.BL.Dictionary
         {
         }
 
-
+        /// <summary>
+        /// Lấy dữ liệu tài khoản
+        /// </summary>
+        /// <returns></returns>
         public async Task<IList<User>> LoadUser()
         {
             return await _service.DataService.GetDataAsync<User>("Proc_Get_User", new object[] { });
         }
-        public async Task<IList<thongke>> LoadThongKe()
-        {
-            return await _service.DataService.GetDataAsync<thongke>("Proc_Count_ThongKe", new object[] { });
-        }
-        public async Task<IList<item>> LoadItemMenu()
-        {
-            return await _service.DataService.GetDataAsync<item>("Proc_Get_DemItemMenu", new object[] { });
-        }
-
         public async Task<IList<User>> LoadALLTaiKhoan()
         {
             return await _service.DataService.GetDataAsync<User>("Proc_GetALL_TK", new object[] { });
@@ -41,14 +35,31 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<people>("Proc_Get_ND", new object[] { });
         }
-        public async Task<IList<cauHoi>> LoadCauHoi()
-        {
-            return await _service.DataService.GetDataAsync<cauHoi>("Proc_Get_Cauhoi", new object[] { });
-        }
         public async Task<IList<baoloi>> loadLoi()
         {
             return await _service.DataService.GetDataAsync<baoloi>("Pro_Get_Baoloi", new object[] { });
         }
+        
+        public async Task<IList<thongke>> LoadThongKe()
+        {
+            return await _service.DataService.GetDataAsync<thongke>("Proc_Count_ThongKe", new object[] { });
+        }
+        public async Task<IList<item>> LoadItemMenu()
+        {
+            return await _service.DataService.GetDataAsync<item>("Proc_Get_DemItemMenu", new object[] { });
+        }
+        public async Task<IList<thongke>> LoadThongBao()
+        {
+            return await _service.DataService.GetDataAsync<thongke>("Proc_Count_BaoLoi", new object[] { });
+        }
+
+      
+     
+        public async Task<IList<cauHoi>> LoadCauHoi()
+        {
+            return await _service.DataService.GetDataAsync<cauHoi>("Proc_Get_Cauhoi", new object[] { });
+        }
+        
         public async Task<IList<Pagezing>> CountMonAn()
         {
             return await _service.DataService.GetDataAsync<Pagezing>("Proc_Count_Monan", new object[] { });
@@ -160,6 +171,13 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.ExcuteSaveAsync("Proc_Insert_DanhDau", d);
         }
+
+
+        /// <summary>
+        /// Thêm/Sửa thông tin món ăn
+        /// </summary>
+        /// <param name="saveParam"></param>
+        /// <returns></returns>
         public async Task<bool> SaveFood(SaveParam saveParam)
         {
             var obj = JsonSerializer.Deserialize<monan>(saveParam.FormData.ToString());

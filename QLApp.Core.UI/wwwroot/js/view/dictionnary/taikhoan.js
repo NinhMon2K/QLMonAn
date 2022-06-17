@@ -106,7 +106,7 @@
     }
     saveTK() {
         let me = this;
-        $('.form-group').on('change', '#taikhoan', () => {
+        $('.form-group').off('change', '#taikhoan').on('change', '#taikhoan', () => {
             let username = $('#taikhoan').val();
             let wa = $('.box_taikhoan .box_right').find('span');
             if (username == '') {
@@ -489,7 +489,8 @@
                                 $('#fullname').val(item.tendaydu);
                                 $('#sdt').val(item.sdt);
                                 $('#email').val(item.email);
-                                $('#ngaysinh').val(item.ngaysinh);
+                                let dates = item.ngaysinh.substring(0, 10);
+                                $('#ngaysinh').val(dates);
                                 if (item.gioitinh == '1') {
                                     $("#rdonam").prop("checked", true);
                                 }

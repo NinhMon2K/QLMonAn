@@ -99,7 +99,8 @@
 </div>
 
 <div id="dialog-form" title="Tài khoản">
-    <form class="form" id="form-1" action="" method="POST">
+     
+    <form class="form" id="form-1" action=""  data-auto-screen="true" method="POST">
 
         <div class="page-content">
             <div class="page_row page_row-1">
@@ -192,7 +193,17 @@
                                 <label>Ngày sinh:</label>
                             </div>
                             <div class="box_right form-group">
-                                <input type="date" id="ngaysinh" name="date">
+                                <input type="date"
+                                       id="ngaysinh" 
+                                       name="date"
+                                       data-field="ngaysinh"
+                              
+                               data-has-data="true"
+                               data-control-type="Date"
+                               data-type="Date"
+                               placeholder="__/__/____"
+                            
+                                       >
                                 <span class="form-message"></span>
                             </div>
                         </div>

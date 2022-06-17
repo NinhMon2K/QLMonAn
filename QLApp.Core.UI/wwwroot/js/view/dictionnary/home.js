@@ -22,7 +22,7 @@ class home {
         {
             indexTotal: '0',
             name: 'Tài khoản',
-            iconItem: 'ti-bookmark-alt',
+            iconItem: 'ti-user',
             link: '/Dictionary/taikhoan'
         },
         {
@@ -45,7 +45,7 @@ class home {
         arr.forEach((x, i) => {
             let $item = $('<a>', {
                 id: i,
-                class: 'item-navbar',
+                class: 'item-navbar item-navbar_'+i,
                 href: x.link,
                 data: {
                     index: i

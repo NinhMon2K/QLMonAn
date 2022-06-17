@@ -10,5 +10,7 @@ namespace QLApp.Core.Entities.Dictionary.Data
         public string tenmonan { get; set; }
         public int Tong { get; set; }
         public int idmonan { get; set; }
+
+        public int TongLoi { get; set; }
     }
 }

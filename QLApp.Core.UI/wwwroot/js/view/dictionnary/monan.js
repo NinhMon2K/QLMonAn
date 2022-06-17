@@ -27,7 +27,7 @@ class monan {
         let me = this;
 
         $('#hinhanh_ma').on('change', function (e) {
-            me.file = this.files && this.files[0];
+            me.file = this.files && this.files[0] || null;
         });
        
 
@@ -96,7 +96,7 @@ class monan {
         });
         $('.right-footer').on('click', '#btn_luu', () => {
 
-
+            
             me.callAjaxUploadFile().then(() => {
                 let anh = '';
             anh = me.anh;
@@ -339,7 +339,7 @@ class monan {
                                 $('#video_ma').val(item.video);
                                 $('#noiban_ma').val(item.noiban);
                                 $('#mota_ma').val(item.mota);
-                                $('#blah').attr('src', '/saveimage/ReviewFoods/service/thang/'+ item.anh);
+                                $('#blah').attr('src', item.anh);
 
                             });
 
@@ -462,7 +462,7 @@ class monan {
                 processData: false,
             }
             formdata.append('file', me.file);
-
+         
             AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
 
                 me.anh = data;
@@ -479,7 +479,7 @@ class monan {
     }
 
     onFormatIng(val) {
-        return `<img src='${'/saveimage/ReviewFoods/service/thang/'+val}'></img>`;
+        return `<img src='${val}'></img>`;
     }
     onFormatChecked(val) {
         return `<input type='checkbox' data-checkbox ='true' true, class='check_item' data-id=${val}>`;

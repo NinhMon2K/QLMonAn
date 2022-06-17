@@ -1,15 +1,2 @@
-﻿.box_gt {
-  display: flex;
-  border: none !important; }
-  .box_gt .gt {
-    display: flex;
-    align-items: center; }
-    .box_gt .gt:first-child {
-      margin-right: 10px; }
-    .box_gt .gt input {
-      width: auto !important; }
-
-.box_right {
-  width: 40px; }
-  .box_right #ngaysinh {
-    width: 40px; }
+﻿.page-content .page_row .cpn_centent .cpn_centent_text .box_ht {
+  margin-bottom: -10px !important; }
