@@ -195,7 +195,23 @@ class baoloi {
         });
 
     }
+    loadThongBao() {
+        let me = this;
+        let p = $('.bell_item').find('p');
 
+        AppAjax.Ajax(me.callApi('LoadThongBao'), {}, {}, function (data) {
+
+
+            data.forEach((item, i) => {
+                if (item.TongLoi == '0') {
+                    $('.bell_item').hide();
+                } else {
+
+                    p.text(item.TongLoi);
+                }
+            });
+        })
+    }
     confirm() {
         let me = this;
         let ID = [];
@@ -209,7 +225,8 @@ class baoloi {
                 AppAjax.Ajax(me.callApi('UpdateBaoLoi'), {}, { id }, function (data) {
 
                     if (data) {
-                        toastr.success('Xử lý sữ liệu thành công', { positionClass: 'toast-top-center' });
+                        toastr.success('Xử lý dữ liệu thành công', { positionClass: 'toast-top-center' });
+                        me.loadThongBao();
                         let a = setTimeout(() => {
                             let a = setTimeout(() => {
                                 $('#table_id').bootstrapTable('refresh');
@@ -220,7 +237,7 @@ class baoloi {
 
 
                     } else {
-                        toastr.error('Xử lý sữ liệu thất bại', { positionClass: 'toast-top-center' });
+                        toastr.error('Xử lý dữ liệu thất bại', { positionClass: 'toast-top-center' });
 
                     }
                 })

@@ -18,6 +18,7 @@
     loadThongBao() {
         let me = this;
         let p = $('.bell_item').find('p');
+
         AppAjax.Ajax(me.callApi('LoadThongBao'), {}, {}, function (data) {
 
            
