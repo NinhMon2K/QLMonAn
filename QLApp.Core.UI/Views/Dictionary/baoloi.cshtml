@@ -7,25 +7,25 @@
 <link href="~/css/view/dictionary/baoloi.css" rel="stylesheet" />
 
 <div class="menu-group" >
-    <a id="0" class="item-navbar item-navbar_3" href="/Dictionary/monan">
+    <a id="0" class="item-navbar item-navbar_3" href="/Dictionary/baoloi">
         <div class="navbar-left">
-            <div class="total">38</div>
+            <div class="total total_tong">38</div>
             <div class="name-total">Tổng</div>
         </div><div class="navbar-right">
             <div class="icon-navbar"><i class="ti-home"></i></div>
         </div>
     </a>
-    <a id="1" class="item-navbar item-navbar_2" href="/Dictionary/monan">
+    <a id="1" class="item-navbar item-navbar_2" href="/Dictionary/baoloi?status=0">
         <div class="navbar-left">
-            <div class="total">38</div>
+            <div class="total total_chuaxuly">38</div>
             <div class="name-total">Chưa xử lý</div>
         </div><div class="navbar-right">
             <div class="icon-navbar"><i class="ti-alert"></i></div>
         </div>
     </a>
-    <a id="2" class="item-navbar item-navbar_0" href="/Dictionary/monan">
+    <a id="2" class="item-navbar item-navbar_0" href="/Dictionary/baoloi?status=1">
         <div class="navbar-left">
-            <div class="total">38</div>
+            <div class="total total_daxuly">38</div>
             <div class="name-total">Đã xử lý</div>
         </div><div class="navbar-right">
             <div class="icon-navbar"><i class="ti-check"></i></div>
@@ -74,7 +74,8 @@
 <div class="container-table">
     <table id="table_id"
            class="display"
-           data-url="@Url.AppAction(MicroService.Core,"LoadLoi","Dictionary")"
+           data-url="@Url.AppAction(MicroService.Core,"LoadTrangThaiBL","Dictionary")"
+           data-params="bl.getParam"
            data-toolbar="#tbBaoLoi"
            data-search-selector="#txt_search"
            data-pagination="true"

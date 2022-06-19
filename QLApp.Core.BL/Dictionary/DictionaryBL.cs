@@ -54,6 +54,10 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<thongke>("Proc_Count_ThongKe", new object[] { });
         }
+        public async Task<IList<itemMenuBL>> LoadItemBaoLoi()
+        {
+            return await _service.DataService.GetDataAsync<itemMenuBL>("Proc_Count_Item_BL", new object[] { });
+        }
         public async Task<IList<item>> LoadItemMenu()
         {
             return await _service.DataService.GetDataAsync<item>("Proc_Get_DemItemMenu", new object[] { });
@@ -68,9 +72,13 @@ namespace QLApp.Core.BL.Dictionary
             return await _service.DataService.GetDataAsync<cauHoi>("Proc_Get_Cauhoi", new object[] { });
         }
         
-        public async Task<IList<Pagezing>> CountMonAn()
+        public async Task<IList<thongke>> CountMonAn()
         {
-            return await _service.DataService.GetDataAsync<Pagezing>("Proc_Count_Monan", new object[] { });
+            return await _service.DataService.GetDataAsync<thongke>("Proc_Count_Monan", new object[] { });
+        }
+        public async Task<IList<thongke>> LoadCountDanhGia()
+        {
+            return await _service.DataService.GetDataAsync<thongke>("Proc_Get_DanhGiaMA", new object[] { });
         }
         public async Task<IList<monan>> LoadMonAn()
         {
@@ -86,6 +94,13 @@ namespace QLApp.Core.BL.Dictionary
 
             return await _service.DataService.GetDataAsync<monan>("Proc_Get_MonAn_ID", new object[] { id });
         }
+
+        public async Task<IList<baoloi>> LoadTrangThaiBL(int status)
+        {
+
+            return await _service.DataService.GetDataAsync<baoloi>("Proc_Get_BL", new object[] { status });
+        }
+
         public async Task<IList<people>> LoadNguoiDungID(int id)
         {
 
@@ -192,7 +207,10 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<User>("Proc_Get_TK_ID", new object[] { tentaikhoan });
         }
-
+        public async Task<IList<User>> CheckAcc(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<User>("Proc_Check_Acc", a );
+        }
 
         public async Task<bool> DeleteMonAn(int idMonan)
         {
@@ -200,9 +218,9 @@ namespace QLApp.Core.BL.Dictionary
             return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_MonAn", new object[] { idMonan });
 
         }
-        public async Task<bool> InsertDanhDau(danhdau d)
+        public async Task<bool> InsertDanhDau(object[] a)
         {
-            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_DanhDau", d);
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_DanhDau", a);
         }
 
 

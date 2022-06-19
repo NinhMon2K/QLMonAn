@@ -1,21 +1,52 @@
 ﻿
-
 class baoloi {
     constructor() {
         this.init();
 
     }
     init() {
+        this.setItem();
+
         this.loadLoi();
         this.Done();
         this.confirm();
+        this.totalItemMenu();
     }
 
 
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
     }
+    setItem() {
+        let me = this;
+        me.formdata = AppUtil.getParam()
+        //switch (me.formdata) {
+        //    case 0: {
+        //        $('#table_id').data('url', me.callApi('LoadTrangThaiBL'));
+        //        break;
+        //    }
+        //    case 0: {
 
+        //        break;
+        //    }
+        //    default: {
+
+        //    }
+
+        //}
+    }
+    totalItemMenu() {
+        let me = this;
+        AppAjax.Ajax(me.callApi('LoadItemBaoLoi'), {}, {}, function (data) {
+            data.forEach((item, i) => {
+
+                $('.total_tong').text(item.Tong);
+                $('.total_chuaxuly').text(item.chuaxuly);
+                $('.total_daxuly').text(item.daxuly);
+            });
+        })
+
+    }
     Done() {
         $('.btn_left').on('click', '#btn_close', (e) => {
             $('#dialog-form').dialog('close');
@@ -48,6 +79,11 @@ class baoloi {
             silent: true,
             onCheck: function () {
                 $('.btn_delete').prop('disabled', false);
+            },
+
+            queryParams: function () {
+                return { status: me.formdata.status, }
+
             },
 
             onUncheck: function () {
@@ -152,6 +188,7 @@ class baoloi {
                     class: 'btn_kt',
                     id: 'btnCheckXoa',
                     click: function () {
+                        let ele = this;
                         ID.forEach((id) => {
                             AppAjax.Ajax(me.callApi('DeleteBaoLoi'), {}, { id }, function (data) {
 
@@ -172,7 +209,7 @@ class baoloi {
 
                                 }
                             })
-                            $(this).dialog('close');
+                            $(ele).dialog('close');
 
                         });
 
@@ -227,6 +264,7 @@ class baoloi {
                     if (data) {
                         toastr.success('Xử lý dữ liệu thành công', { positionClass: 'toast-top-center' });
                         me.loadThongBao();
+                        me.totalItemMenu();
                         let a = setTimeout(() => {
                             let a = setTimeout(() => {
                                 $('#table_id').bootstrapTable('refresh');
@@ -245,6 +283,13 @@ class baoloi {
             });
         });
     }
+
+    getParam() {
+        return {
+            status: this.formdata.status || 1
+        }
+    }
+
     onFormatDelete() {
         return `<div class='btnDelete'> <i class='ti-trash'></i> </div>`;
     }

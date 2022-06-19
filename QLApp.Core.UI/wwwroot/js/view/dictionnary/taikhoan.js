@@ -419,6 +419,7 @@
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
+                                let ele = this;
                                 AppAjax.Ajax(me.callApi('DeleteTaiKhoan'), {}, { tentaikhoan }, function (data) {
 
                                     if (data) {
@@ -440,7 +441,7 @@
                                         toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
                                         me.resetForm();
                                     }
-                                    $(this).dialog('close');
+                                    $(ele).dialog('close');
                                 })
 
                             }

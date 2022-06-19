@@ -327,6 +327,7 @@ class nguoidung {
                     class: 'btn_kt',
                     id: 'btnCheckXoa',
                     click: function () {
+                        let ele = this;
                         ID.forEach((id) => {
                             AppAjax.Ajax(me.callApi('DeleteND'), {}, { id }, function (data) {
 
@@ -347,7 +348,7 @@ class nguoidung {
 
                                 }
                             })
-                            $(this).dialog('close');
+                            $(ele).dialog('close');
 
                         });
 

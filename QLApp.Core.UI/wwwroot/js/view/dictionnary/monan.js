@@ -19,7 +19,7 @@ class monan {
             , i = Object.values(n).map(n => t.handleUploadFile(n));
         return Promise.all(i)
     }
-   
+
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
     }
@@ -29,7 +29,7 @@ class monan {
         $('#hinhanh_ma').on('change', function (e) {
             me.file = this.files && this.files[0] || null;
         });
-       
+
 
     }
     addCombobox() {
@@ -58,7 +58,7 @@ class monan {
             modal: true,
 
         });
-       
+
         $("#btn_add").button().on("click", function () {
             dialog.dialog("open");
             me.Mode = 1;
@@ -69,8 +69,8 @@ class monan {
 
             $('#dialog-form').dialog('close');
         });
-      
-        me.changeFileToImage('hinhanh_ma','#blah');
+
+        me.changeFileToImage('hinhanh_ma', '#blah');
 
     }
     SaveFood() {
@@ -81,7 +81,7 @@ class monan {
             errorSelector: '.form-message',
             rules: [
                 Validator.isRequired('#name_ma', 'Vui lòng nhập tên món ăn!'),
-                
+
 
                 Validator.isRequired('#noiban_ma', 'Vui lòng nhập nơi bán món ăn!'),
                 Validator.isRequired('#mota_ma'),
@@ -94,11 +94,11 @@ class monan {
         });
         $('.right-footer').on('click', '#btn_luu', () => {
 
-            
+
             me.callAjaxUploadFile().then(() => {
                 let anh = '';
-            anh = me.anh;
-           
+                anh = me.anh;
+
 
                 let tenmonan = $('#name_ma').val();
 
@@ -238,8 +238,7 @@ class monan {
                 data.forEach((x, i) => { x.stt = i + 1 });
                 return data;
             },
-
-
+           
             totalField: "RecordsTotal",
             pageList: [5, 7, 8, 9, 10],
             pageSize: 5,
@@ -282,6 +281,8 @@ class monan {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
+                                let ele = this;
+
                                 AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
 
                                     if (data) {
@@ -303,7 +304,7 @@ class monan {
                                         toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
 
                                     }
-                                    $(this).dialog('close');
+                                    $(ele).dialog('close');
                                 })
 
                             }
@@ -429,7 +430,7 @@ class monan {
 
     }
 
-  
+
     changeFileToImage(idFile, idImage) {
         document.getElementById(idFile).onchange = function () {
 
@@ -446,33 +447,50 @@ class monan {
 
     callAjaxUploadFile() {
 
+        let me = this;
+        let valid = true;
+
+        if (this.file) {
+            let name = me.file.name;
+            let short = name.substring(name.lastIndexOf("."), name.length);
+
+            valid = ['.png'].some(x => x == short);
+        }
+
         return new Promise((i, r) => {
 
-            let me = this;
-
-            let formdata = new FormData();
-            let config = {
-                type: 'POST',
-                data: formdata,
-                contentType: false,
-                cache: false,
-                enctype: "multipart/form-data",
-                processData: false,
-            }
-            formdata.append('file', me.file);
-         
-            AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
-
-                me.anh = data;
-                if (data) {
-
-                    i();
-
-                } else {
-                    toastr.error('Thêm mới thất bại');
-
+            if (valid) {
+                let formdata = new FormData();
+                let config = {
+                    type: 'POST',
+                    data: formdata,
+                    contentType: false,
+                    cache: false,
+                    enctype: "multipart/form-data",
+                    processData: false,
                 }
-            })
+                formdata.append('file', me.file);
+                formdata.append('oldField', '');
+
+                AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
+
+                    me.anh = data;
+                    if (data) {
+
+                        i();
+
+                    } else {
+                        toastr.error('Thêm mới thất bại');
+
+                    }
+                })
+            } else {
+                i()
+                me.anh = '';
+
+            }
+
+
         });
     }
 
@@ -498,7 +516,7 @@ class monan {
             return `<i data-ID= '${row.id}' class='ti-trash'></i>`
         })
     }
-  
-    
+
+
 }
 var monanr = new monan();

@@ -185,7 +185,30 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-         
+
+
+        [HttpPost("DeleteImg")]
+        public async Task<ServiceResult> DeleteImg(string name)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(name.ToString()))
+                {
+                    name = name.ToString().Split("/").LastOrDefault();
+                    await _service.StorageService.DeleteFileAsync(name);
+                }
+
+                res.Data = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
         /// <summary>
         /// lấy dữ liệu theo id
         /// </summary>
@@ -232,6 +255,9 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+
+
+
         [HttpGet("UpdateBaoLoi")]
         public async Task<ServiceResult> UpdateBaoLoi(int id)
         {
@@ -266,6 +292,45 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Lấy dữ liệu cho item báo lỗi
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadItemBaoLoi")]
+        public async Task<ServiceResult> LoadItemBaoLoi()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadItemBaoLoi();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+
+
+        [HttpGet("LoadTrangThaiBL")]
+        public async Task<ServiceResult> LoadTrangThaiBL(int status)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadTrangThaiBL(status);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
         //----------END BÁO LỖI----------
 
         //----------START MÓN ĂN--------------
@@ -586,6 +651,24 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+
+        [HttpGet("LoadCountDanhGia")]
+        public async Task<ServiceResult> LoadCountDanhGiav()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadCountDanhGia();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         //----------END THÔNG KÊ ----------
 
 
@@ -661,14 +744,25 @@ namespace QLApp.Core.API.Controllers.Dictionary
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
+
         [HttpPost("InsertDanhDau")]
-        public async Task<ServiceResult> InsertDanhDau([FromForm] danhdau d)
+        public async Task<ServiceResult> InsertDanhDau([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertDanhDau(d);
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertDanhDau(a);
+
+
+
             }
             catch (Exception e)
             {
@@ -677,7 +771,6 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-
         //----------END ĐÁNH DẤU/THẢ TIM ----------v
 
 
@@ -749,6 +842,37 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        
+
+        //----------------API ANDROID ----------------
+
+        // API Bảo
+        [HttpPost("CheckAcc")]
+        public async Task<ServiceResult> CheckAcc([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).CheckAcc(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+
     }
 }

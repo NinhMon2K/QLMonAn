@@ -8,6 +8,7 @@ class home {
     init() {
         this.loadThongKe();
         this.listMenu();
+        this.loadDanhGia();
     }
     listMenu() {
         let me = this;
@@ -100,6 +101,8 @@ class home {
         let me = this;
         let Dem = [];
         let tenMon = [];
+        let DemDG = [];
+        let tenMonDG = [];
         setInterval(() => { }, 2000);
         AppAjax.Ajax(me.callApi('LoadThongKe'), {}, {}, function (data) {
 
@@ -109,23 +112,19 @@ class home {
                 $('.text-lg').text(item.Tong);
             });
         })
+       
 
-
-
-
-        'use strict'
-
-        var ticksStyle = {
+        let ticksStyle = {
             fontColor: '#495057',
             fontStyle: 'bold'
         }
 
-        var mode = 'index'
-        var intersect = true
+        let mode = 'index'
+        let intersect = true
 
-        var $salesChart = $('#sales-chart');
+        let $salesChart = $('#sales-chart');
         // eslint-disable-next-line no-unused-vars
-        var salesChart = new Chart($salesChart, {
+        let salesChart = new Chart($salesChart, {
             type: 'bar',
             data: {
                 labels: tenMon,
@@ -135,6 +134,81 @@ class home {
                     backgroundColor: '#007bff',
                     borderColor: '#007bff',
                     data: Dem,
+
+                    fill: false
+                }
+
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                hover: {
+                    mode: mode,
+                    intersect: intersect
+                },
+                legend: {
+                    display: false
+                },
+                sscales: {
+                    yAxes: [{
+                        // display: false,
+                        gridLines: {
+                            display: true,
+                            lineWidth: '4px',
+                            color: 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: $.extend({
+                            beginAtZero: true,
+                            suggestedMax: 6
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        });
+
+        
+
+    }
+
+    loadDanhGia() {
+        let me = this;
+      
+        let DemDG = [];
+        let tenMonDG = [];
+        AppAjax.Ajax(me.callApi('LoadCountDanhGia'), {}, {}, function (data) {
+
+            DemDG = data.map((x) => x.Tong);
+            tenMonDG = data.map((x) => x.tenmonan);
+        });
+        let ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold'
+        }
+
+        let mode = 'index'
+        let intersect = true
+        let salesCharts = new Chart($('#sales-chart_danhgia'), {
+            type: 'bar',
+            data: {
+                labels: tenMonDG,
+
+
+                datasets: [{
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff',
+                    data: DemDG,
 
                     fill: false
                 }

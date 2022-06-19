@@ -1,9 +1,5 @@
 ﻿[
   {
-    "outputFile": "wwwroot/css/view/dictionary/Home.css",
-    "inputFile": "wwwroot/scss/view/dictionary/Home.scss"
-  },
-  {
     "outputFile": "wwwroot/css/view/dictionary/_Layout.css",
     "inputFile": "wwwroot/scss/view/dictionary/_Layout.scss"
   },
@@ -50,5 +46,9 @@
   {
     "outputFile": "wwwroot/css/view/dictionary/baoloi.css",
     "inputFile": "wwwroot/scss/view/dictionary/baoloi.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/Home.css",
+    "inputFile": "wwwroot/scss/view/dictionary/Home.scss"
   }
 ]

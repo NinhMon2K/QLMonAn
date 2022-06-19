@@ -317,6 +317,7 @@ class cauhoi {
                     class: 'btn_kt',
                     id: 'btnCheckXoa',
                     click: function () {
+                        let ele = this;
                         ID.forEach((idMonan) => {
                             AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
 
@@ -337,7 +338,7 @@ class cauhoi {
 
                                 }
                             })
-                            $(this).dialog('close');
+                            $(ele).dialog('close');
 
                         });
 
