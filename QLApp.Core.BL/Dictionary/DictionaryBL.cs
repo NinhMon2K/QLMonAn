@@ -222,9 +222,9 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.ExcuteSaveAsync("Proc_Insert_DanhDau", a);
         }
-        public async Task<bool> GetUsers(object[] a)
+        public async Task<IList<User>> GetUsers(object[] a)
         {
-            return await _service.DataService.ExcuteSaveAsync("Proc_Get_User", a);
+            return await _service.DataService.GetDataAsync<User>("Proc_Get_User", a);
         }
 
 

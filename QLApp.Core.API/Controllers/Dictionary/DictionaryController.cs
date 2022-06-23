@@ -837,7 +837,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
         [HttpPost("GetUsers")]
-        public async Task<ServiceResult> GetUsers([FromForm] Dictionary<string, string> pr)
+        public async Task<ServiceResult> GetUsers([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
 
