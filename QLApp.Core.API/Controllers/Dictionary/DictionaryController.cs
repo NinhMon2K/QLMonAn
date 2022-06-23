@@ -356,26 +356,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        /// <summary>
-        /// Lấy dữ liệu món ăn
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("LoadMonAn")]
-        public async Task<ServiceResult> LoadMonAn()
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadMonAn();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
+        
 
         /// <summary>
         /// Lấy dữ liệu toàn bộ món ăn và chi tiết món ăn
@@ -420,26 +401,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        /// <summary>
-        /// Lấy tên loại món ăn
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("LoadLoaiMonAn")]
-        public async Task<ServiceResult> LoadLoaiMonAn()
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
+        
 
         /// <summary>
         /// Thêm/Sửa thông tin món ăn
@@ -746,10 +708,10 @@ namespace QLApp.Core.API.Controllers.Dictionary
         /// <returns></returns>
 
         [HttpPost("InsertDanhDau")]
-        public async Task<ServiceResult> InsertDanhDau([FromBody] Dictionary<string, object> pr)
+        public async Task<ServiceResult> InsertDanhDau([FromBody] Dictionary<string,object> pr)
         {
             var res = new ServiceResult();
-
+         
             try
             {
 
@@ -864,6 +826,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
 
 
+
             }
             catch (Exception e)
             {
@@ -873,6 +836,76 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        [HttpPost("GetUsers")]
+        public async Task<ServiceResult> GetUsers([FromForm] Dictionary<string, string> pr)
+        {
+            var res = new ServiceResult();
 
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetUsers(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        ///API Thắng
+
+        /// <summary>
+        /// API Thắng lấy dữ liệu loại món ăn
+        /// Lấy dữ liệu loại món ăn
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadLoaiMonAn")]
+        public async Task<ServiceResult> LoadLoaiMonAn()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lấy dữ liệu món ăn
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadMonAn")]
+        public async Task<ServiceResult> LoadMonAn()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
     }
 }
