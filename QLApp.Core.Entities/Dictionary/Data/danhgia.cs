@@ -4,10 +4,10 @@ using System.Text;
 
 namespace QLApp.Core.Entities.Dictionary.Data
 {
-   public class danhgia
+   public class danhgiaMA
     {
         public int idmonan { get; set; }
         public string tentaikhoan { get; set; }
-        public string danhgiaMA { get; set; }
+        public string danhgia { get; set; }
     }
 }

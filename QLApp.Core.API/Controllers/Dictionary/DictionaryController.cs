@@ -562,32 +562,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         //----------END TÀI KHOẢN ----------
 
 
-        [HttpPost("LoadCheckedDanhDau")]
-        public async Task<ServiceResult> LoadCheckedDanhDau([FromBody] Dictionary<string, object> pr)
-        {
-            var res = new ServiceResult();
-
-            try
-            {
-
-                var a = new object[] { };
-                foreach (var key in pr.Keys)
-                {
-                    a = a.Append(pr[key]).ToArray();
-                }
-
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadCheckedDanhDau(a);
-
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
+        
 
 
 
@@ -678,61 +653,9 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
         //----------START ĐÁNH DẤU/THẢ TIM --------------
 
-        /// <summary>
-        /// Xóa dữ liệu đánh dấu theo id món ăn và tên tài khoản
-        /// </summary>
-        /// <param name="idmonan"></param>
-        /// <param name="tentaikhoan"></param>
-        /// <returns></returns>
-        [HttpPost("DeleteDanhDau")]
-        public async Task<ServiceResult> DeleteDanhDau(int idmonan, string tentaikhoan)
-        {
-            var res = new ServiceResult();
+       
 
-            try
-            {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(idmonan, tentaikhoan);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Thêm mới đánh dấu/thả tim
-        /// </summary>
-        /// <param name="d"></param>
-        /// <returns></returns>
-
-        [HttpPost("InsertDanhDau")]
-        public async Task<ServiceResult> InsertDanhDau([FromBody] Dictionary<string,object> pr)
-        {
-            var res = new ServiceResult();
-         
-            try
-            {
-
-                var a = new object[] { };
-                foreach (var key in pr.Keys)
-                {
-                    a = a.Append(pr[key]).ToArray();
-                }
-
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertDanhDau(a);
-
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return res;
-        }
+        
         //----------END ĐÁNH DẤU/THẢ TIM ----------v
 
 
@@ -808,6 +731,13 @@ namespace QLApp.Core.API.Controllers.Dictionary
         //----------------API ANDROID ----------------
 
         // API Bảo
+
+        /// <summary>
+        /// CheckAcc + SelectAcc
+        /// Lay du du tai khoan theo tentaikhoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
         [HttpPost("CheckAcc")]
         public async Task<ServiceResult> CheckAcc([FromBody] Dictionary<string, object> pr)
         {
@@ -836,8 +766,12 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+
+
+
+
         [HttpPost("GetUsers")]
-        public async Task<ServiceResult> GetUsers([FromBody] Dictionary<string, object> pr)
+        public async Task<ServiceResult> GetUsers([FromBody] Dictionary<string, string> pr)
         {
             var res = new ServiceResult();
 
@@ -863,9 +797,191 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Lay du lieu mon an theo ID mon an
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("GetFoodID")]
+        public async Task<ServiceResult> GetFoodID([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetFoodID(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lay du lieu mon an gioi han 8
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetMonAnHome")]
+        public async Task<ServiceResult> GetMonAnHome()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetMonAnHome();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Update password theo tentaikhoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("UpdatePassWord")]
+        public async Task<ServiceResult> UpdatePassWord([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).UpdatePassWord(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// lay du lieu tai khoan thao ten tai khoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpGet("GetUserID")]
+        public async Task<ServiceResult> GetUserID([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetUserID(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// SelectRating Lay du lieu danh gia theo ten tai khoan va id mon an
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpGet("GetRating")]
+        public async Task<ServiceResult> GetRating([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetRating(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Count danh gia va avg danh gia
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpGet("GetAllRate")]
+        public async Task<ServiceResult> GetAllRate([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+                
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetAllRate(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         ///API Thắng
 
         /// <summary>
+        /// Thang + Bao
         /// API Thắng lấy dữ liệu loại món ăn
         /// Lấy dữ liệu loại món ăn
         /// </summary>
@@ -888,6 +1004,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
         /// <summary>
+        /// Thang + Bao
         /// Lấy dữ liệu món ăn
         /// </summary>
         /// <returns></returns>
@@ -899,6 +1016,127 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadMonAn();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lay du lieu mon an da danh dau  
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("LoadCheckedDanhDau")]
+        public async Task<ServiceResult> LoadCheckedDanhDau([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadCheckedDanhDau(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpPost("LoadHoSo")]
+        public async Task<ServiceResult> GetHoSo([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetHoSo(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Thêm mới đánh dấu/thả tim
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
+
+        [HttpPost("InsertDanhDau")]
+        public async Task<ServiceResult> InsertDanhDau([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertDanhDau(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Xóa dữ liệu đánh dấu theo id món ăn và tên tài khoản
+        /// </summary>
+        /// <param name="idmonan"></param>
+        /// <param name="tentaikhoan"></param>
+        /// <returns></returns>
+        [HttpPost("DeleteDanhDau")]
+        public async Task<ServiceResult> DeleteDanhDau([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(a);
             }
             catch (Exception e)
             {

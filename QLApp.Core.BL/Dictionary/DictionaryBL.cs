@@ -176,19 +176,7 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_ND", new object[] { ids });
         }
-        public async Task<bool> DeleteDanhDau(int idmonans, string tentaikhoans)
-        {
-            var ID = tentaikhoans.Split(",");
-            var rs = false;
-
-            foreach (var DishID in ID)
-            {
-                rs = await _service.DataService.ExcuteDeteteAsync("Proc_Delete_DanhDau", new object[] { idmonans, tentaikhoans });
-            }
-
-            return rs;
-
-        }
+        
         public async Task<bool> DeleteTaiKhoan(string tentaikhoans)
         {
             var ID = tentaikhoans.Split(",");
@@ -253,8 +241,41 @@ namespace QLApp.Core.BL.Dictionary
         //    return await _service.DataService.ExcuteSaveAsync("Proc_Insert_ND", pr);
         //}
 
+        public async Task<IList<User>> GetHoSo(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<User>("Proc_Get_TK_ID", a);
+        }
+        public async Task<bool> DeleteDanhDau(object[] a)
+        {
+
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_DanhDau", a);
+
+        }
+        public async Task<IList<monan>> GetFoodID(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<monan>("Proc_Get_Food_ID", a);
+        }
+        public async Task<IList<monan>> GetMonAnHome()
+        {
+            return await _service.DataService.GetDataAsync<monan>("Proc_Get_MonAn_Home", new object[] { });
+        }
 
 
-
+        public async Task<IList<User>> UpdatePassWord(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<User>("Proc_Update_PassWord", a);
+        }
+        public async Task<IList<User>> GetUserID(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<User>("Proc_Get_TK_ID", a);
+        }
+        public async Task<IList<danhgiaMA>> GetRating(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<danhgiaMA>("Proc_Get_Rating", a);
+        }
+        public async Task<IList<rate>> GetAllRate(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<rate>("Proc_GetALL_Rate", a);
+        }
     }
 }
