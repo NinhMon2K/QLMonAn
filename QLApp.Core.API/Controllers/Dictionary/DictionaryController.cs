@@ -1118,6 +1118,38 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
         /// <summary>
+        /// Sua ho so nguoi dung
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("updateHoSo")]
+        public async Task<ServiceResult> updateHoSo([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).UpdateHoSo(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
         /// Xóa dữ liệu đánh dấu theo id món ăn và tên tài khoản
         /// </summary>
         /// <param name="idmonan"></param>
@@ -1137,6 +1169,170 @@ namespace QLApp.Core.API.Controllers.Dictionary
                 }
 
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteDanhDau(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+
+        //----------------API Manh-----------------
+        
+        /// <summary>
+        /// Lay du lieu review
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpGet("LoadAllReview")]
+        public async Task<ServiceResult> LoadAllReview([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+               
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetAllReview(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpGet("LoadALLQuest")]
+        public async Task<ServiceResult> LoadALLQuest()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetAllQuest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Xoa quest
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("DeleteQuest")]
+        public async Task<ServiceResult> DeleteQuest([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteQuest(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Xoa Review
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("DeleteReview")]
+        public async Task<ServiceResult> DeleteReview([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteReview(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Them quest
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("InsertQuest")]
+        public async Task<ServiceResult> InsertQuest([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertQuest(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        //Ninh
+        [HttpGet("LoadALLDanhDau")]
+        public async Task<ServiceResult> LoadALLDanhDau([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadALLDanhDau(a);
+
+
+
             }
             catch (Exception e)
             {

@@ -277,5 +277,43 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<rate>("Proc_GetALL_Rate", a);
         }
+
+
+        public async Task<bool> UpdateHoSo(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Update_HoSo", a);
+        }
+
+        //Ninh
+        public async Task<IList<danhdau>> LoadALLDanhDau(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<danhdau>("Proc_GetALL_DanhDau", a);
+        }
+
+        ///Manh
+        public async Task<IList<review>> GetAllReview(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<review>("Proc_Get_Review", a);
+        }
+        public async Task<IList<quest>> GetAllQuest()
+        {
+            return await _service.DataService.GetDataAsync<quest>("Proc_GetALL_Quest", new object[] { });
+        }
+        public async Task<bool> DeleteQuest(object[] a)
+        {
+
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_Quest", a);
+
+        }
+        public async Task<bool> DeleteReview(object[] a)
+        {
+
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_Review", a);
+
+        }
+        public async Task<bool> InsertQuest(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Quest", a);
+        }
     }
 }
