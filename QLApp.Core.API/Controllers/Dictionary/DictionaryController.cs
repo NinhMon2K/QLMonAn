@@ -745,6 +745,40 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             try
             {
+                
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                
+                var user = await BLFactory.CreateAs<DictionaryBL>(_service).CheckAcc(a);
+                if (user != null)
+                {
+                    res.Data = true;
+                }
+                else {
+                    res.Data = false;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpPost("CheckAccount")]
+        public async Task<ServiceResult> CheckAccount([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
 
                 var a = new object[] { };
                 foreach (var key in pr.Keys)
@@ -752,9 +786,19 @@ namespace QLApp.Core.API.Controllers.Dictionary
                     a = a.Append(pr[key]).ToArray();
                 }
 
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).CheckAcc(a);
 
-
+                var user = await BLFactory.CreateAs<DictionaryBL>(_service).CheckAccount(a);
+                if (user == 0)
+                {
+                    res.Data = 0;
+                }
+                else if (user == 1)
+                {
+                    res.Data = 1;
+                }
+                else {
+                    res.Data = 2;
+                }
 
 
             }
@@ -882,12 +926,39 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        [HttpPost("RegisterAcc")]
+        public async Task<ServiceResult> RegisterAcc([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).RegisterAcc(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         /// <summary>
         /// lay du lieu tai khoan thao ten tai khoan
         /// </summary>
         /// <param name="pr"></param>
         /// <returns></returns>
-        [HttpGet("GetUserID")]
+        [HttpPost("GetUserID")]
         public async Task<ServiceResult> GetUserID([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
@@ -919,7 +990,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         /// </summary>
         /// <param name="pr"></param>
         /// <returns></returns>
-        [HttpGet("GetRating")]
+        [HttpPost("GetRating")]
         public async Task<ServiceResult> GetRating([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
@@ -951,7 +1022,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         /// </summary>
         /// <param name="pr"></param>
         /// <returns></returns>
-        [HttpGet("GetAllRate")]
+        [HttpPost("GetAllRate")]
         public async Task<ServiceResult> GetAllRate([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
@@ -977,6 +1048,35 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
+
+        /// <summary>
+        /// Them danh gia
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("InsertRating")]
+        public async Task<ServiceResult> InsertRating([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertRating(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
 
         ///API Thắng
 
@@ -1315,7 +1415,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         }
 
         //Ninh
-        [HttpGet("LoadALLDanhDau")]
+        [HttpPost("LoadALLDanhDau")]
         public async Task<ServiceResult> LoadALLDanhDau([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();

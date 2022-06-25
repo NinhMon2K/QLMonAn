@@ -197,7 +197,44 @@ namespace QLApp.Core.BL.Dictionary
         }
         public async Task<IList<User>> CheckAcc(object[] a)
         {
-            return await _service.DataService.GetDataAsync<User>("Proc_Check_Acc", a );
+            var us =  await _service.DataService.GetDataAsync<User>("Proc_Check_Acc", a );
+
+
+            if (us != null)
+            {
+                return us;
+            }
+            else { 
+            
+            return null;
+            }
+        }
+        public async Task<int> CheckAccount(object[] a)
+        {
+          
+            var su = await _service.DataService.GetDataAsync<User>("Proc_Check_Account1", a);
+            var kq = 0;
+            if (su.Count != 0)
+            {
+
+                var us = await _service.DataService.GetDataAsync<User>("Proc_Check_Account", a);
+                if (us.Count != 0)
+                {
+                    kq = 2;
+                  
+                }
+                else
+                {
+
+                    kq = 1;
+                }
+
+            }
+            else {
+                kq = 0;
+            }
+            return kq;
+           
         }
 
         public async Task<bool> DeleteMonAn(int idMonan)
@@ -214,7 +251,10 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<User>("Proc_Get_User", a);
         }
-
+        public async Task<bool> RegisterAcc(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_RegisterAcc", a);
+        }
 
         /// <summary>
         /// Thêm/Sửa thông tin món ăn
@@ -314,6 +354,10 @@ namespace QLApp.Core.BL.Dictionary
         public async Task<bool> InsertQuest(object[] a)
         {
             return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Quest", a);
+        }
+        public async Task<bool> InsertRating(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Rating", a);
         }
     }
 }
