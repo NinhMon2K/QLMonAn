@@ -359,5 +359,9 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Rating", a);
         }
+        public async Task<IList<loaimonan>> GetLoaiMonAnID(object[] a)
+        {
+            return await _service.DataService.GetDataAsync<loaimonan>("Proc_Get_CateID", a);
+        }
     }
 }

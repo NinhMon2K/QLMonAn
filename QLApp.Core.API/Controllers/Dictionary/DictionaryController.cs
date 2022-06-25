@@ -943,7 +943,6 @@ namespace QLApp.Core.API.Controllers.Dictionary
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).RegisterAcc(a);
 
 
-
             }
             catch (Exception e)
             {
@@ -973,6 +972,38 @@ namespace QLApp.Core.API.Controllers.Dictionary
                 }
 
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetUserID(a);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lay loai mon an theo idloaimonan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("LoadMonAnID")]
+        public async Task<ServiceResult> LoadMonAnID([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetLoaiMonAnID(a);
 
 
 
@@ -1067,7 +1098,15 @@ namespace QLApp.Core.API.Controllers.Dictionary
                     a = a.Append(pr[key]).ToArray();
                 }
 
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertRating(a);
+               var u = await BLFactory.CreateAs<DictionaryBL>(_service).InsertRating(a);
+                if (u == true)
+                {
+                    res.Data = 1;
+                }
+                else
+                {
+                    res.Data = 0;
+                }
             }
             catch (Exception e)
             {

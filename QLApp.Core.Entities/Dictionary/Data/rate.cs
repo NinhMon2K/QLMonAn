@@ -7,6 +7,6 @@ namespace QLApp.Core.Entities.Dictionary.Data
     public class rate
     {
         public int count { get; set; }
-        public int rates { get; set; }
+        public float rates { get; set; }
     }
 }
