@@ -6,7 +6,6 @@ namespace QLApp.Core.Entities.Dictionary.Data
 {
   public class quests
     {
-
         public int keyQuest { get; set; }
         public string account { get; set; }
         public string quest { get; set; }

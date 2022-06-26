@@ -71,7 +71,22 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<cauHoi>("Proc_Get_Cauhoi", new object[] { });
         }
-        
+
+        public async Task<IList<quests>> LoadQuest()
+        {
+            return await _service.DataService.GetDataAsync<quests>("Proc_Get_Quest", new object[] { });
+        }
+
+        public async Task<IList<quests>> GetQuestID(int keyQuests)
+        {
+            return await _service.DataService.GetDataAsync<quests>("Proc_Get_QuestID", new object[] { keyQuests });
+        }
+
+        public async Task<IList<reports>> GetReportStatus(int status)
+        {
+            return await _service.DataService.GetDataAsync<reports>("Proc_Get_ReportID", new object[] { status });
+        }
+
         public async Task<IList<thongke>> CountMonAn()
         {
             return await _service.DataService.GetDataAsync<thongke>("Proc_Count_Monan", new object[] { });
@@ -139,6 +154,16 @@ namespace QLApp.Core.BL.Dictionary
 
         }
 
+        public async Task<bool> UpdateQuest(quests Pr)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Update_Quest", Pr);
+        }
+
+        public async Task<bool> UpdateReport(int keyRP)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Update_Report", new object[] { keyRP } );
+        }
+
         public async Task<bool> SaveTypeFood(SaveParam saveParam)
         {
             var obj = JsonSerializer.Deserialize<loaimonan>(saveParam.FormData.ToString());
@@ -170,6 +195,15 @@ namespace QLApp.Core.BL.Dictionary
         public async Task<bool> DeleteCauHoi(int id)
         {
             return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_CH", new object[] { id });
+        }
+        public async Task<bool> DeleteKeyQuest(int keyQuests)
+        {
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_KeyQuest", new object[] { keyQuests });
+        }
+
+        public async Task<bool> DeleteReport(int keyRPs)
+        {
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_Report", new object[] { keyRPs });
         }
 
         public async Task<IList<cauHoi>> GetCauHoiID(int id)

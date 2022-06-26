@@ -57,99 +57,56 @@ class cauhoi {
             }
         });
         $('.right-footer').on('click', '#btn_luu', () => {
-                let cauhoi = $('#cauhoi').val();
-
                 let traloi = $('#traloi').val();
-                let us = {
-                    id: me.id,
-                    cauhoi: cauhoi,
-                    traloi: traloi,
+                let Pr = {
+                    keyQuest: me.keyQuest,
+                    answer: traloi
+
                 }
 
-                switch (me.Mode) {
-                    case 1: {
-                        let data = {
-                            Mode: 1,
-                            Formdata: JSON.stringify(us)
-                        }
+                $('<div>', {
+                    text: 'Bạn thực sự muốn sửa !'
+                }).dialog({
+                    title: 'Cảnh báo!',
+                    modal: true,
 
-                        AppAjax.Ajax(me.callApi('SaveCauHoi'), { type: 'POST' }, JSON.stringify(data), function (data) {
+                    buttons: [{
+                        text: 'Sửa',
+                        class: 'btn_kt',
+                        id: 'btnCheckSua',
+                        click: function () {
+                            AppAjax.Ajax(me.callApi('UpdateQuest'), { type: 'POST' }, JSON.stringify(Pr), function (data) {
 
-                            if (data) {
-
-                                toastr.success('Thêm mới thành công');
-                                $('#cauhoi').val('');
-                                $('#traloi').val('');
-
-                                let a = setTimeout(() => {
+                                if (data) {
+                                    $('#cauhoi').val('');
+                                    $('#traloi').val('');
+                                    toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
                                     $('#dialog-form').dialog('close');
-                                    $('#table_id').bootstrapTable('refresh');
-                                }, 200);
 
-                            } else {
-                                toastr.error('Thêm mới thất bại');
+                                    let a = setTimeout(() => {
+                                        $('#table_id').bootstrapTable('refresh');
+                                    }, 200);
 
-                            }
-                        })
+                                } else {
+                                    toastr.error('Sửa dữ liệu thất bại!', { positionClass: 'toast-top-center' });
 
-                        break;
-                    }
-                    case 3: {
+                                }
 
-
-                        let data = {
-                            Mode: 3,
-                            Formdata: JSON.stringify(us)
+                            })
+                            $(this).dialog('close');
                         }
+                    },
+                    {
+                        text: 'Không',
+                        class: 'btn_kt',
+                        id: 'btnCheckKhong',
+                        click: function (e) {
+                            $(this).dialog('close');
 
-                        $('<div>', {
-                            text: 'Bạn thực sự muốn sửa !'
-                        }).dialog({
-                            title: 'Cảnh báo!',
-                            modal: true,
-
-                            buttons: [{
-                                text: 'Sửa',
-                                class: 'btn_kt',
-                                id: 'btnCheckSua',
-                                click: function () {
-                                    AppAjax.Ajax(me.callApi('SaveCauHoi'), { type: 'POST' }, JSON.stringify(data), function (data) {
-
-                                        if (data) {
-                                            $('#cauhoi').val('');
-                                            $('#traloi').val('');
-                                            toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
-                                            $('#dialog-form').dialog('close');
-
-                                            let a = setTimeout(() => {
-                                                $('#table_id').bootstrapTable('refresh');
-                                            }, 200);
-
-                                        } else {
-                                            toastr.error('Sửa dữ liệu thất bại!', { positionClass: 'toast-top-center' });
-
-                                        }
-
-                                    })
-                                    $(this).dialog('close');
-                                }
-                            },
-                            {
-                                text: 'Không',
-                                class: 'btn_kt',
-                                id: 'btnCheckKhong',
-                                click: function (e) {
-                                    $(this).dialog('close');
-
-                                }
-                            }
-                            ]
-                        })
-
-
-                        break;
+                        }
                     }
-                }
+                    ]
+                })
             
         });
 
@@ -206,7 +163,7 @@ class cauhoi {
                 bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
-                    let id = parseInt(item.id);
+                    let keyQuests = parseInt(item.keyQuest);
                     $('<div>', {
                         text: 'Bạn thực sự muốn xóa !'
                     }).dialog({
@@ -218,7 +175,8 @@ class cauhoi {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
-                                AppAjax.Ajax(me.callApi('DeleteCauHoi'), {}, { id }, function (data) {
+                                let r = this;
+                                AppAjax.Ajax(me.callApi('DeleteKeyQuest'), {}, { keyQuests }, function (data) {
 
                                     if (data) {
 
@@ -239,7 +197,7 @@ class cauhoi {
                                         toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
 
                                     }
-                                    $(this).dialog('close');
+                                    $(r).dialog('close');
                                 })
 
                             }
@@ -263,32 +221,24 @@ class cauhoi {
 
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
-                    let id = parseInt(item.id);
-                    AppAjax.Ajax(me.callApi('GetCauHoiID'), {}, { id }, function (data) {
+                    let keyQuest = parseInt(item.keyQuest);
+                    AppAjax.Ajax(me.callApi('GetQuestID'), {}, { keyQuest }, function (data) {
                         console.log(data);
                         if (data) {
                             data.forEach((item, i) => {
-                                $('#cauhoi').val(item.cauhoi);
-                                $('#traloi').val(item.traloi);
-
+                                $('#cauhoi').val(item.quest);
+                                $('#traloi').val(item.answer);
+                               
                             });
-
-
 
                         } else {
                             toastr.error('Không có dữ liêu.Thất bại!', { positionClass: 'toast-top-center' });
-
                         }
-
+                        
                     })
-                    me.Mode = 3;
-                    me.id = id;
+                    me.keyQuest = keyQuest;
                     dialog.dialog("open");
                 });
-                $('.container-table').on('click', '.btnUpdate', (e) => {
-
-                })
-
             }
 
         };
@@ -300,7 +250,7 @@ class cauhoi {
 
             ID = $.map($('#table_id').bootstrapTable('getSelections'), function (row) {
 
-                return row.id
+                return row.keyQuest;
             });
 
             let u = $('.check-box-index input:checked');
@@ -318,8 +268,8 @@ class cauhoi {
                     id: 'btnCheckXoa',
                     click: function () {
                         let ele = this;
-                        ID.forEach((idMonan) => {
-                            AppAjax.Ajax(me.callApi('DeleteMonAn'), {}, { idMonan }, function (data) {
+                        ID.forEach((keyQuests) => {
+                            AppAjax.Ajax(me.callApi('DeleteKeyQuest'), {}, { keyQuests }, function (data) {
 
                                 if (data) {
                                     let a = setTimeout(() => {
@@ -360,6 +310,17 @@ class cauhoi {
 
         });
 
+    }
+
+    onFormatStatus(val) {
+        let pq = '';
+        if (val == '1') {
+            pq = 'Đã trả lời'
+        }
+        else {
+            pq = 'Chưa trả lời'
+        }
+        return pq;
     }
 
     onFormatUpdate() {

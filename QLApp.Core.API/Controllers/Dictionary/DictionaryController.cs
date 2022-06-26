@@ -291,6 +291,94 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
         //----------END CÂU HỎI----------
 
+        //----------START QUEST--------------
+        /// <summary>
+        /// lấy dữ liệu quest
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("LoadQuest")]
+        public async Task<ServiceResult> LoadQuest()
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadQuest();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        /// <summary>
+        /// update dữ liệu quest
+        /// </summary>
+        /// <param name="Pr"></param>
+        /// <returns></returns>
+        [HttpPost("UpdateQuest")]
+        public async Task<ServiceResult> UpdateQuest(quests Pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).UpdateQuest(Pr);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        /// <summary>
+        /// lấy dữ liệu quest theo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetQuestID")]
+        public async Task<ServiceResult> GetQuestID(int keyQuest)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetQuestID(keyQuest);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Xóa dữ liệu quest
+        /// </summary>
+        /// <param name="keyQuests"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteKeyQuest")]
+        public async Task<ServiceResult> DeleteKeyQuest(int keyQuests)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteKeyQuest(keyQuests);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        //----------END QUEST----------
+
         //----------START BÁO LỖI--------------
         /// <summary>
         /// Lấy dữ liệu báo lỗi
@@ -312,8 +400,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
             return res;
         }
-
-
+       
 
 
         [HttpGet("UpdateBaoLoi")]
@@ -390,6 +477,73 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
         //----------END BÁO LỖI----------
+
+        //----------START REPORT--------------
+        /// <summary>
+        /// lấy dữ liệu quest theo id
+        /// </summary>
+        /// <param name="keyQuest"></param>
+        /// <returns></returns>
+        [HttpGet("GetReportStatus")]
+        public async Task<ServiceResult> GetReportStatus(int status)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetReportStatus(status);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        /// <summary>
+        /// update dữ liệu report
+        /// </summary>
+        /// <param name="keyRP"></param>
+        /// <returns></returns>
+        [HttpGet("UpdateReport")]
+        public async Task<ServiceResult> UpdateReport(int keyRP)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).UpdateReport(keyRP);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+        /// <summary>
+        /// Xóa dữ liệu report
+        /// </summary>
+        /// <param name="keyRPs"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteReport")]
+        public async Task<ServiceResult> DeleteReport(int keyRPs)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteReport(keyRPs);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        //----------END REPORT----------
 
         //----------START MÓN ĂN--------------
 

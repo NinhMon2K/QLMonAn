@@ -46,7 +46,7 @@
 <div class="container-table">
     <table id="table_id"
            class="display"
-           data-url="@Url.AppAction(MicroService.Core,"LoadCauHoi","Dictionary")"
+           data-url="@Url.AppAction(MicroService.Core,"LoadQuest","Dictionary")"
            data-toolbar="#tbCauHoi"
            data-search-selector="#txt_search"
            data-pagination="true"
@@ -63,9 +63,15 @@
                 <th class="stt"
                     data-field="stt" data-searchable="false">STT </th>
                 <th class="cauhoi"
-                    data-field="cauhoi">Câu hỏi</th>
-                <th class="traloi"
-                    data-field="traloi">Trả lời</th>
+                    data-field="account">Tài khoản</th>
+                <th class="cauhoi"
+                    data-field="quest">Câu hỏi</th>
+                <th class="cauhoi"
+                    data-field="answer">Trả lời</th>
+                <th class="cauhoi"
+                    data-field="timeQ" data-searchable="false">Thời gian</th>
+                <th class="cauhoi" data-width="200" data-align="center"
+                    data-field="checkQ" data-formatter="ch.onFormatStatus">Trạng thái</th>
                 <th class="btn_sua" data-formatter="ch.onFormatUpdate" data-align="center" data-searchable="false"> </th>
                 <th class="btn_xoa" data-formatter="ch.onFormatDelete" data-searchable="false">  </th>
             </tr>

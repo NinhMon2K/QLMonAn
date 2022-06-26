@@ -100,13 +100,10 @@ class baoloi {
             },
 
             onPostBody(data, bs) {
-
-
-
                 bs.$body.off('click', '.btnDelete').on('click', '.btnDelete', (e) => {
                     let index = $(e.currentTarget).closest('tr').data('index');
                     let item = data[index];
-                    let id = parseInt(item.id);
+                    let keyRPs = parseInt(item.keyRP);
                     $('<div>', {
                         text: 'Bạn thực sự muốn xóa !'
                     }).dialog({
@@ -118,7 +115,8 @@ class baoloi {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
-                                AppAjax.Ajax(me.callApi('DeleteBaoLoi'), {}, { id }, function (data) {
+                                let r = this;
+                                AppAjax.Ajax(me.callApi('DeleteReport'), {}, { keyRPs }, function (data) {
 
                                     if (data) {
 
@@ -139,7 +137,7 @@ class baoloi {
                                         toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
 
                                     }
-                                    $(this).dialog('close');
+                                    $(r).dialog('close');
                                 })
 
                             }
@@ -171,7 +169,7 @@ class baoloi {
 
             ID = $.map($('#table_id').bootstrapTable('getSelections'), function (row) {
 
-                return row.id
+                return row.keyRP
             });
 
             let u = $('.check-box-index input:checked');
@@ -189,8 +187,8 @@ class baoloi {
                     id: 'btnCheckXoa',
                     click: function () {
                         let ele = this;
-                        ID.forEach((id) => {
-                            AppAjax.Ajax(me.callApi('DeleteBaoLoi'), {}, { id }, function (data) {
+                        ID.forEach((keyRPs) => {
+                            AppAjax.Ajax(me.callApi('DeleteReport'), {}, { keyRPs }, function (data) {
 
                                 if (data) {
                                     let a = setTimeout(() => {
@@ -252,14 +250,14 @@ class baoloi {
     confirm() {
         let me = this;
         let ID = [];
-
+        
         $('.btn-right').on('click', '#btn_check', (e) => {
             ID = $.map($('#table_id').bootstrapTable('getSelections'), function (row) {
 
-                return row.id
+                return row.keyRP;
             });
-            ID.forEach((id) => {
-                AppAjax.Ajax(me.callApi('UpdateBaoLoi'), {}, { id }, function (data) {
+            ID.forEach((keyRP) => {
+                AppAjax.Ajax(me.callApi('UpdateReport'), { }, { keyRP }, function (data) {
 
                     if (data) {
                         toastr.success('Xử lý dữ liệu thành công', { positionClass: 'toast-top-center' });
