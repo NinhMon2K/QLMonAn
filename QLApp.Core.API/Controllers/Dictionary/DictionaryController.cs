@@ -155,6 +155,30 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
         //----------END THÔNG TIN NGƯỜI DÙNG----
 
+
+        /// <summary>
+        /// Xoa loai mon an
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("DeleteTypeFood")]
+        public async Task<ServiceResult> DeleteTypeFood(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).DeleteTypeFood(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+
         //----------START CÂU HỎI--------------
 
         /// <summary>

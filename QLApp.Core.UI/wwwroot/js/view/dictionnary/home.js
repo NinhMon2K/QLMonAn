@@ -193,7 +193,7 @@ class home {
             tenMonDG = data.map((x) => x.tenmonan);
         });
         let ticksStyle = {
-            fontColor: '#495057',
+            fontColor: '#38D8E4',
             fontStyle: 'bold'
         }
 
@@ -206,8 +206,8 @@ class home {
 
 
                 datasets: [{
-                    backgroundColor: '#007bff',
-                    borderColor: '#007bff',
+                    backgroundColor: '#0080ff',
+                    borderColor: '#0080ff',
                     data: DemDG,
 
                     fill: false

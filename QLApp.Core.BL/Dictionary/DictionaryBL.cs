@@ -196,7 +196,11 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_ND", new object[] { ids });
         }
-        
+        public async Task<bool> DeleteTypeFood(int ids)
+        {
+            return await _service.DataService.ExcuteDeteteAsync("Proc_Delete_TypeFood", new object[] { ids });
+        }
+
         public async Task<bool> DeleteTaiKhoan(string tentaikhoans)
         {
             var ID = tentaikhoans.Split(",");

@@ -7,6 +7,9 @@
         this.loadALLLoaiMA();
         this.addForm();
         this.saveTypeFood();
+        this.deleteTypeFood();
+        this.searchTypeFood();
+        
     }
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);
@@ -17,6 +20,63 @@
         $('#img_type_desh').on('change', function (e) {
             me.file = this.files && this.files[0];
         });
+    }
+    searchTypeFood() {
+        let me = this;
+       
+        $('.header__search__bar__input').off('change', '#txt_search').on('change', '#txt_search', () => {
+            if ($('#txt_search').val() == '') {
+                    me.loadALLLoaiMA()
+                } else {
+                    let DS = me.DSMA;
+                let r = DS.filter(data => data.tenloai == $('#txt_search').val());
+                    let listDS = $('.container_list_product_type-dish');
+                listDS.html('');
+
+                if (r.length == 0) {
+
+                    listDS.html('Không có dữ liệu.Mời nhập lại!');
+                }
+                else {
+                    r.forEach((item, i) => {
+                        let product = $('<div>', {
+                            class: 'item_product_type-dish',
+                            data: {
+                                ID: item.idloaimonan
+                            }
+                        }).appendTo(listDS);
+                        let box_img = $('<div>', {
+                            class: 'img_type-dish'
+                        }).appendTo(product);
+                        let box_name = $('<div>', {
+                            class: 'name_type_dish'
+                        }).appendTo(product);
+                        let box_delete = $('<div>', {
+                            class: 'box_delete_type_dish',
+                            data: {
+                                ID: item.idloaimonan
+                            }
+                        }).appendTo(product);
+
+                        let img = $('<img>', {
+                            src: item.anh
+                        }).appendTo(box_img);
+
+                        let p = $('<p>', {
+                            text: item.tenloai
+                        }).appendTo(box_name);
+
+                        let iDelete = $('<i>', {
+                            class: 'ti-trash'
+                        }).appendTo(box_delete);
+                    });
+                }
+                }
+        });
+       
+        
+       
+
     }
     addForm() {
         let me = this;
@@ -30,14 +90,14 @@
         $('.container_list_product_type-dish').on('dblclick', '.item_product_type-dish', (e) => {
             dialog.dialog("open");
             let id = $(e.currentTarget).data('ID');
-            AppAjax.Ajax(me.callApi('LoadLoaiMonAnIDs'), { }, {id}, function (data) {
+            AppAjax.Ajax(me.callApi('LoadLoaiMonAnIDs'), {}, { id }, function (data) {
                 console.log(data);
                 data.forEach((item, i) => {
                     $('#name_type_desh').val(item.tenloai);
                     $('#blah').attr('src', item.anh);
                 });
             });
-            
+
             me.Mode = 3;
             me.Id = id;
         });
@@ -103,11 +163,12 @@
 
         var me = this;
         $('.right-footer').on('click', '#btn_luu', () => {
-            me.callAjaxUploadFile().then(() => {            
+            me.callAjaxUploadFile().then(() => {
                 let tenloai = $('#name_type_desh').val();
-         
+
+
                 let typefood = {
-                    id: me.id,
+                    idloaimonan: me.Id,
                     tenloai: tenloai,
                     anh: me.anh
                 }
@@ -126,7 +187,7 @@
                                 toastr.success('Thêm mới thành công');
                                 $('#name_type_desh').val('');
                                 loadALLLoaiMA();
-                                    $('#dialog-form').dialog('close');
+                                $('#dialog-form').dialog('close');
 
 
                             } else {
@@ -156,6 +217,7 @@
                                 class: 'btn_kt',
                                 id: 'btnCheckSua',
                                 click: function () {
+
                                     AppAjax.Ajax(me.callApi('SaveTypeFood'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                                         if (data) {
@@ -178,7 +240,6 @@
                                 id: 'btnCheckKhong',
                                 click: function (e) {
                                     $(this).dialog('close');
-
                                 }
                             }
                             ]
@@ -191,9 +252,59 @@
             });
         });
     }
+    deleteTypeFood() {
+        let me = this;
+        $('.item_product_type-dish').on('click', '.box_delete_type_dish', (e) => {
+            let id = $(e.currentTarget).data('ID');
+
+
+
+            $('<div>', {
+                text: 'Bạn thực sự muốn xóa !'
+            }).dialog({
+                title: 'Cảnh báo!',
+                modal: true,
+
+                buttons: [{
+                    text: 'Xóa',
+                    class: 'btn_kt',
+                    id: 'btnCheckXoa',
+                    click: function () {
+                        let ele = this;
+                        AppAjax.Ajax(me.callApi('DeleteTypeFood'), {}, { id }, function (data) {
+                            if (data) {
+                                toastr.success('Xóa dữ liệu thành công', { positionClass: 'toast-top-center' });
+                             
+                                $('#dialog-form').dialog('close');
+                                me.loadALLLoaiMA();
+
+
+                            } else {
+                                toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
+                            }
+                            $(ele).dialog('close');
+                            me.loadALLLoaiMA();
+                        })
+
+                    }
+                },
+                {
+                    text: 'Không',
+                    class: 'btn_kt',
+                    id: 'btnCheckKhong',
+                    click: function (e) {
+                        $(this).dialog('close');
+
+                    }
+                }
+                ]
+            })
+        })
+    }
     loadALLLoaiMA() {
         let me = this;
         AppAjax.Ajax(me.callApi('LoadLoaiMonAn'), {}, {}, function (data) {
+            me.DSMA = data;
             let listDS = $('.container_list_product_type-dish');
             listDS.html('');
             data.forEach((item, i) => {
@@ -210,7 +321,10 @@
                     class: 'name_type_dish'
                 }).appendTo(product);
                 let box_delete = $('<div>', {
-                    class: 'box_delete_type_dish'
+                    class: 'box_delete_type_dish',
+                    data: {
+                        ID: item.idloaimonan
+                    }
                 }).appendTo(product);
 
                 let img = $('<img>', {
@@ -220,7 +334,7 @@
                 let p = $('<p>', {
                     text: item.tenloai
                 }).appendTo(box_name);
-                
+
                 let iDelete = $('<i>', {
                     class: 'ti-trash'
                 }).appendTo(box_delete);
