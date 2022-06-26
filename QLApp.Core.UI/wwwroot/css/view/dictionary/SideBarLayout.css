@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 .sidebar {
@@ -147,7 +146,7 @@
 
     .sidebar .nav-links li .sub-menu a:hover {
         opacity: 1;
-        border-left: solid 1px;
+       
     }
 
 .sidebar.close .nav-links li .sub-menu {

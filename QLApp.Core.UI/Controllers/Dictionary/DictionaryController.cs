@@ -43,6 +43,10 @@ namespace QLApp.Core.UI.Controllers.Dictionary
         {
             return View("baoloi");
         }
+        public IActionResult loaimonan()
+        {
+            return View("loaimonan");
+        }
 
     }
 }

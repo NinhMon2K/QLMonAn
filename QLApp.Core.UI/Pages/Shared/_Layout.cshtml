@@ -78,79 +78,111 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="@Url.AppAction(MicroService.UI, "Home","Dictionary")">
-                    <i class='ti-home'></i>
-                    <span class="link_name">Tổng quan</span>
-                </a>
+                <div class="iocn-link">
+                    <a href="@Url.AppAction(MicroService.UI, "Home","Dictionary")">
+                        <i class='ti-home'></i>
+                        <span class="link_name">Tổng quan</span>
+                    </a>
+                </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "Home","Dictionary")">Tổng quan</a></li>
                 </ul>
             </li>
 
+            @*<li>
+                    <a href="@Url.AppAction(MicroService.UI, "monan","Dictionary")">
+                        <i class='ti-calendar'></i>
+                        <span class="link_name">Món ăn</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "monan","Dictionary")">Món ăn</a></li>
+                    </ul>
+                </li>*@
             <li>
-                <a href="@Url.AppAction(MicroService.UI, "monan","Dictionary")">
-                    <i class='ti-calendar'></i>
-                    <span class="link_name">Món ăn</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "monan","Dictionary")">Món ăn</a></li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='ti-clipboard'></i>
+                        <span class="link_name">QL món ăn</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Quản lý món ăn</a></li>
+
+                    <li>
+                        <div class="iocn-link">
+                            <a href="@Url.AppAction(MicroService.UI, "monan","Dictionary")">Món ăn</a>
+                            </div>
+                    </li>
+                    <li>
+                        <div class="iocn-link">
+                            <a href="@Url.AppAction(MicroService.UI, "loaimonan","Dictionary")">Loại món ăn</a>
+                            </div>
+                    </li>
                 </ul>
             </li>
             <li>
-
-                <a href="@Url.AppAction(MicroService.UI, "nguoidung","Dictionary")">
-                    <i class='far fa-user-circle'></i>
-                    <span class="link_name">Thông tin nguời dùng</span>
-                </a>
+                <div class="iocn-link">
+                    <a href="@Url.AppAction(MicroService.UI, "nguoidung","Dictionary")">
+                        <i class='far fa-user-circle'></i>
+                        <span class="link_name">Thông tin nguời dùng</span>
+                    </a>
+                </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "nguoidung","Dictionary")">Thông tin nguời dùng</a></li>
                 </ul>
             </li>
             <li>
-                <a href="@Url.AppAction(MicroService.UI, "taikhoan","Dictionary")">
-                    <i class='ti-user'></i>
-                    <span class="link_name">Tài khoản</span>
-                </a>
+                <div class="iocn-link">
+                    <a href="@Url.AppAction(MicroService.UI, "taikhoan","Dictionary")">
+                        <i class='ti-user'></i>
+                        <span class="link_name">Tài khoản</span>
+                    </a>
+                </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "taikhoan","Dictionary")">Tài khoản</a></li>
                 </ul>
             </li>
             <li>
-                <a href="@Url.AppAction(MicroService.UI, "baoloi","Dictionary")">
-                    <i class='ti-alert'></i>
-                    <span class="link_name">Báo lỗi</span>
-                </a>
+                <div class="iocn-link">
+                    <a href="@Url.AppAction(MicroService.UI, "baoloi","Dictionary")">
+                        <i class='ti-alert'></i>
+                        <span class="link_name">Báo lỗi</span>
+                    </a>
+                </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "baoloi","Dictionary")">Báo lỗi</a></li>
                 </ul>
             </li>
             <li>
-                <a href="@Url.AppAction(MicroService.UI, "cauhoi","Dictionary")">
-                    <i class='ti-comment-alt'></i>
-                    <span class="link_name">Câu hỏi</span>
-                </a>
+                <div class="iocn-link">
+                    <a href="@Url.AppAction(MicroService.UI, "cauhoi","Dictionary")">
+                        <i class='ti-comment-alt'></i>
+                        <span class="link_name">Câu hỏi</span>
+                    </a>
+                </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="@Url.AppAction(MicroService.UI, "cauhoi","Dictionary")">Câu hỏi</a></li>
                 </ul>
             </li>
             @*<li>
-                <a href="#">
-                    <i class='ti-help-alt'></i>
-                    <span class="link_name">Trợ giúp</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Trợ giúp</a></li>
-                </ul>
-            </li>*@
+                    <a href="#">
+                        <i class='ti-help-alt'></i>
+                        <span class="link_name">Trợ giúp</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Trợ giúp</a></li>
+                    </ul>
+                </li>*@
             @*<li>
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Setting</a></li>
-                </ul>
-            </li>*@
+                    <a href="#">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Setting</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Setting</a></li>
+                    </ul>
+                </li>*@
             <!--<li>
             <div class="profile-details">
                 <div class="profile-content">-->
@@ -197,7 +229,7 @@
                 <div class="top-item header-user">
 
                     <div class="user user-name">Nguyễn Nghĩa Ninh</div>
-                    <div class="user user-icon"><img class="img_userinfo"/></div>
+                    <div class="user user-icon"><img class="img_userinfo" /></div>
                     <div class="user user-icon-dropdow"><i class="ti-arrow-circle-down"></i></div>
                     <div class="user-info">
                         <div class="top-user-info">
