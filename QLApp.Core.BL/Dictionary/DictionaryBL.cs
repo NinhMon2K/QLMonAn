@@ -106,6 +106,12 @@ namespace QLApp.Core.BL.Dictionary
 
             return await _service.DataService.GetDataAsync<people>("Proc_Get_NguoiDung_ID", new object[] { id });
         }
+        public async Task<IList<loaimonan>> LoadLoaiMonAnIDs(int id)
+        {
+
+            return await _service.DataService.GetDataAsync<loaimonan>("Proc_Get_LoaiMonAnID", new object[] { id });
+        }
+
         public async Task<IList<loaimonan>> LoadLoaiMonAn()
         {
             return await _service.DataService.GetDataAsync<loaimonan>("Proc_GetALL_TypeFood", new object[] { });
@@ -129,6 +135,20 @@ namespace QLApp.Core.BL.Dictionary
             else
             {
                 return await _service.DataService.ExcuteSaveAsync("Proc_Update_ND", obj);
+            }
+
+        }
+
+        public async Task<bool> SaveTypeFood(SaveParam saveParam)
+        {
+            var obj = JsonSerializer.Deserialize<loaimonan>(saveParam.FormData.ToString());
+            if (saveParam.Mode == Mode.Add)
+            {
+                return await _service.DataService.ExcuteSaveAsync("Proc_Insert_TypeFood", obj);
+            }
+            else
+            {
+                return await _service.DataService.ExcuteSaveAsync("Proc_Update_TypeFood", obj);
             }
 
         }
@@ -375,9 +395,9 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<loaimonan>("Proc_Get_CateID", a);
         }
-        public async Task<bool> InsertUserFacebook(object[] a)
+        public async Task<IList<User>> InsertUserFacebook(object[] a)
         {
-            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_UserFacebook", a);
+            return await _service.DataService.GetDataAsync<User>("Proc_Insert_UserFacebook", a);
         }
     }
 }

@@ -75,6 +75,23 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        [HttpGet("LoadLoaiMonAnIDs")]
+        public async Task<ServiceResult> LoadLoaiMonAnIDs(int id)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).LoadLoaiMonAnIDs(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
         /// <summary>
         /// Thêm/Sửa thông tin người dùng
         /// </summary>
@@ -88,6 +105,23 @@ namespace QLApp.Core.API.Controllers.Dictionary
             try
             {
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveNguoiDung(saveParam);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        [HttpPost("SaveTypeFood")]
+        public async Task<ServiceResult> SaveTypeFood([FromBody] SaveParam saveParam)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).SaveTypeFood(saveParam);
             }
             catch (Exception e)
             {
