@@ -50,5 +50,9 @@
   {
     "outputFile": "wwwroot/css/view/dictionary/Home.css",
     "inputFile": "wwwroot/scss/view/dictionary/Home.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view/dictionary/loaimonan.css",
+    "inputFile": "wwwroot/scss/view/dictionary/loaimonan.scss"
   }
 ]

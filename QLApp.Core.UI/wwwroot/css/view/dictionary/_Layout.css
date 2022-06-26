@@ -1,7 +1,7 @@
-﻿/*@font-face {
-  font-family: Roboto-Regular!important;
-  src: url(../../../fonts/Roboto-Regular.ttf)!important;}
-*/
+﻿@font-face {
+  font-family: Roboto-Regular;
+  src: url(../../../scss/view/fonts/Roboto-Regular.ttf); }
+
 body {
   position: absolute;
   top: 0;
