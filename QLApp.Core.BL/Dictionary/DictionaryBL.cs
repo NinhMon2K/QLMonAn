@@ -251,9 +251,9 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<User>("Proc_Get_User", a);
         }
-        public async Task<bool> RegisterAcc(object[] a)
+        public async Task<User> RegisterAcc(object[] a)
         {
-            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_RegisterAcc", a);
+            return await _service.DataService.GetObjectAsync<User>("Proc_Insert_RegisterAcc", a);
         }
 
         /// <summary>
@@ -335,9 +335,9 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.GetDataAsync<review>("Proc_Get_Review", a);
         }
-        public async Task<IList<quest>> GetAllQuest()
+        public async Task<IList<quests>> GetAllQuestID(object[] a)
         {
-            return await _service.DataService.GetDataAsync<quest>("Proc_GetALL_Quest", new object[] { });
+            return await _service.DataService.GetDataAsync<quests>("Proc_GetALL_Quest",a);
         }
         public async Task<bool> DeleteQuest(object[] a)
         {
@@ -355,6 +355,18 @@ namespace QLApp.Core.BL.Dictionary
         {
             return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Quest", a);
         }
+        public async Task<bool> InsertRepost(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Repost", a);
+        }
+        public async Task<bool> UpdateReview(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_UpdateReview", a);
+        }
+        public async Task<bool> InsertReview(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Review", a);
+        }
         public async Task<bool> InsertRating(object[] a)
         {
             return await _service.DataService.ExcuteSaveAsync("Proc_Insert_Rating", a);
@@ -362,6 +374,10 @@ namespace QLApp.Core.BL.Dictionary
         public async Task<IList<loaimonan>> GetLoaiMonAnID(object[] a)
         {
             return await _service.DataService.GetDataAsync<loaimonan>("Proc_Get_CateID", a);
+        }
+        public async Task<bool> InsertUserFacebook(object[] a)
+        {
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_UserFacebook", a);
         }
     }
 }

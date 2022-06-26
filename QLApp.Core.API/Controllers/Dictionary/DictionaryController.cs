@@ -658,12 +658,6 @@ namespace QLApp.Core.API.Controllers.Dictionary
         
         //----------END ĐÁNH DẤU/THẢ TIM ----------v
 
-
-
-
-
-
-
         /// <summary>
         /// Lưu ảnh lên server
         /// </summary>
@@ -772,6 +766,11 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Check ten tai khoan theo ten tai khoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
         [HttpPost("CheckAccount")]
         public async Task<ServiceResult> CheckAccount([FromBody] Dictionary<string, object> pr)
         {
@@ -810,10 +809,41 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Them moi user facebook
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("InsertUserFacebook")]
+        public async Task<ServiceResult> InsertUserFacebook([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertUserFacebook(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
 
 
 
-
+        /// <summary>
+        /// Lay du lieu tai khoan theo ten tai khoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
         [HttpPost("GetUsers")]
         public async Task<ServiceResult> GetUsers([FromBody] Dictionary<string, string> pr)
         {
@@ -926,6 +956,11 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+        /// <summary>
+        /// Them moi tai khoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
         [HttpPost("RegisterAcc")]
         public async Task<ServiceResult> RegisterAcc([FromBody] Dictionary<string, object> pr)
         {
@@ -1196,6 +1231,12 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
+
+        /// <summary>
+        /// Lay du lieu ho so nguoi dung theo ten tai khoan
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
         [HttpPost("LoadHoSo")]
         public async Task<ServiceResult> GetHoSo([FromBody] Dictionary<string, object> pr)
         {
@@ -1228,7 +1269,6 @@ namespace QLApp.Core.API.Controllers.Dictionary
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-
         [HttpPost("InsertDanhDau")]
         public async Task<ServiceResult> InsertDanhDau([FromBody] Dictionary<string, object> pr)
         {
@@ -1325,7 +1365,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
         /// </summary>
         /// <param name="pr"></param>
         /// <returns></returns>
-        [HttpGet("LoadAllReview")]
+        [HttpPost("LoadAllReview")]
         public async Task<ServiceResult> LoadAllReview([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
@@ -1352,14 +1392,25 @@ namespace QLApp.Core.API.Controllers.Dictionary
             return res;
         }
 
-        [HttpGet("LoadALLQuest")]
-        public async Task<ServiceResult> LoadALLQuest()
+        /// <summary>
+        /// Lay du lieu quest theo ID
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("LoadQuestID")]
+        public async Task<ServiceResult> LoadQuestID([FromBody] Dictionary<string, object> pr)
         {
             var res = new ServiceResult();
 
             try
             {
-                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetAllQuest();
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).GetAllQuestID(a);
             }
             catch (Exception e)
             {
@@ -1444,6 +1495,91 @@ namespace QLApp.Core.API.Controllers.Dictionary
                 }
 
                 res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertQuest(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Them moi repost
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("InsertRepost")]
+        public async Task<ServiceResult> InsertRepost([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertRepost(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Sua review
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("UpdateReview")]
+        public async Task<ServiceResult> UpdateReview([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).UpdateReview(a);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return res;
+        }
+
+
+        /// <summary>
+        /// Them moi review
+        /// </summary>
+        /// <param name="pr"></param>
+        /// <returns></returns>
+        [HttpPost("InsertReview")]
+        public async Task<ServiceResult> InsertReview([FromBody] Dictionary<string, object> pr)
+        {
+            var res = new ServiceResult();
+
+            try
+            {
+                var a = new object[] { };
+                foreach (var key in pr.Keys)
+                {
+                    a = a.Append(pr[key]).ToArray();
+                }
+
+                res.Data = await BLFactory.CreateAs<DictionaryBL>(_service).InsertReview(a);
             }
             catch (Exception e)
             {
