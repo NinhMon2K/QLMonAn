@@ -176,6 +176,7 @@ tr:hover td {
 
 .container-content {
     height: 50%;
+
 }
 
 .pagination {
@@ -966,6 +967,8 @@ input {
     margin: 20px 0px 22px 0px;
     color: #fff;
 
+
+
     a {
         flex: 1;
         color: #000;
@@ -1042,6 +1045,21 @@ input {
 
         &:last-child {
             margin-right: 0px;
+        }
+    }
+
+    .active {
+        background-color: #1492e6 !important;
+        border: none !important;
+
+        .navbar-left {
+            .total {
+                color: #fff;
+            }
+
+            .name-total {
+                color: #fff;
+            }
         }
     }
 

@@ -27,7 +27,7 @@ class monan {
         let me = this;
 
         $('#hinhanh_ma').on('change', function (e) {
-            me.file = this.files && this.files[0] || null;
+            me.file = this.files && this.files[0];
         });
 
 
@@ -40,7 +40,7 @@ class monan {
             me.formdata = data;
             data.forEach((item, i) => {
                 let opp = $('<option>', {
-                    value: item.idLoai,
+                    value: item.idloaimonan,
                     text: item.tenloai,
                     class: 'cboLoai_ma'
                 }).appendTo(sel);
@@ -109,10 +109,9 @@ class monan {
                 let us = {
                     id: me.id,
                     tenmonan: tenmonan,
-                    anh: anh,
-                    video: '',
+                    anh: anh,    
                     mota: mota,
-                    idLoai: parseInt(loaimon),
+                    idloaimonan: parseInt(loaimon),
                     cachlam: cachlam,
                     noiban: noiban,
                 }
@@ -454,6 +453,7 @@ class monan {
             let short = name.substring(name.lastIndexOf("."), name.length);
 
             valid = ['.png'].some(x => x == short);
+            valid = ['.jpg'].some(x => x == short);
         }
 
         return new Promise((i, r) => {
@@ -469,8 +469,7 @@ class monan {
                     processData: false,
                 }
                 formdata.append('file', me.file);
-                formdata.append('oldField', '');
-
+           
                 AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
 
                     me.anh = data;

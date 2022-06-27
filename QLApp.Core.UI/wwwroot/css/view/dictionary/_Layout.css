@@ -1,8 +1,4 @@
-﻿@font-face {
-  font-family: Roboto-Regular;
-  src: url(../../../scss/view/fonts/Roboto-Regular.ttf); }
-
-body {
+﻿body {
   position: absolute;
   top: 0;
   left: 0;

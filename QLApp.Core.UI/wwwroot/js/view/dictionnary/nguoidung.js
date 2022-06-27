@@ -218,6 +218,7 @@ class nguoidung {
                             class: 'btn_kt',
                             id: 'btnCheckXoa',
                             click: function () {
+                                let r = this;
                                 AppAjax.Ajax(me.callApi('DeleteND'), {}, { id }, function (data) {
 
                                     if (data) {
@@ -239,7 +240,7 @@ class nguoidung {
                                         toastr.error('Xóa dữ liệu thất bại', { positionClass: 'toast-top-center' });
 
                                     }
-                                    $(this).dialog('close');
+                                    $(r).dialog('close');
                                 })
 
                             }

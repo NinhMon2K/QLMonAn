@@ -10,9 +10,10 @@ class baoloi {
         this.Done();
         this.confirm();
         this.totalItemMenu();
+      
        
     }
-
+  
 
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);

@@ -710,5 +710,12 @@ input {
     .menu-group .item-navbar:last-child {
       margin-right: 0px; }
   .menu-group .active {
+    background-color: #1492e6 !important;
+    border: none !important; }
+    .menu-group .active .navbar-left .total {
+      color: #fff; }
+    .menu-group .active .navbar-left .name-total {
+      color: #fff; }
+  .menu-group .active {
     background-color: #007bff;
     color: #fff !important; }

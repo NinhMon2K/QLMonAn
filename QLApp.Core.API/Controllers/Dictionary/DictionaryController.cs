@@ -884,12 +884,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
             {
                 var formData = HttpContext.Request.Form;
                 var oldFile = formData["oldFile"];
-                if (!string.IsNullOrEmpty(oldFile.ToString()))
-                {
-                    oldFile = oldFile.ToString().Split("/").LastOrDefault();
-                    await _service.StorageService.DeleteFileAsync(oldFile);
-                }
-
+               
                 if (file != null)
                 {
                     var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');

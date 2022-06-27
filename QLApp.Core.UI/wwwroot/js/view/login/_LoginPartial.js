@@ -14,6 +14,10 @@ class login {
     callApi(nameAPI) {
         return AppUtil.getURLApi('Login', nameAPI);
     }
+    callApiUser(nameAPI) {
+        return AppUtil.getURLApi('Dictionary', nameAPI);
+    }
+
 
     setImage() {
         let me = this;
@@ -109,7 +113,7 @@ class login {
 
 
                 } else {
-                    toastr.warning('Tài khoản hoặc mật khẩu không đúng', { positionClass: 'toast-top-center' });
+                    toastr.warning('Tài khoản hoặc mật khẩu không đúng, bạn không có quyền đăng nhập', { positionClass: 'toast-top-center' });
 
                 }
 
@@ -119,7 +123,7 @@ class login {
         });
 
     }
-    
+
     AddUser() {
         let me = this;
         $('.form-group').off('change', '#taikhoan').on('change', '#taikhoan', () => {
@@ -158,8 +162,7 @@ class login {
 
 
                     })
-                    //console.log($('#taikhoan').val());
-
+                 
                 }, 1000);
             }
         });
@@ -174,7 +177,7 @@ class login {
                 let taikhoan = $('#taikhoan').val();
 
                 let password = $('#password_tk').val();
-                let pq = $('#lt_type_dish_filter').val();
+                let pq = '1';
                 let name = $('#fullname').val();
                 let sdt = $('#sdt').val();
                 let email = $('#email').val();
@@ -192,168 +195,13 @@ class login {
                     sdt: sdt,
                 }
 
-                switch (me.Mode) {
-                    case 1: {
-                        let data = {
-                            Mode: 1,
-                            Formdata: JSON.stringify(nguoidung)
-                        }
 
-                        AppAjax.Ajax(me.callApi('SaveTaiKhoan'), { type: 'POST' }, JSON.stringify(data), function (data) {
-
-                            if (data) {
-
-                                toastr.success('Thêm mới thành công');
-
-                                $('#dialog-form').dialog('close');
-                                me.resetForm();
-                                let a = setTimeout(() => {
-                                    $('#table_id').bootstrapTable('refresh');
-                                }, 200);
-
-                            } else {
-                                toastr.error('Thêm mới thất bại');
-                                $('#dialog-form').dialog('close');
-                                me.resetForm();
-                            }
-                        })
-
-                        break;
-                    }
-                    case 3: {
-
-
-                        let data = {
-                            Mode: 3,
-                            Formdata: JSON.stringify(nguoidung)
-                        }
-
-                        $('<div>', {
-                            text: 'Bạn thực sự muốn sửa !'
-                        }).dialog({
-                            title: 'Cảnh báo!',
-                            modal: true,
-
-                            buttons: [{
-                                text: 'Sửa',
-                                class: 'btn_kt',
-                                id: 'btnCheckSua',
-                                click: function () {
-                                    AppAjax.Ajax(me.callApi('SaveTaiKhoan'), { type: 'POST' }, JSON.stringify(data), function (data) {
-
-                                        if (data) {
-
-                                            toastr.success('Sửa dữ liệu thành công!', { positionClass: 'toast-top-center' })
-                                            $('#dialog-form').dialog('close');
-
-                                            let a = setTimeout(() => {
-                                                me.resetForm();
-                                                $('#table_id').bootstrapTable('refresh');
-                                            }, 200);
-
-                                        } else {
-                                            toastr.error('Sửa dữ liệu thất bại!', { positionClass: 'toast-top-center' });
-                                            me.resetForm();
-                                        }
-
-                                    })
-                                    $(this).dialog('close');
-                                }
-                            },
-                            {
-                                text: 'Không',
-                                class: 'btn_kt',
-                                id: 'btnCheckKhong',
-                                click: function (e) {
-                                    $(this).dialog('close');
-
-                                }
-                            }
-                            ]
-                        })
-
-
-                        break;
-                    }
-                }
-            });
-        });
-
-    }
-
-    saveTK() {
-        let me = this;
-        $('.form-group').off('change', '#taikhoan').on('change', '#taikhoan', () => {
-            let username = $('#taikhoan').val();
-            let wa = $('.box_taikhoan .box_right').find('span');
-            if (username == '') {
-                wa.css('color', 'red');
-                Validator({
-                    form: '#form-1',
-                    formGroupSelector: '.box_right',
-                    errorSelector: '.form-message',
-                    rules: [
-                        Validator.isRequired('#taikhoan', 'Vui lòng nhập tên tài khoản!'),
-
-
-                    ],
-                    onSubmit: function (data) {
-                        // Call API
-
-                    }
-                });
-
-
-            } else {
-
-                setTimeout((e) => {
-
-
-                    AppAjax.Ajax(AppUtil.getURLApi('Login', 'CheckUser'), {}, {
-                        UserName: username
-                    }, function (data) {
-                        if (data) {
-                            wa.css('color', 'red');
-                            wa.text('Tài khoản đã được dùng.Vui lòng nhập tài khoản khác!');
-                        } else {
-                            wa.css('color', '#FF9900');
-                            wa.text('Tài khoản hợp lệ!');
-                        }
-
-
-                    })
-                    //console.log($('#taikhoan').val());
-
-                }, 1000);
-            }
-        });
-
-        $('.right-footer').on('click', '#btn_luu', () => {
-
-            me.callAjaxUploadFile().then(() => {
-                let anh = '';
-                anh = me.anh;
-                let taikhoan = $('#taikhoan').val();
-                let password = $('#password_tk').val();
-                let pq = $('#lt_type_dish_filter').val();
-                let name = $('#fullname').val();
-                let sdt = $('#sdt').val();
-                let email = $('#email').val();
-                let gioitinh = $('input[type="radio"][name="sex"]:checked').val();
-                let ngaysinh = $('#ngaysinh').val();
-                let nguoidung = {
-                    tentaikhoan: taikhoan,
-                    matkhau: password,
-                    quyen: parseInt(pq),
-                    tendaydu: name,
-                    anhdaidien: anh,
-                    ngaysinh: ngaysinh,
-                    email: email,
-                    gioitinh: parseInt(gioitinh),
-                    sdt: sdt,
+                let data = {
+                    Mode: 1,
+                    Formdata: JSON.stringify(nguoidung)
                 }
 
-                AppAjax.Ajax(me.callApi('SaveTaiKhoan'), { type: 'POST' }, JSON.stringify(nguoidung), function (data) {
+                AppAjax.Ajax(me.callApiUser('SaveTaiKhoan'), { type: 'POST' }, JSON.stringify(data), function (data) {
 
                     if (data) {
 
@@ -376,6 +224,8 @@ class login {
         });
 
     }
+
+    
 
 
     loadForm(step) {
@@ -418,9 +268,11 @@ class login {
     }
     lo
     callAjaxUploadFile() {
+
         return new Promise((i, r) => {
 
             let me = this;
+
             let formdata = new FormData();
             let config = {
                 type: 'POST',
@@ -434,12 +286,13 @@ class login {
 
             AppAjax.Ajax(me.callApi('SaveImage'), config, {}, function (data) {
 
+                me.anh = data;
                 if (data) {
 
                     i();
 
                 } else {
-                    toastr.error('Đăng ký thất bại');
+                    toastr.error('Thêm mới thất bại');
 
                 }
             })

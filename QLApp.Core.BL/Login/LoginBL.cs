@@ -15,8 +15,7 @@ namespace QLApp.Core.BL.Login
         }
         public async Task<bool> RegisterUser(User user)
         {
-            var check = await _service.DataService.ExcuteSaveAsync("Proc_Insert_User", user);
-            return check;
+            return await _service.DataService.ExcuteSaveAsync("Proc_Insert_User", user);
         }
         public async Task<User> GetUser(string UserName, string Password)
         {
