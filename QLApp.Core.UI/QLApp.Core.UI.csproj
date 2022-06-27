@@ -47,6 +47,28 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\KTPM\81bc74fe-9c7a-4bd7-80a5-be976700af33.jpg" />
+    <None Include="wwwroot\KTPM\connect.php" />
+    <None Include="wwwroot\KTPM\deleteQuest.php" />
+    <None Include="wwwroot\KTPM\deleteReview.php" />
+    <None Include="wwwroot\KTPM\fileUpload.php" />
+    <None Include="wwwroot\KTPM\Images\16548778321654877830619.png" />
+    <None Include="wwwroot\KTPM\Images\16548787621654878760781.png" />
+    <None Include="wwwroot\KTPM\Images\16548790111654879009789.png" />
+    <None Include="wwwroot\KTPM\Images\16548792341654879232534.png" />
+    <None Include="wwwroot\KTPM\Images\16548792401654879238395.png" />
+    <None Include="wwwroot\KTPM\Images\16553129471655312947198.png" />
+    <None Include="wwwroot\KTPM\Images\16553136781655313677804.png" />
+    <None Include="wwwroot\KTPM\Images\16553137691655313769570.png" />
+    <None Include="wwwroot\KTPM\insertQuest.php" />
+    <None Include="wwwroot\KTPM\insertReport.php" />
+    <None Include="wwwroot\KTPM\insertReview.php" />
+    <None Include="wwwroot\KTPM\quest.php" />
+    <None Include="wwwroot\KTPM\report.php" />
+    <None Include="wwwroot\KTPM\review.php" />
+    <None Include="wwwroot\KTPM\selectQuest.php" />
+    <None Include="wwwroot\KTPM\selectReview.php" />
+    <None Include="wwwroot\KTPM\updateReview.php" />
     <None Include="wwwroot\lib\fontawesome-free-5.15.4-web\attribution.js" />
     <None Include="wwwroot\lib\fontawesome-free-5.15.4-web\js\all.js" />
     <None Include="wwwroot\lib\fontawesome-free-5.15.4-web\js\all.min.js" />

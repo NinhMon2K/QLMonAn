@@ -6,10 +6,7 @@ $api_version = 1.0;
 
 $start = microtime(true);
 
-$dir = $_SERVER['DOCUMENT_ROOT']."/ReviewFoods/service/manh/KTPM/Images/";
-
-
-
+$dir = $_SERVER['DOCUMENT_ROOT']."/QLMonAn/QLApp.Core.UI/wwwroot/KTPM/Images/";
 if( isset($_FILES['image']['name']) )
 
 {

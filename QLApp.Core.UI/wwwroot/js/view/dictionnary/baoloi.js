@@ -275,7 +275,15 @@ class baoloi {
             status: this.formdata.status || 1
         }
     }
-
+    onFormatIng(val) {
+        if (val == null) {
+            return '';
+        }
+        else {
+            return `<img src='${'../../../KTPM/Images/' + val}'></img>`;
+        }
+      
+    }
     onFormatDelete() {
         return `<div class='btnDelete'> <i class='ti-trash'></i> </div>`;
     }
