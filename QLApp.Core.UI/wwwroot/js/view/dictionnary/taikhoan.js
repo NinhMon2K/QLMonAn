@@ -364,6 +364,7 @@
     }
     loadTaiKhoan() {
         let me = this;
+        $('.item_TK').addClass('actives');
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,

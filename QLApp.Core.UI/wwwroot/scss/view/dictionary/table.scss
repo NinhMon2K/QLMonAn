@@ -27,6 +27,23 @@
         }
     }
 }
+.sidebar {
+    .nav-links {
+        li {
+            .actives {
+                background: #273557;
+                border-left: solid 5px #0094ff;
+            }
+
+           /* & > .item_TQ.item_QLMA.item_ND.item_TK.item_BL.item_CH {
+                background: #273557;
+                border-left: solid 5px #0094ff;
+            }*/
+
+           
+        }
+    }
+}
 
 .col-lg-6 {
     max-width: 50%;

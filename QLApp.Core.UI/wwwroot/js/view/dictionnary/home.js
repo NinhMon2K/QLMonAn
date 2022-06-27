@@ -12,7 +12,7 @@ class home {
     }
     listMenu() {
         let me = this;
-
+        $('.item_TQ').addClass('actives');
         let arr = [{
             indexTotal: '0',
             name: 'Món ăn',
@@ -100,9 +100,7 @@ class home {
     loadThongKe() {
         let me = this;
         let Dem = [];
-        let tenMon = [];
-        let DemDG = [];
-        let tenMonDG = [];
+        let tenMon = [];    
         setInterval(() => { }, 2000);
         AppAjax.Ajax(me.callApi('LoadThongKe'), {}, {}, function (data) {
 
@@ -189,8 +187,11 @@ class home {
         let tenMonDG = [];
         AppAjax.Ajax(me.callApi('LoadCountDanhGia'), {}, {}, function (data) {
 
-            DemDG = data.map((x) => x.Tong);
+            DemDG = data.map((x) => x.Dem);
             tenMonDG = data.map((x) => x.tenmonan);
+            data.forEach((item, i) => {
+                $('.text-Tong').text(item.Tong);
+            });
         });
         let ticksStyle = {
             fontColor: '#38D8E4',

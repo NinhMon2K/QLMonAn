@@ -161,6 +161,7 @@ class nguoidung {
     }
     loadNguoiDung() {
         let me = this;
+        $('.item_ND').addClass('actives');
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,

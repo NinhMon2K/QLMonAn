@@ -5,12 +5,12 @@ class baoloi {
 
     }
     init() {
-        this.setItem();
-
+        this.setItem();       
         this.loadLoi();
         this.Done();
         this.confirm();
         this.totalItemMenu();
+       
     }
 
 
@@ -20,20 +20,6 @@ class baoloi {
     setItem() {
         let me = this;
         me.formdata = AppUtil.getParam()
-        //switch (me.formdata) {
-        //    case 0: {
-        //        $('#table_id').data('url', me.callApi('LoadTrangThaiBL'));
-        //        break;
-        //    }
-        //    case 0: {
-
-        //        break;
-        //    }
-        //    default: {
-
-        //    }
-
-        //}
     }
     totalItemMenu() {
         let me = this;
@@ -55,6 +41,7 @@ class baoloi {
     }
     loadLoi() {
         let me = this;
+        $('.item_BL').addClass('actives');
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,

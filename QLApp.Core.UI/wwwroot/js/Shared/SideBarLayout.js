@@ -11,6 +11,7 @@
         this.setUserInfo();
         this.LogoutUser();
         this.loadThongBao();
+       
     }
     callApi(nameAPI) {
         return AppUtil.getURLApi('Dictionary', nameAPI);

@@ -119,6 +119,7 @@ class cauhoi {
     }
     loadCauHoi() {
         let me = this;
+        $('.item_CH').addClass('actives');
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,

@@ -802,7 +802,7 @@ namespace QLApp.Core.API.Controllers.Dictionary
 
 
         [HttpGet("LoadCountDanhGia")]
-        public async Task<ServiceResult> LoadCountDanhGiav()
+        public async Task<ServiceResult> LoadCountDanhGia()
         {
             var res = new ServiceResult();
 

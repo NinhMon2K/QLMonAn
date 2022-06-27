@@ -121,10 +121,10 @@ namespace QLApp.Core.BL.Dictionary
 
             return await _service.DataService.GetDataAsync<people>("Proc_Get_NguoiDung_ID", new object[] { id });
         }
-        public async Task<IList<loaimonan>> LoadLoaiMonAnIDs(int id)
+        public async Task<IList<loaimonan>> LoadLoaiMonAnIDs(int idloaimonan)
         {
 
-            return await _service.DataService.GetDataAsync<loaimonan>("Proc_Get_LoaiMonAnID", new object[] { id });
+            return await _service.DataService.GetDataAsync<loaimonan>("Proc_Get_LoaiMonAnID", new object[] { idloaimonan });
         }
 
         public async Task<IList<loaimonan>> LoadLoaiMonAn()

@@ -224,6 +224,7 @@ class monan {
     }
     loadDanhSachMonAn() {
         let me = this;
+        $('.item_QLMA').addClass('actives');
         let dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 740,
@@ -354,9 +355,7 @@ class monan {
                     me.id = id;
                     dialog.dialog("open");
                 });
-                $('.container-table').on('click', '.btnUpdate', (e) => {
-
-                })
+              
 
             }
 
