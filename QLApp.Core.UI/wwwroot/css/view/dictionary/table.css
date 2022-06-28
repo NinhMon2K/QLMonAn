@@ -688,7 +688,16 @@ input {
     overflow: hidden;
     margin-right: 14px; }
     .menu-group .item-navbar:active {
-      background-color: #007bff; }
+      background-color: #1492e6 !important;
+      border: none !important; }
+      .menu-group .item-navbar:active .navbar-left .total {
+        color: #fff; }
+      .menu-group .item-navbar:active .navbar-left .name-total {
+        color: #fff; }
+      .menu-group .item-navbar:active .navbar-right .icon-navbar {
+        background-color: #fff; }
+        .menu-group .item-navbar:active .navbar-right .icon-navbar i {
+          color: #1492e6; }
     .menu-group .item-navbar .navbar-left {
       display: block;
       padding: 0 0px 0px 26px; }
@@ -716,6 +725,10 @@ input {
       color: #fff; }
     .menu-group .active .navbar-left .name-total {
       color: #fff; }
+    .menu-group .active .navbar-right .icon-navbar {
+      background-color: #fff; }
+      .menu-group .active .navbar-right .icon-navbar i {
+        color: #1492e6; }
   .menu-group .active {
     background-color: #007bff;
     color: #fff !important; }

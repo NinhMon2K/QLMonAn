@@ -62,8 +62,7 @@ class nguoidung {
                 Validator.isRequired('#hinhanh_nd', 'Vui lòng chọn ảnh!'),
                 Validator.isRequired('#ngaysinh', 'Vui lòng nhập ngày sinh!'),
                 Validator.isEmail('#email', 'Vui lòng nhập email!'),
-                Validator.isRequired('#sdt', 'Vui lòng nhập số điện thoại!'),
-
+                Validator.isRequired('#sdt', 'Vui lòng nhập số điện thoại!'),         
             ],
             onSubmit: function (data) {
                 // Call API

@@ -70,7 +70,19 @@ class baoloi {
             },
 
             queryParams: function () {
-                return { status: me.formdata.status, }
+                $('.item-navbar').removeClass('active');
+                if (me.formdata.status == '2') {
+
+                    $('.item-navbar_3').addClass('active');
+                } else if (me.formdata.status == '0') {
+                    $('.item-navbar_2').addClass('active');
+                } else {
+                    $('.item-navbar_0').addClass('active');
+                }
+                return {
+
+                    status: me.formdata.status,
+                }
 
             },
 

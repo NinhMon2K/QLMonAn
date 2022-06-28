@@ -111,7 +111,7 @@
             let wa = $('.box_taikhoan .box_right').find('span');
             if (username == '') {
                 wa.css('color', 'red');
-                Validator({
+                var a = Validator({
                     form: '#form-1',
                     formGroupSelector: '.box_right',
                     errorSelector: '.form-message',
@@ -120,12 +120,12 @@
 
 
                     ],
-                    onSubmit: function (data) {
+                    onsubmit: function (data) {
                         // Call API
 
                     }
                 });
-
+                console.log(a);
 
             } else {
 
@@ -152,6 +152,27 @@
         });
 
         $('.right-footer').on('click', '#btn_luu', () => {
+
+            Validator({
+                form: '#form-1',
+                formGroupSelector: '.box_right',
+                errorSelector: '.form-message',
+                rules: [
+                    Validator.isRequired('#taikhoan', 'Vui lòng nhập tên tài khoản!'),
+                    Validator.isRequired('#password_tk', 'Vui lòng nhập mật khẩu!'),
+                    Validator.isRequired('#fullname', 'Vui lòng nhập tên người dùng!'),
+                    Validator.isRequired('#sdt', 'Vui lòng nhập số điện thoại!'),
+                    Validator.isRequired('#ngaysinh', 'Vui lòng nhập ngày sinh!'),
+                    Validator.isEmail('#email', 'Vui lòng nhập email!')
+
+                ],
+                onSubmit: function (data) {
+                    // Call API
+                    console.log(data);
+                }
+            });
+          
+
 
 
             me.callAjaxUploadFile().then(() => {
@@ -346,7 +367,7 @@
             me.resetForm();
             me.loadForm(2);
         });
-        me.changeFileToImage('hinhanh_tk','#blah');
+        me.changeFileToImage('hinhanh_tk', '#blah');
 
     }
     changeFileToImage(idFile, idImage) {

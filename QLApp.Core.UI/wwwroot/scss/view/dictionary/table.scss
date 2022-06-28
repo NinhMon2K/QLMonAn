@@ -1012,7 +1012,28 @@ input {
         margin-right: 14px;
 
         &:active {
-            background-color: #007bff;
+            background-color: #1492e6 !important;
+            border: none !important;
+
+            .navbar-left {
+                .total {
+                    color: #fff;
+                }
+
+                .name-total {
+                    color: #fff;
+                }
+            }
+
+            .navbar-right {
+                .icon-navbar {
+                    background-color: #fff;
+
+                    i {
+                        color: #1492e6;
+                    }
+                }
+            }
         }
 
 
@@ -1059,6 +1080,16 @@ input {
 
             .name-total {
                 color: #fff;
+            }
+        }
+
+        .navbar-right {
+            .icon-navbar {
+                background-color: #fff;
+
+                i {
+                    color: #1492e6;
+                }
             }
         }
     }
