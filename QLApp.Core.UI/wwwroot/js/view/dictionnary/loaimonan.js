@@ -165,6 +165,19 @@
     saveTypeFood() {
 
         var me = this;
+        Validator({
+            form: '#form-1',
+            formGroupSelector: '.box_right',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#name_type_desh', 'Vui lòng nhập tên!'),
+            ],
+            onSubmit: function (data) {
+                console.log(data);
+            }
+        });
+       
+       
         $('.right-footer').on('click', '#btn_luu', () => {
             me.callAjaxUploadFile().then(() => {
                 let tenloai = $('#name_type_desh').val();

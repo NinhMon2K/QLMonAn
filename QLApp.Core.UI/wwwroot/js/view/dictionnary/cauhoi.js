@@ -228,6 +228,7 @@ class cauhoi {
                         if (data) {
                             data.forEach((item, i) => {
                                 $('#cauhoi').val(item.quest);
+                                $('#cauhoi').prop('disabled', false);
                                 $('#traloi').val(item.answer);
                                
                             });
