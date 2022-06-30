@@ -31,6 +31,9 @@
   .col-lg-6 .card .card-body .mb-4 {
     margin-bottom: 0 !important; }
 
+.img_type-dish img {
+  border-radius: 8px; }
+
 .d-flex {
   flex-direction: column; }
   .d-flex .box_SL span:first-child {
